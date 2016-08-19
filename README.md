@@ -11,5 +11,5 @@ Send link (URL) to exam
 Take exam
 Check and visualize results
 
-sammy
-charan
+GitHub Cheat sheet:
+https://www.git-tower.com/blog/git-cheat-sheet/
