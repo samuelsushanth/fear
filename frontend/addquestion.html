@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+
+        .center {
+            text-align: center;
+            border: 3px solid green;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+            border-right:1px solid #bbb;
+        }
+
+        .affix {
+            top: 1pt;
+            left: 1pt;
+            width: 100%;
+            opacity: 0.85;
+        }
+
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #1a1a1a;
+            color: #bbbbbb;
+            text-decoration: none;
+        }
+
+        .active{
+            background-color: #4CAF50;
+        }
+        .footer{
+            position: fixed;
+            left:1pt;
+            bottom:1pt;
+            text-align: center;
+            width: 100%;
+            background-color: black;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading"><div class="center">
+            <p>Online Exam</p>
+        </div></div>
+        <div class="panel-body">
+            <ul data-spy="affix" data-offset-top="25">
+                <li><a href="#">Home</a></li>
+                <li><a class="active" href="#" style="text-decoration: none">Questions</a></li>
+                <li><a href="#">Questionnaire</a></li>
+                <li style="float:right"><a href="#">Log out</a></li>
+            </ul>
+            <div><form>
+                <div class="form-group">
+                    <label for="question">Enter the Question:</label>
+                    <textarea class="form-control" rows="3" id="question"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="choice">Number of choices:</label>
+                    <input class="form-control" id="choice">
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Enter the choices:</h3>
+                    </div>
+                    <div class="panel-body">
+                        <input class="form-control" type="text" maxlength="50"><input class="form-control" type="text" maxlength="50"><input class="form-control" type="text" maxlength="50"><input class="form-control" type="text" maxlength="50"><input class="form-control" type="text" maxlength="50"><input class="form-control" type="text" maxlength="50"><input class="form-control" type="text" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="choice">Enter the answer:</label>
+                    <input class="form-control" id="answer">
+                </div>
+                <div style="text-align: right">
+                    <button type="submit">Add</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    CopyRights
+</div>
+</body>
+</html>
