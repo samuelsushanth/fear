@@ -1,4 +1,4 @@
-package se.example2.softhouse;
+package se.example2.softhouse.Application;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

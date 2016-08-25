@@ -1,16 +1,6 @@
-package se.example2.softhouse;
+package se.example2.softhouse.Application;
 
-import java.sql.SQLException;
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterRegistration.Dynamic;
-
-import org.eclipse.jetty.servlets.CrossOriginFilter;
-import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
-
-import com.google.common.base.Joiner;
 
 
 import io.dropwizard.Application;
