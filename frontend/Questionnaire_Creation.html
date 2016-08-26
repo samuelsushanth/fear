@@ -53,7 +53,6 @@
             text-decoration: none;
         }
 
-
         .active{
             background-color: #4CAF50;
         }
@@ -78,9 +77,9 @@
         </div></div>
         <div class="panel-body">
             <ul data-spy="affix" data-offset-top="25">
-                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="#" style="text-decoration: none">Home</a></li>
                 <li><a href="addquestion.html">Questions</a></li>
-                <li><a class="active" href="#" style="text-decoration: none">Questionnaire</a></li>
+                <li><a href="questionaire.html">Questionnaire</a></li>
                 <li style="float:right"><a href="#">Log out</a></li>
             </ul>
 
@@ -88,26 +87,26 @@
     </div>
 </div>
 <div class="container">
-    <div name="Type of questionaire" class="panel panel-default">
-        <div class="panel-heading"><div class="center">
-            <p>Choose the method for creation of questionaire:</p>
-        </div></div>
-        <div class="panel-body">
-            <button  type="button" class="btn btn-primary btn-lg form-control" name="automatic" >Automatically generate questionaire</button>
-            <button  type="button" class="btn btn-primary btn-lg form-control" name="manual">Manually generate questionaire</button>
+    <h2>Auto Creation</h2>
+    <div class="form-group">
+        <label for="question">Number of Questions</label>
+        <textarea class="form-control" rows="3" id="num_qs"></textarea>
+        <button  type="button" class="btn btn-primary btn-lg form-control" name="manual">Create</button>
+    </div>
+    <h2>Manual Creation</h2>
+    <div class="form-group">
+        <div class="checkbox">
+            <label><input type="checkbox" value="">Question 1</label>
         </div>
+        <div class="checkbox">
+            <label><input type="checkbox" value="">Question 2</label>
+        </div>
+        <button  type="button" class="btn btn-primary btn-lg form-control" name="manual">Create</button>
     </div>
-    <div name="questionaire" class="panel panel-default">
-        <div class="panel-heading"><div class="center">
-            <p>Questionaire Title</p>
-        </div></div>
-        <div class="panel-body">
-           </div>
-    </div>
+
 </div>
 
 <div class="footer">
     CopyRights
 </div>
 </body>
-</html>
