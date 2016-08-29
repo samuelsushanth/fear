@@ -25,13 +25,7 @@ import se.example2.softhouse.core.Question;
 @Path("/questions")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-// class ParameterBean {
-// @QueryParam("topic")
-// public String[] topic;
-//
-// @QueryParam("size")
-// public String[] size;
-// }
+
 
 public class QuestionResource {
 
@@ -53,12 +47,7 @@ public class QuestionResource {
         }
     }
 
-    // @GET
-    // @Timed
-    // public List<Question> nebondaGet(@BeanParam ParameterBean paramBean) {
-    // System.out.println(paramBean.size);
-    // return getQuestions(paramBean.size, paramBean.topic);
-    // }
+
     @GET
     @Timed
     public List<Question> nebondaGet(@QueryParam(value = "size") List<String> size,
@@ -75,14 +64,10 @@ public class QuestionResource {
         List<Question> qList = new ArrayList<Question>();
         for (int i = 0; i < size.size(); i++) {
             System.out.println("questions in topic are" + topic.get(i));
-            List<Question> topicQuestions = questionDAO.getAllQuestionsByTopic(topic.get(i));
+            List<Question> topicQuestions = QuestionDAO.getAllQuestionsByTopic(topic.get(i));
             System.out.println("questions  topic are" + topicQuestions.toString());
 
-            // int[] qSubList = new Random().ints(1,
-            // topicQuestions.size()).distinct().limit(Integer.parseInt(size.get(i)))
-            // .toArray();
-            // System.out.println("questions in topic are" +
-            // qSubList.toString());
+
             for (int j = 0; j < Integer.parseInt(size.get(i)); j++) {
                 qList.add(topicQuestions.get(j));
             }
@@ -91,30 +76,6 @@ public class QuestionResource {
         return qList;
     }
 
-    // public List<Question> listQuestions(String topic) {
-    // return questionDAO.getAllQuestions(topic);
-    // }
-    //
-    // public List<Question> getQuestionByIdList(String ids) {
-    // String[] idList = ids.split(",");
-    // final int[] ints = new Random().ints(1,
-    // ).distinct().limit(Integer.parseInt(ids)).toArray();
-    //// return Stream.of(idList) //
-    //// .map(id -> questionDAO.findQuestionById(Integer.parseInt(id))) //
-    //// .filter(q -> q != null) //
-    //// .collect(Collectors.toList());
-    // List<Question> qList = new ArrayList<Question>();
-    // if (idList.length > 0) {
-    // for (int i = 0; i < idList.length; i++) {
-    // Question q =
-    // questionDAO.findQuestionById(Integer.parseInt(idList[i]));
-    // if (q != null) {
-    // qList.add(q);
-    // }
-    // }
-    // }
-    // return qList;
-    // }
 
     @POST
     @Timed
@@ -153,19 +114,5 @@ public class QuestionResource {
         }
     }
 
-    // @DELETE
-    // @Path("/{question}")
-    // @Timed
-    // @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML,
-    // MediaType.TEXT_PLAIN })
-    // public void deleteQuestStr(@PathParam("question") String question) {
-    //
-    // if (quesDAO.findQuesByStr(question) != null) {
-    // quesDAO.deleteQuesByStr(question);
-    // throw new WebApplicationException(Response.Status.OK);
-    // } else {
-    // throw new WebApplicationException(Response.Status.NOT_FOUND);
-    // }
-    // }
 
 }
