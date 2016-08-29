@@ -56,7 +56,9 @@ public class QuestionResource {
         System.out.println(size.size() + "      " + topic.size());
         if (size.size() > 0) {
             return getQuestions(size, topic);
-        } else return questionDAO.getAllQuestions();
+        } else {
+            return questionDAO.getAllQuestions();
+        }
 
     }
 

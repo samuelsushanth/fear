@@ -53,8 +53,9 @@ public class QuestionDAO {
         @SqlUpdate("delete from QUESTIONS where question = :it")
         void deleteQuestionByName(@Bind String question);
     }
-        return null;
+
     }
+
 
 
 }
