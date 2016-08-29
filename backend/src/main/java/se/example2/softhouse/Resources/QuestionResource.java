@@ -1,4 +1,4 @@
-package se.example2.softhouse;
+package se.example2.softhouse.Resources;
 
 import java.util.ArrayList;
 import java.util.List;

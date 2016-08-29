@@ -1,28 +1,19 @@
 package se.example2.softhouse.DAO;
 
-import java.util.List;
-
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
-
 import se.example2.softhouse.core.Question;
 
+import java.util.List;
 
-/**
- * Created by sasanksaisujanadapa on 25/08/16.
- */
-public class QuestionDAO {
-
-
-    public Question findQuestionById(Integer id) {
+@RegisterMapperFactory(BeanMapperFactory.class)
+public interface QuestionDAO {
 
 
-    @RegisterMapperFactory(BeanMapperFactory.class)
-    public interface UsersDAO {
         @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(255), topic varchar(80), opa varchar(80), opb varchar(80), opc varchar(80), corr_op varchar(80))")
         void createQuestionTable();
 
@@ -52,9 +43,6 @@ public class QuestionDAO {
 
         @SqlUpdate("delete from QUESTIONS where question = :it")
         void deleteQuestionByName(@Bind String question);
-    }
-
-    }
 
 
 

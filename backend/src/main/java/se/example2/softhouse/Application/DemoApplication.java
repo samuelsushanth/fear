@@ -6,7 +6,7 @@ import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.QuestionDAO;
-import se.example2.softhouse.QuestionResource;
+import se.example2.softhouse.Resources.QuestionResource;
 
 /**
  * Created by sasanksaisujanadapa on 2016-08-16.
