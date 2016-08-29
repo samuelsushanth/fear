@@ -12,7 +12,7 @@ import io.dropwizard.db.DataSourceFactory;
 
 
 /**
- * Created by hxs on 2016-08-16.
+ * Created by sasanksaisujanadapa on 2016-08-16.
  */
 
 public class DemoConfiguration extends Configuration {

@@ -9,46 +9,52 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
-import se.example2.softhouse.core.User;
+import se.example2.softhouse.core.Question;
 
 
 /**
  * Created by sasanksaisujanadapa on 25/08/16.
  */
-public class UsersDAO {
+public class QuestionDAO {
+
+
+    public Question findQuestionById(Integer id) {
 
 
     @RegisterMapperFactory(BeanMapperFactory.class)
-    public interface UserDAO {
-        @SqlUpdate("create table if not exists USERS (id int auto_increment, name varchar(80), email varchar(80) primary key, password varchar(20), score int(11) )")
-        void createUserTable();
+    public interface UsersDAO {
+        @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(255), topic varchar(80), opa varchar(80), opb varchar(80), opc varchar(80), corr_op varchar(80))")
+        void createQuestionTable();
 
-        @SqlUpdate("insert into USERS (name, email, password, score) values (:name, :email, :password, :score)")
-        void insertUser(@BindBean User userSay);
+        @SqlUpdate("insert into QUESTIONS (question, topic, opa, opb, opc, corr_op) values (:question, :topic, :opa, :opb, :opc, :corr_op)")
+        void insertQuestion(@BindBean Question question);
 
-        @SqlUpdate("update USERS set name = :u.name, email = :u.email, password = :u.password, score = :u.score where id = :id")
-        void updateUser(@BindBean("u") User userSay, @Bind("id") int id);
+        @SqlUpdate("update QUESTIONS set question = :u.question, topic = :u.topic, opa = :u.opa, opb = :u.opb, opc = :u.opc, corr_op = :u.corr_op where id = :id")
+        void updateQuestion(@BindBean("u") Question question, @Bind("id") int id);
 
-        @SqlQuery("select * from USERS where id = :id")
-        User findUserById(@Bind("id") int id);
+        @SqlQuery("select * from QUESTIONS where id = :id")
+        Question findQuestionById(@Bind("id") int id);
 
-        @SqlQuery("select * from USERS where email = :it")
-        User findUserByEmail(@Bind String email);
+        @SqlQuery("select * from QUESTIONS where question = :question")
+        Question findQuestionByName(@Bind("question") String question);
 
-        @SqlQuery("select password from USERS where email = :it")
-        User findPasswordByEmail(@Bind String email);
+        @SqlQuery("select * from QUESTIONS where topic = :it")
+        List<Question> getAllQuestionsByTopic(@Bind String topic);
 
-        @SqlQuery("select * from USERS")
-        List<User> getAllUsers();
+        @SqlQuery("select * from QUESTIONS")
+        List<Question> getAllQuestions();
 
-        @SqlUpdate("delete from USERS where id = :it")
-        void deleteUserById(@Bind int id);
+        @SqlQuery("select distinct topic from QUESTIONS")
+        List<String> getAllTopics();
 
-        @SqlUpdate("delete from USERS where email = :it")
-        void deleteUserByEmail(@Bind String email);
+        @SqlUpdate("delete from QUESTIONS where id = :it")
+        void deleteQuestionById(@Bind int id);
 
-
-
+        @SqlUpdate("delete from QUESTIONS where question = :it")
+        void deleteQuestionByName(@Bind String question);
     }
-}
+        return null;
+    }
 
+
+}
