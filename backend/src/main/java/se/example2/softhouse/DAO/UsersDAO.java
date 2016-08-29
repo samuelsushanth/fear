@@ -12,11 +12,10 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.User;
 
 
-
 /**
  * Created by sasanksaisujanadapa on 25/08/16.
  */
-public class UserDAO {
+public class UsersDAO {
 
 
     @RegisterMapperFactory(BeanMapperFactory.class)
@@ -51,3 +50,5 @@ public class UserDAO {
 
 
     }
+}
+
