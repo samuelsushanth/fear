@@ -14,13 +14,13 @@ import java.util.List;
 public interface QuestionDAO {
 
 
-        @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(255), topic varchar(80), opa varchar(80), opb varchar(80), opc varchar(80), corr_op varchar(80))")
+        @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(255), opa varchar(80), opb varchar(80), opc varchar(80), corr_op varchar(80))")
         void createQuestionTable();
 
-        @SqlUpdate("insert into QUESTIONS (question, topic, opa, opb, opc, corr_op) values (:question, :topic, :opa, :opb, :opc, :corr_op)")
+        @SqlUpdate("insert into QUESTIONS (question, opa, opb, opc, corr_op) values (:question, :opa, :opb, :opc, :corr_op)")
         void insertQuestion(@BindBean Question question);
 
-        @SqlUpdate("update QUESTIONS set question = :u.question, topic = :u.topic, opa = :u.opa, opb = :u.opb, opc = :u.opc, corr_op = :u.corr_op where id = :id")
+        @SqlUpdate("update QUESTIONS set question = :u.question, opa = :u.opa, opb = :u.opb, opc = :u.opc, corr_op = :u.corr_op where id = :id")
         void updateQuestion(@BindBean("u") Question question, @Bind("id") int id);
 
         @SqlQuery("select * from QUESTIONS where id = :id")
@@ -29,14 +29,8 @@ public interface QuestionDAO {
         @SqlQuery("select * from QUESTIONS where question = :question")
         Question findQuestionByName(@Bind("question") String question);
 
-        @SqlQuery("select * from QUESTIONS where topic = :it")
-        List<Question> getAllQuestionsByTopic(@Bind String topic);
-
         @SqlQuery("select * from QUESTIONS")
         List<Question> getAllQuestions();
-
-        @SqlQuery("select distinct topic from QUESTIONS")
-        List<String> getAllTopics();
 
         @SqlUpdate("delete from QUESTIONS where id = :it")
         void deleteQuestionById(@Bind int id);
