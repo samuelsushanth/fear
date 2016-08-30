@@ -1,99 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html ng-app="app">
 <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>NotesApp</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-    <style>
-
-        .center {
-            text-align: center;
-            border: 3px solid green;
-        }
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        li {
-            float: left;
-            border-right:1px solid #bbb;
-        }
-
-        .affix {
-            top: 1pt;
-            left: 1pt;
-            width: 100%;
-            opacity: 0.85;
-        }
-
-
-        li:last-child {
-            border-right: none;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        li a:hover:not(.active) {
-            background-color: #1a1a1a;
-            color: #bbbbbb;
-            text-decoration: none;
-        }
-
-        .active{
-            background-color: #4CAF50;
-        }
-        .footer{
-            position: fixed;
-            left:1pt;
-            bottom:1pt;
-            text-align: center;
-            width: 100%;
-            background-color: black;
-            color: white;
-        }
-
-    </style>
 </head>
+
 <body>
-
-<div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading"><div class="center">
-            <p>Online Exam</p>
-        </div></div>
-        <div class="panel-body">
-            <ul data-spy="affix" data-offset-top="25">
-                <li><a class="active" href="#" style="text-decoration: none">Home</a></li>
-                <li><a href="addquestion.html">Questions</a></li>
-                <li><a href="questionaire.html">Questionnaire</a></li>
-                <li style="float:right"><a href="#">Log out</a></li>
-            </ul>
-
-        </div>
-    </div>
-</div>
-<div class="container">
-    <h2>Admin Profile</h2>
-
-    <img src="Smiley.jpg" class="img-rounded" alt="Cinque Terre" width="304" height="236">
-</div>
-
-<div class="footer">
-    CopyRights
-</div>
+<notes></notes>
+<choice-form name="siva"></choice-form>
+<choice-form name="dino"></choice-form>
 </body>
+
+<script src="js/angular.min.js"></script>
+<script src="app/services/note.service.js"></script>
+<script src="app/services/choice.service.js"></script>
+<script src="app/note/note.controller.js"></script>
+<script src="app/notes/notes.controller.js"></script>
+<script src="app/note-form/note-form.controller.js"></script>
+<script src="app/choice-form/choice-form.controller.js"></script>
+<script src="app/app.js"></script>
 </html>
