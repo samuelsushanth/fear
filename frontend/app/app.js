@@ -1,7 +1,7 @@
-this.choices = ["milk","grod"];
+
 angular.module('app', [])
     .factory('noteService', noteService)
-    .factory('choiceService', choiceService)
+    .factory("choiceService", choiceService)
     .component('noteForm', {
         templateUrl: 'app/note-form/note-form.tpl',
         controller: NoteFormController,
