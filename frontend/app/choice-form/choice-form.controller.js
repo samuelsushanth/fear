@@ -52,7 +52,7 @@ function ChoiceFormController(choiceService) {
         }
     function refreshF(){
         vm.question = "";
-        vm.choices = "";
+        vm.choices = [];
         vm.answer= "";
         vm.choiceText ="";
     }
