@@ -1,32 +1,31 @@
 package se.example2.softhouse.Application;
 
+import com.bazaarvoice.dropwizard.assets.AssetsBundleConfiguration;
+import com.bazaarvoice.dropwizard.assets.AssetsConfiguration;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.dropwizard.Configuration;
+import se.example2.softhouse.Application.Note.Note;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.dropwizard.Configuration;
-import io.dropwizard.db.DataSourceFactory;
-
-
 /**
- * Created by sasanksaisujanadapa on 2016-08-16.
+ * Created by hxs on 2016-08-16.
  */
+public class DemoConfiguration extends Configuration implements AssetsBundleConfiguration{
 
-public class DemoConfiguration extends Configuration {
-    @Valid
-    @NotNull
-    private DataSourceFactory database = new DataSourceFactory();
+    private Note defaultNote;
 
-    @JsonProperty("database")
-    public void setDataSourceFactory(DataSourceFactory factory) {
-        this.database = factory;
+    public Note getDefaultNote() {
+        return defaultNote;
     }
 
-    @JsonProperty("database")
-    public DataSourceFactory getDataSourceFactory() {
-        return database;
+    @Valid
+    @NotNull
+    @JsonProperty
+    private final AssetsConfiguration assets = new AssetsConfiguration();
+
+    public AssetsConfiguration getAssetsConfiguration() {
+        return assets;
     }
 }
