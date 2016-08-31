@@ -8,8 +8,6 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.Question;
 
-import java.util.List;
-
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface QuestionDAO {
 
@@ -26,7 +24,7 @@ public interface QuestionDAO {
         @SqlQuery("select * from QUESTIONS where id = :id")
         Question findQuestionById(@Bind("id") int id);
 
-        @SqlQuery("select * from QUESTIONS where question = :question")
+       /* @SqlQuery("select * from QUESTIONS where question = :question")
         Question findQuestionByName(@Bind("question") String question);
 
         @SqlQuery("select * from QUESTIONS")
@@ -36,7 +34,7 @@ public interface QuestionDAO {
         void deleteQuestionById(@Bind int id);
 
         @SqlUpdate("delete from QUESTIONS where question = :it")
-        void deleteQuestionByName(@Bind String question);
+        void deleteQuestionByName(@Bind String question);*/
 
 
 

@@ -21,6 +21,6 @@
     #username
     user: sa
     #password
-    password:
+    password: sa
     #JDBC URL
     url: jdbc:h2:./hunt/database

@@ -1,15 +1,34 @@
 package se.example2.softhouse.core;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Created by sasanksaisujanadapa on 25/08/16.
  */
 
 public class Question {
+    @JsonProperty
     private Integer id;
+
+    @JsonProperty
+    @NotEmpty
     private String question;
+
+    @JsonProperty
+    @NotEmpty
     private String opa;
+
+    @JsonProperty
+    @NotEmpty
     private String opb;
+
+    @JsonProperty
+    @NotEmpty
     private String opc;
+
+    @JsonProperty
+    @NotEmpty
     private String corr_op;
 
     public Question() {
