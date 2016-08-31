@@ -16,26 +16,7 @@ public interface QuestionDAO {
         void createQuestionTable();
 
         @SqlUpdate("insert into QUESTIONS (question, opa, opb, opc, corr_op) values (:question, :opa, :opb, :opc, :corr_op)")
-        void insertQuestion(@BindBean Question question);
-
-        @SqlUpdate("update QUESTIONS set question = :u.question, opa = :u.opa, opb = :u.opb, opc = :u.opc, corr_op = :u.corr_op where id = :id")
-        void updateQuestion(@BindBean("u") Question question, @Bind("id") int id);
-
-        @SqlQuery("select * from QUESTIONS where id = :id")
-        Question findQuestionById(@Bind("id") int id);
-
-       /* @SqlQuery("select * from QUESTIONS where question = :question")
-        Question findQuestionByName(@Bind("question") String question);
-
-        @SqlQuery("select * from QUESTIONS")
-        List<Question> getAllQuestions();
-
-        @SqlUpdate("delete from QUESTIONS where id = :it")
-        void deleteQuestionById(@Bind int id);
-
-        @SqlUpdate("delete from QUESTIONS where question = :it")
-        void deleteQuestionByName(@Bind String question);*/
-
+        void insQues(@BindBean Question question);
 
 
 }

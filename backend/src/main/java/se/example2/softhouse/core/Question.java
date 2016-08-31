@@ -17,63 +17,14 @@ public class Question {
 
     @JsonProperty
     @NotEmpty
-    private String opa;
+    private NotEmpty.List choice;
 
     @JsonProperty
     @NotEmpty
-    private String opb;
-
-    @JsonProperty
-    @NotEmpty
-    private String opc;
-
-    @JsonProperty
-    @NotEmpty
-    private String corr_op;
+    private String CA;
 
     public Question() {
-        super();
-    }
 
-    public Question(Integer id, String question) {
-        super();
-        this.id = id;
-        this.question = question;
-    }
-
-
-    public Question(Integer id, String question, String opa) {
-        super();
-        this.id = id;
-        this.question = question;
-        this.opa = opa;
-    }
-
-    public Question(Integer id, String question, String opa, String opb) {
-        super();
-        this.id = id;
-        this.question = question;
-        this.opa = opa;
-        this.opb = opb;
-    }
-
-    public Question(Integer id, String question, String opa, String opb, String opc) {
-        super();
-        this.id = id;
-        this.question = question;
-        this.opa = opa;
-        this.opb = opb;
-        this.opc = opc;
-    }
-
-    public Question(Integer id, String question, String opa, String opb, String opc, String corr_op) {
-        super();
-        this.id = id;
-        this.question = question;
-        this.opa = opa;
-        this.opb = opb;
-        this.opc = opc;
-        this.corr_op = corr_op;
     }
 
     public Integer getId() {
@@ -92,36 +43,20 @@ public class Question {
         this.question = question;
     }
 
-    public String getOpa() {
-        return opa;
+     public NotEmpty.List getchoice() {
+        return choice;
     }
 
-    public void setOpa(String opa) {
-        this.opa = opa;
+    public void setChoice(NotEmpty.List opc) {
+        this.choice = opc;
     }
 
-    public String getOpb() {
-        return opb;
+    public String getCA() {
+        return CA;
     }
 
-    public void setOpb(String opb) {
-        this.opb = opb;
-    }
-
-    public String getOpc() {
-        return opc;
-    }
-
-    public void setOpc(String opc) {
-        this.opc = opc;
-    }
-
-    public String getCorr_op() {
-        return corr_op;
-    }
-
-    public void setCorr_op(String corr_op) {
-        this.corr_op = corr_op;
+    public void setCA(String ca) {
+        this.CA = ca;
     }
 
 }

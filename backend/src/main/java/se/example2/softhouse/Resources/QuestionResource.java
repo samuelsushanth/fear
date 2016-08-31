@@ -9,39 +9,30 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-@Path("/questions")
+@Path("/addquestion")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
 
 public class QuestionResource {
 
-    private QuestionDAO questionDAO;
+    private QuestionDAO qdao;
 
-    public QuestionResource(QuestionDAO dao) {
-        questionDAO = dao;
+    private Question q1;
+
+    public QuestionResource(QuestionDAO dao,Question q) {
+        qdao = dao;
+        q1=q;
+
     }
-
-    @GET
-    @Path("/{id}")
-    @Timed
-    public Question getQuestion(@PathParam("id") Integer id) {
-        Question q = questionDAO.findQuestionById(id);
-        if (q != null) {
-            return q;
-        } else {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-    }
-
 
 
 
     @POST
     @Timed
-    public void saveQuestion(Question question) {
+    public void addquestiontodb(Question question) {
         if (question != null) {
-            questionDAO.insertQuestion(question);
+            qdao.insQues(question);
             throw new WebApplicationException(Response.Status.OK);
         } else {
             throw new WebApplicationException(Status.BAD_REQUEST);
@@ -49,30 +40,7 @@ public class QuestionResource {
 
     }
 
-    @PUT
-    @Path("/{id}")
-    public void updateQuestion(@PathParam("id") int id, Question question) {
-        if (question != null) {
-            questionDAO.updateQuestion(question, id);
-            throw new WebApplicationException(Response.Status.OK);
-        } else {
-            throw new WebApplicationException(Status.BAD_REQUEST);
-        }
-    }
 
-    @DELETE
-    @Path("/{id}")
-    @Timed
-    @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN })
-    public void deleteQuestion(@PathParam("id") Integer id) {
-
-        if (questionDAO.findQuestionById(id) != null) {
-            questionDAO.deleteQuestionById(id);
-            throw new WebApplicationException(Response.Status.OK);
-        } else {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-    }
 
 
 }
