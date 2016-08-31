@@ -39,6 +39,7 @@ function ChoiceFormController(choiceService) {
 
         else
         {
+            alert("You have chosen answer "+vm.answer+"for the question "+vm.question+"");
           //choiceService.update(vm.question, vm.choices, vm.answer).then(vm.refreshF())
             vm.refreshF();
         }
