@@ -1,28 +1,41 @@
 package se.example2.softhouse.core;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 
 public class Question {
-    @JsonProperty
     private Integer id;
-
-    @JsonProperty
-    @NotEmpty
     private String question;
-
-    @JsonProperty
-    @NotEmpty
     private NotEmpty.List choice;
-
-    @JsonProperty
-    @NotEmpty
-    private int CA;
+    private String ca;
 
     public Question() {
-
+        super();
     }
+
+    public Question(Integer id, String question) {
+        super();
+        this.id = id;
+        this.question = question;
+    }
+
+    public Question(Integer id, String question, NotEmpty.List choice) {
+        super();
+        this.id = id;
+        this.question = question;
+        this.choice = choice;
+    }
+
+    public Question(Integer id, String question, NotEmpty.List choice, String ca) {
+        super();
+        this.id = id;
+        this.question = question;
+        this.choice = choice;
+        this.ca=ca;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -44,16 +57,14 @@ public class Question {
         return choice;
     }
 
-    public void setChoice(NotEmpty.List opc) {
-        this.choice = opc;
+    public void setChoice(NotEmpty.List choice) {
+        this.choice = choice;
     }
 
-    public int getCA() {
-        return CA;
-    }
+    public String getCa() { return ca;}
 
-    public void setCA(int ca) {
-        this.CA = ca;
+    public void setCa(String ca) {
+        this.ca = ca;
     }
 
 }
