@@ -8,7 +8,7 @@ function ChoiceFormController(choiceService) {
     vm.refreshF = refreshF;
 
     function $onInit() {
-        vm.choices = ["Milk", "Bread"];
+        vm.choices = [];
     }
 
     function choiceWasSubmitted() {

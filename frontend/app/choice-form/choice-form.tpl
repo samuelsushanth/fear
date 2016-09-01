@@ -1,17 +1,6 @@
 
-<div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading"><div class="center">
-            <p>Online Exam</p>
-        </div></div>
-        <div class="panel-body">
-            <ul data-spy="affix" data-offset-top="25">
-                <li style="float: left;"><a href="index.html">Home</a></li>
-                <li style="float: left;"><a class="active" href="#" style="text-decoration: none">Questions</a></li>
-                <li style="float: left;"><a href="questionaire.html">Questionnaire</a></li>
-                <li style="float:right"><a href="#">Log out</a></li>
-            </ul>
-            <div><form>
+            <div>
+                <form>
                 <div class="form-group">
                     <label for="question">Enter the Question:</label>
                     <textarea class="form-control" rows="3" id="question" ng-model="vm.question"></textarea>
@@ -40,11 +29,6 @@
                     <button type="reset" ng-click="vm.refreshF()">Reset</button>
                 </div>
             </form>
-            </div>
+
             {{vm}}
         </div>
-    </div>
-</div>
-<div class="footer">
-    CopyRights
-</div>
