@@ -2,9 +2,7 @@ package se.example2.softhouse.Application.Note;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Created by hxs on 2016-08-16.
- */
+
 public class Note {
 
     @JsonProperty

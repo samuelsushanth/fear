@@ -1,6 +1,7 @@
 package se.example2.softhouse.Resources;
 
 import com.codahale.metrics.annotation.Timed;
+import se.example2.softhouse.Application.Note.addquestionDAO;
 import se.example2.softhouse.DAO.QuestionDAO;
 import se.example2.softhouse.core.Question;
 
@@ -20,9 +21,11 @@ public class QuestionResource {
 
     private Question q1;
 
-    public QuestionResource(QuestionDAO dao,Question q) {
-        qdao = dao;
-        q1=q;
+    public QuestionResource(Question ques,QuestionDAO QDAO) {
+        qdao = QDAO;
+        q1 = ques;
+
+
 
     }
 

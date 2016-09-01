@@ -3,9 +3,6 @@ package se.example2.softhouse.core;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- * Created by sasanksaisujanadapa on 25/08/16.
- */
 
 public class Question {
     @JsonProperty
@@ -21,7 +18,7 @@ public class Question {
 
     @JsonProperty
     @NotEmpty
-    private String CA;
+    private int CA;
 
     public Question() {
 
@@ -51,11 +48,11 @@ public class Question {
         this.choice = opc;
     }
 
-    public String getCA() {
+    public int getCA() {
         return CA;
     }
 
-    public void setCA(String ca) {
+    public void setCA(int ca) {
         this.CA = ca;
     }
 
