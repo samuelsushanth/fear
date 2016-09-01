@@ -1,9 +1,3 @@
-defaultQuestion:
-  qid: 2
-  question: 'The default question'
-  text: 'This is the default note for the demo application'
-  choice: "choice1;choice2"
-  CA: 3
 
 assets:
   overrides:

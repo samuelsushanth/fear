@@ -16,11 +16,6 @@ import javax.validation.constraints.NotNull;
  */
 public class DemoConfiguration extends Configuration implements AssetsBundleConfiguration{
 
-    private Question defaultQuestion;
-
-    public Question getDefaultQuestion() {
-        return defaultQuestion;
-    }
 
     @Valid
     @NotNull

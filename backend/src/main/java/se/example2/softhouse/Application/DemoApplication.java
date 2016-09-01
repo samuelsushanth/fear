@@ -28,7 +28,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         //final addquestionDAO dao = jdbi.onDemand(addquestionDAO.class);
 
         //dao.createTable();
-        environment.jersey().register(new QuestionResource(configuration.getDefaultQuestion(),dao));
+        environment.jersey().register(new QuestionResource(dao));
         //dao.insert(2, "Aaron");
 
         //String name = dao.findNameById(2);

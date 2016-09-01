@@ -21,9 +21,8 @@ public class QuestionResource {
 
     private Question q1;
 
-    public QuestionResource(Question ques,QuestionDAO QDAO) {
+    public QuestionResource(QuestionDAO QDAO) {
         qdao = QDAO;
-        q1 = ques;
 
 
 
