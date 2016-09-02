@@ -16,6 +16,7 @@ public class Question {
     @NotEmpty
     private NotEmpty.List choice;
 
+
     @JsonProperty
     @NotEmpty
     private int CA;
