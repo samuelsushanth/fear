@@ -16,8 +16,6 @@ public interface QuestionDAO {
         @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(1000), choice varchar(80), ca varchar(80))")
         void createQuestionTable();
 
-
-
         @SqlUpdate("insert into QUESTIONS (question, choice, ca) values (:question, :choice, :ca)")
         void insQues(@BindBean Question question);
 
