@@ -23,7 +23,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "h2");
         final QuestionDAO dao = jdbi.onDemand(QuestionDAO.class);
         environment.jersey().register(new QuestionResource(dao));
-        dao.createQuestionTable();
+        //dao.createQuestionTable();
 
 
     }
