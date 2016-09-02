@@ -35,6 +35,7 @@ public class QuestionResource {
     public void addquestiontodb(Question question) {
         if (question != null) {
             qdao.insQues(question);
+
             throw new WebApplicationException(Response.Status.OK);
         } else {
             throw new WebApplicationException(Status.BAD_REQUEST);
