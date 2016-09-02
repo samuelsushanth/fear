@@ -29,7 +29,6 @@ public class QuestionResource {
     }
 
 
-
     @POST
     @Timed
     public void addquestiontodb(Question question) {
