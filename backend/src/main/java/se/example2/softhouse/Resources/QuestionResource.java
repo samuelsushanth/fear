@@ -21,6 +21,8 @@ public class QuestionResource {
 
     private Question q1;
 
+
+
     public QuestionResource(QuestionDAO QDAO) {
         qdao = QDAO;
 
@@ -28,6 +30,19 @@ public class QuestionResource {
 
     }
 
+    @GET
+    @Timed
+    public Question addquestiontodb() {
+        //if (question != null) {
+          //  qdao.insQues(question);
+
+            //throw new WebApplicationException(Response.Status.OK);
+        //} else {
+         //   throw new WebApplicationException(Status.BAD_REQUEST);
+       // }
+        return q1;
+
+    }
 
     @POST
     @Timed
