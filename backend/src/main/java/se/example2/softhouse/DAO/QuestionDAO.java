@@ -3,6 +3,7 @@ package se.example2.softhouse.DAO;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
+import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.Question;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface QuestionDAO {
     int create(@BindBean Question question);
 
     @SqlUpdate("update QUESTIONS set question = :u.question, ca = :u.ca where id = :id")
-    void update(@Bind("id") int id, @BindBean("u") Question question);
+    void update(@Bind("id") int id, @BindBean("u") Choice question);
 
     @SqlQuery("select * from QUESTIONS where id = :id")
     Question retrieve(@Bind("id") int id);

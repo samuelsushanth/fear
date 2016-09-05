@@ -5,8 +5,11 @@ import io.dropwizard.Application;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
+import se.example2.softhouse.DAO.ChoiceDAO;
 import se.example2.softhouse.DAO.QuestionDAO;
+import se.example2.softhouse.Resources.ChoiceResource;
 import se.example2.softhouse.Resources.QuestionResource;
 
 import java.sql.SQLException;
@@ -21,15 +24,17 @@ public class DemoApplication extends Application<DemoConfiguration> {
 
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "h2");
-        final QuestionDAO dao = jdbi.onDemand(QuestionDAO.class);
-        dao.createQuestionTable();
-        environment.jersey().register(new QuestionResource(dao));
+        Server myH2adminGUI = org.h2.tools.Server.createWebServer("-webDaemon");
+        myH2adminGUI.start();
 
-        //dao.createSomethingTable();
 
-        //dao.insert(2, "Aaron");
+        final QuestionDAO questiondao = jdbi.onDemand(QuestionDAO.class);
+        questiondao.createQuestionTable();
+        environment.jersey().register(new QuestionResource(questiondao));
 
-        //String name = dao.findNameById(2);
+        final ChoiceDAO choicedao = jdbi.onDemand(ChoiceDAO.class);
+        choicedao.createChoiceTable();
+        environment.jersey().register(new ChoiceResource(choicedao));
 
 
     }
