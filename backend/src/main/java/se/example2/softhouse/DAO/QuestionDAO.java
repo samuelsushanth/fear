@@ -1,23 +1,30 @@
 package se.example2.softhouse.DAO;
 
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.Question;
 
+import java.util.List;
+
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface QuestionDAO {
+    @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(1000), ca varchar(80))")
+    void createQuestionTable();
 
+    @GetGeneratedKeys
+    @SqlUpdate("insert into QUESTIONS (id, question, ca) values (:id, :question, :ca)")
+    int create(@BindBean Question question);
 
+    @SqlUpdate("update QUESTIONS set question = :u.question, ca = :u.ca where id = :id")
+    void update(@Bind("id") int id, @BindBean("u") Question question);
 
-        @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(1000), choice varchar(80), ca varchar(80))")
-        void createQuestionTable();
+    @SqlQuery("select * from QUESTIONS where id = :id")
+    Question retrieve(@Bind("id") int id);
 
-        @SqlUpdate("insert into QUESTIONS (question, choice, ca) values (:question, :choice, :ca)")
-        void insQues(@BindBean Question question);
+    @SqlQuery("select * from QUESTIONS")
+    List<Question> list();
 
-
+    @SqlUpdate("delete from QUESTIONS where id = :it")
+    void delete(@Bind int id);
 }

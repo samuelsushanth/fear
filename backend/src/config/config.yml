@@ -16,5 +16,5 @@ database:
       password:
       #JDBC URL
 
-      url: jdbc:h2:~/fear
+      url: jdbc:h2:mem:~/fear;DB_CLOSE_DELAY=-1
 

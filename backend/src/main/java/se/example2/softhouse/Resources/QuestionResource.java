@@ -1,48 +1,58 @@
 package se.example2.softhouse.Resources;
 
-import com.codahale.metrics.annotation.Timed;
-import se.example2.softhouse.Application.Note.addquestionDAO;
 import se.example2.softhouse.DAO.QuestionDAO;
 import se.example2.softhouse.core.Question;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
+import java.util.List;
+import java.util.Optional;
 
-@Path("/addquestion")
+@Path("/question")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-
-
 public class QuestionResource {
+    private QuestionDAO questionDAO;
 
-    private QuestionDAO qdao;
-
-    private Question q1;
-
-    public QuestionResource(QuestionDAO QDAO) {
-        qdao = QDAO;
-
-
-
+    public QuestionResource(QuestionDAO questionDAO) {
+        this.questionDAO = questionDAO;
     }
 
+    @GET
+    public List<Question> list() {
+        return questionDAO.list();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Question retrieve(@PathParam("id") Integer id) {
+        return questionDAO.retrieve(id);
+    }
 
     @POST
-    @Timed
-    public void addquestiontodb(Question question) {
-        if (question != null) {
-            qdao.insQues(question);
-
-            throw new WebApplicationException(Response.Status.OK);
-        } else {
-            throw new WebApplicationException(Status.BAD_REQUEST);
-        }
-
+    public Question create(Question question) {
+        int id = questionDAO.create(question);
+        return questionDAO.retrieve(id);
     }
 
+    @PUT
+    @Path("/{id}")
+    public Response update(@PathParam("id") int id, Question question) {
+        Optional<Question> update = Optional.ofNullable(questionDAO.retrieve(id));
 
+        if (update.isPresent()) {
+            questionDAO.update(id, question);
+            return Response.ok(questionDAO.retrieve(id)).build();
+        } else {
+            throw new NotFoundException();
+        }
+    }
 
-
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") Integer id) {
+        questionDAO.delete(id);
+        return Response.ok().build();
+    }
 }

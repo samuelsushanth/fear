@@ -14,12 +14,7 @@ public class Question {
 
     @JsonProperty
     @NotEmpty
-    private NotEmpty.List choice;
-
-
-    @JsonProperty
-    @NotEmpty
-    private int CA;
+    private int ca;
 
     public Question() {
 
@@ -41,20 +36,20 @@ public class Question {
         this.question = question;
     }
 
-     public NotEmpty.List getchoice() {
-        return choice;
+    public int getCa() {
+        return ca;
     }
 
-    public void setChoice(NotEmpty.List opc) {
-        this.choice = opc;
+    public void setCa(int ca) {
+        this.ca = ca;
     }
 
-    public int getCA() {
-        return CA;
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", ca=" + ca +
+                '}';
     }
-
-    public void setCA(int ca) {
-        this.CA = ca;
-    }
-
 }
