@@ -16,7 +16,7 @@ import com.codahale.metrics.annotation.Timed;
         import java.util.ArrayList;
         import java.util.List;
 
-@Path("/question")
+@Path("/exam")
 
 public class ExamResource {
 
