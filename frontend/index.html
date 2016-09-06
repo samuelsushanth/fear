@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
@@ -21,25 +23,25 @@
             </figure>
             </div></div>
             <div class="panel-body">
-                <ul data-spy="affix" data-offset-top="25">
+            <ul data-spy="affix" data-offset-top="25">
                     <li style="float: left;"><a href="index.html">Home</a></li>
                     <li style="float: left;"><a class="active" href="#" style="text-decoration: none">Questions</a></li>
                     <li style="float: left;"><a href="questionaire.html">Exam</a></li>
                     <li style="float:right"><a href="#">Log out</a></li>
                 </ul>
             </div>
-
-   <div class="row">
-       <div class="col-xs-5 text-center"  style="border:1px solid black;" >
-                <choice-form name="siva"></choice-form>
-           </div>
-<div class="col-xs-1">
-
-    </div>
-            <div class="col-xs-5" style="border:1px solid black;">
-                <choice-form name="abc"></choice-form>
+             <div class="row">
+                <div class="col-xs-5 text-center">
+                     <div ng-view></div>
                 </div>
-   </div>
+                 <div class="col-xs-2">
+
+                 </div>
+                 <div class="col-xs-5">
+                    <div ng-view></div>
+                    </div>
+              </div>
+               <!-- <choice-form name="siva"></choice-form>-->
         </div>
             </div>
         </div>
@@ -48,12 +50,12 @@
         </div>
 </body>
 
-<script src="js/angular.min.js"></script>
 <script src="app/services/note.service.js"></script>
 <script src="app/services/choice.service.js"></script>
 <script src="app/note/note.controller.js"></script>
 <script src="app/notes/notes.controller.js"></script>
 <script src="app/note-form/note-form.controller.js"></script>
 <script src="app/choice-form/choice-form.controller.js"></script>
+<script src="app/config.js"></script>
 <script src="app/app.js"></script>
 </html>

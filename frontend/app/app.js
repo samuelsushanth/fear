@@ -1,5 +1,6 @@
 
-angular.module('app', [])
+angular.module('app', ["ngRoute"])
+    .config(config)
     .factory('noteService', noteService)
     .factory("choiceService", choiceService)
     .component('noteForm', {
@@ -42,6 +43,7 @@ angular.module('app', [])
         controllerAs: 'vm',
 
         bindings: {
-            name: '@'
+            name: '@',
+            test: '@'
         }
     });
