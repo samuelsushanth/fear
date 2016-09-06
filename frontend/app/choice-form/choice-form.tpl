@@ -1,14 +1,24 @@
-
+<div class="total_form">
             <div>
                 <form>
                 <div class="form-group">
+                 <div class="container">
+                                <ul class="nav nav-tabs">
+                                  <li role="presentation" class="active"><a href="#">Home</a></li>
+                                  <li role="presentation"><a href="#">Profile</a></li>
+                                  <li role="presentation"><a href="#">Messages</a></li>
+                                </ul>
+
+                  </div>
+                  <div>
                     <label for="question">Enter the Question:</label>
                     <textarea class="form-control" rows="3" id="question" ng-model="vm.question"></textarea>
+                    </div>
                 </div>
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Enter the choices:</h3>
+                        <label for="choices">Enter the Choice:</label>
                     </div>
                     <div class="panel-body">
                         <ol style="background-color:  white;">
@@ -30,5 +40,8 @@
                 </div>
             </form>
 
+
+
             {{vm}}
         </div>
+</div>

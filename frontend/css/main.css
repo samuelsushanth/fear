@@ -58,3 +58,23 @@ li a:hover:not(.active) {
     background-color: black;
     color: white;
 }
+
+.nav-tabs{
+
+    float:left;
+    color:white;
+}
+
+.form1{
+
+    align:right;
+}
+
+.total_form{
+
+    background-color:lightgray;
+}
+
+.panel-heading{
+    background-color:lightgrey;
+}
