@@ -1,12 +1,11 @@
-<div class="total_form">
+<div class="total_form" style="background-color:white;">
             <div>
                 <form>
                 <div class="form-group">
                  <div class="container">
                                 <ul class="nav nav-tabs">
-                                  <li role="presentation" class="active"><a href="#">Home</a></li>
-                                  <li role="presentation"><a href="#">Profile</a></li>
-                                  <li role="presentation"><a href="#">Messages</a></li>
+                                  <li role="presentation" class="active"><a href="#">Add</a></li>
+                                  <li role="presentation"><a href="#">Choose</a></li>
                                 </ul>
 
                   </div>
@@ -21,7 +20,7 @@
                         <label for="choices">Enter the Choice:</label>
                     </div>
                     <div class="panel-body">
-                        <ol style="background-color:  white;">
+                        <ol style="background-color:blue;">
                             <li style="border: 1px solid black;  width:250px; text-decoration: none" ng-repeat="x in vm.choices">{{x}} <span ng-click="vm.removeItem($index)" style="cursor:pointer;" >x</span></li>
                         </ol>
                         <input type="text" ng-model="vm.choiceText">
