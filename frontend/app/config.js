@@ -8,9 +8,9 @@ function config($routeProvider)
 
     $routeProvider
         .when('/',{
-            template:'<choice-form name="siva"></choice-form>'
+            template:'<addquestion name="siva"></addquestion>'
         })
-        .when('/exam/:examId', { template: '<choice-form test="$resolve.examId"></choice-form>', resolve: examResolver });
+        .when('/exam/:examId', { template: '<addquestion test="$resolve.examId"></addquestion>', resolve: examResolver });
 // http://fear.com/exam/6
 
 }

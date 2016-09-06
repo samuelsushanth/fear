@@ -36,9 +36,9 @@ angular.module('app', ["ngRoute"])
             data: '<'
         }
     })
-    // choiceForm becomes <choice-form> in HTML
-    .component('choiceForm', {
-        templateUrl: 'app/choice-form/choice-form.tpl',
+    // addquestionForm becomes <questions> in HTML
+    .component('addquestion', {
+        templateUrl: 'app/questions/add-question.tpl',
         controller: ChoiceFormController,
         controllerAs: 'vm',
 
