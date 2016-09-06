@@ -15,13 +15,21 @@ public interface QuestionDAO {
 
 
 
-        @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(1000), ca int)")
-        void createQuestionTable();
+    @SqlUpdate("create table if not exists QUESTIONS (id Long auto_increment primary key, text varchar(2000))")
+    void createQuestionTable();
 
-        @SqlUpdate("insert into QUESTIONS (question,ca) values (:question, :CA)")
-        void insQues(@BindBean Question question);
+    @SqlUpdate("delete table QUESTIONS")
+    void deleteQuestionTable();
 
-         @SqlQuery("select * from QUESTIONS")
-         List<Question> list();
+    @SqlQuery("select * from QUESTIONS")
+    List<Question> list();
 
+    @SqlUpdate("insert into QUESTIONS (text) values (:text)")
+    void insQues(@BindBean Question question);
+
+    @SqlUpdate("delete from QUESTIONS where (id)=(:id)")
+    void delQues(@BindBean Question question);
+
+    @SqlUpdate("update QUESTIONS set (text)=(:text) where (id)=(:id)")
+    void updQues(@BindBean Question question);
 }

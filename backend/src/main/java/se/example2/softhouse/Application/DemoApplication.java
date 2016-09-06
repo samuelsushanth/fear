@@ -30,8 +30,8 @@ public class DemoApplication extends Application<DemoConfiguration> {
         Question q = new Question();
 
         //q.setId(2);
-        q.setquestion("abc");
-        q.setCA(3);
+        q.setText("abc");
+
         //dao.insQues(q);
         //dao.insQues(q);
         environment.jersey().register(new QuestionResource(dao,q));
