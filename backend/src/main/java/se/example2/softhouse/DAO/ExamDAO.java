@@ -28,7 +28,7 @@ public interface ExamDAO {
     List<Exam> list();
 
     @SqlUpdate("insert into Exam (text) values (:text)")
-    void insQues(@BindBean Exam exam);
+    Long insQues(@BindBean Exam exam);
 
     @SqlUpdate("delete from Exam where (id)=(:id)")
     void delQues(@BindBean Exam exam);

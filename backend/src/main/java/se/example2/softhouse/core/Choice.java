@@ -20,6 +20,17 @@ public class Choice {
     @NotEmpty
     private Long questionId;
 
+    @JsonProperty
+    @NotEmpty
+    private String iscorrect;
+
+    public void setIscorrect(String iscorrect) {
+        this.iscorrect = iscorrect;
+    }
+
+    public String getIscorrect() {
+        return iscorrect;
+    }
 
     public Choice() {
 

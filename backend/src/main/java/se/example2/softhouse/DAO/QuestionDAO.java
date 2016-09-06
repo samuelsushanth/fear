@@ -25,7 +25,7 @@ public interface QuestionDAO {
     List<Question> list();
 
     @SqlUpdate("insert into QUESTIONS (text) values (:text)")
-    void insQues(@BindBean Question question);
+    Long insQues(@BindBean Question question);
 
     @SqlUpdate("delete from QUESTIONS where (id)=(:id)")
     void delQues(@BindBean Question question);

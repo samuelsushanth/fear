@@ -7,9 +7,11 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
-import se.example2.softhouse.DAO.QuestionDAO;
+import se.example2.softhouse.DAO.*;
+import se.example2.softhouse.DAO.QuestionAnswerDAO;
 import se.example2.softhouse.Resources.QuestionResource;
 import se.example2.softhouse.core.Question;
+import se.example2.softhouse.core.QuestionAnswer;
 
 import java.sql.SQLException;
 
@@ -24,17 +26,25 @@ public class DemoApplication extends Application<DemoConfiguration> {
         myH2adminGUI.start();
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "h2");
-        final QuestionDAO dao = jdbi.onDemand(QuestionDAO.class);
+        final QuestionDAO qdao = jdbi.onDemand(QuestionDAO.class);
+        final ChoiceDAO chdao = jdbi.onDemand(ChoiceDAO.class);
+        final QuestionAnswerDAO qadao = jdbi.onDemand(QuestionAnswerDAO.class);
+        final ExamDAO edao = jdbi.onDemand(ExamDAO.class);
+        final ExamQuestionDAO eqdao= jdbi.onDemand(ExamQuestionDAO.class);
 
-        dao.createQuestionTable();
-        Question q = new Question();
+        qdao.createQuestionTable();
+        chdao.createChoiceTable();
+        qadao.createQuestionAnswerTable();
+        edao.createExamTable();
+        eqdao.createExamQuestionTable();
+        //Question q = new Question();
 
         //q.setId(2);
-        q.setText("abc");
+        //q.setText("abc");
 
         //dao.insQues(q);
         //dao.insQues(q);
-        environment.jersey().register(new QuestionResource(dao,q));
+        environment.jersey().register(new QuestionResource(qdao,chdao,qadao,edao,eqdao));
 
 
         //dao.createSomethingTable();

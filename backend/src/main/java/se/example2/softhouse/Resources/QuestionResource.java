@@ -2,8 +2,8 @@ package se.example2.softhouse.Resources;
 
 import com.codahale.metrics.annotation.Timed;
 import se.example2.softhouse.Application.Note.addquestionDAO;
-import se.example2.softhouse.DAO.QuestionDAO;
-import se.example2.softhouse.core.Question;
+import se.example2.softhouse.DAO.*;
+import se.example2.softhouse.core.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,48 +13,74 @@ import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/addquestion")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Path("/question")
+
 
 
 public class QuestionResource {
 
-    private QuestionDAO qdao;
+    private QuestionDAO questiondao;
+    private ChoiceDAO choicedao;
+    private QuestionAnswerDAO questionAnswerdao;
+    private ExamDAO examdao;
+    private ExamQuestionDAO examQuestiondao;
 
     private Question q1;
+    private Choice  c;
+    private QuestionAnswer qa;
+    private Exam e1;
+    private ExamQuestion eq;
+    private List<Question> questions;
+    private Long qid;
+    private Long aid;
 
-
-
-    public QuestionResource(QuestionDAO QDAO, Question q) {
-        qdao = QDAO;
-         q1=q;
-
-
+    public QuestionResource(QuestionDAO qdao,ChoiceDAO chdao,QuestionAnswerDAO qadao,ExamDAO edao,ExamQuestionDAO eqdao) {
+        questiondao =qdao;
+        choicedao=chdao;
+        questionAnswerdao=qadao;
+        examdao=edao;
+        examQuestiondao=eqdao;
     }
 
     @GET
     @Timed
-    public List showquestionstoui()
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Question> showquestionstoui()
     {
-        qdao.insQues(q1);
-        qdao.insQues(q1);
+        questions=new ArrayList<>();
 
-        List k;
-
-       /* q1.setCA(2);
-        q1.setChoice(k);
-        q1.setQuestion("abc");*/
-
-         k=qdao.list();
-        return k;
+        questions=questiondao.list();
+        return questions;
     }
 
+
     @POST
-    @Timed
-    public void addquestiontodb(Question question) {
-        if (question != null) {
-            qdao.insQues(question);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addquestiontodb(Question q, List<Choice> ch, Exam e) {
+        q1=q;
+        e1=e;
+        if (q != null) {
+            qid=questiondao.insQues(q);
+
+          /*  for( c : ch)
+            {
+
+                c.setQuestionId(qid);
+                Long cid = choicedao.insChoice(c);
+                if (c.getIscorrect()=="true")
+
+                {
+                    aid=cid;
+                }
+
+            }*/
+            qa.setQuestionId(qid);qa.setCorrectChoiceId(aid);
+           questionAnswerdao.insQuestionAnswer(qa);
+
+            long eid=examdao.insQues(e);
+            eq.setQuestionId(qid);eq.setExamId(eid);
+            examQuestiondao.insExamQuestion(eq);
+
 
             throw new WebApplicationException(Response.Status.OK);
         } else {

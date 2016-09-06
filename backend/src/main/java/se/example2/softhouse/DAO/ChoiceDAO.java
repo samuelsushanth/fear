@@ -26,7 +26,7 @@ public interface ChoiceDAO {
     List<Choice> list();
 
     @SqlUpdate("insert into CHOICE (text,questionId) values (:text,:questionId)")
-    void insChoice(@BindBean Choice choice);
+    Long insChoice(@BindBean Choice choice);
 
     @SqlUpdate("delete from CHOICE where (id)=(:id)")
     void delChoice(@BindBean Choice choice);

@@ -16,7 +16,7 @@ import se.example2.softhouse.core.QuestionAnswer;
 
 import java.util.List;
 @RegisterMapperFactory(BeanMapperFactory.class)
-public interface QuestionAnswerDao {
+public interface QuestionAnswerDAO {
     @SqlUpdate("create table if not exists QuestionAnswer (id Long auto_increment primary key,examId Long,questionId Long)")
     void createQuestionAnswerTable();
 
