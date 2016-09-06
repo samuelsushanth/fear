@@ -39,6 +39,7 @@ li a {
 
 .panel-body span {
     float: right;
+    background-color: lightgray;
 }
 li a:hover:not(.active) {
     background-color: #1a1a1a;
