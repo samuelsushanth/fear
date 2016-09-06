@@ -10,10 +10,11 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.Choice;
+import se.example2.softhouse.core.ExamQuestion;
 import se.example2.softhouse.core.Question;
 import java.util.List;
 @RegisterMapperFactory(BeanMapperFactory.class)
-public interface ExamQuestion {
+public interface ExamQuestionDAO {
     @SqlUpdate("create table if not exists ExamQuestion (id Long auto_increment primary key,examId Long,questionId Long)")
     void createExamQuestionTable();
 

@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 /**
  * Created by charan on 9/6/2016.
  */
-public class QuestionChoice {
+public class QuestionAnswer {
     @JsonProperty
     private Long id;
 
