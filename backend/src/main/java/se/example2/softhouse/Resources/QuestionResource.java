@@ -26,9 +26,9 @@ public class QuestionResource {
 
 
 
-    public QuestionResource(QuestionDAO QDAO) {
+    public QuestionResource(QuestionDAO QDAO, Question q) {
         qdao = QDAO;
-
+         q1=q;
 
 
     }
@@ -37,6 +37,9 @@ public class QuestionResource {
     @Timed
     public List showquestionstoui()
     {
+        qdao.insQues(q1);
+        qdao.insQues(q1);
+
         List k;
 
        /* q1.setCA(2);

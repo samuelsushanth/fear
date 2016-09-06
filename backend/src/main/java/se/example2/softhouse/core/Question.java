@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 
 public class Question {
-    @JsonProperty
+    /*@JsonProperty
     private Integer id;
-
+*/
     @JsonProperty
     @NotEmpty
     private String question;
@@ -33,19 +33,19 @@ public class Question {
         CA=corr;
     }
 
-    public int getId() {
+ /*   public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getQuestion() {
+*/
+    public String getquestion() {
         return question;
     }
 
-    public void setQuestion(String question) {
+    public void setquestion(String question) {
         this.question = question;
     }
 

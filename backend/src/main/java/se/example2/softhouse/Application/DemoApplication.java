@@ -20,21 +20,21 @@ public class DemoApplication extends Application<DemoConfiguration> {
 
     @Override
     public void run(DemoConfiguration configuration, Environment environment) throws SQLException {
-
+        Server myH2adminGUI = org.h2.tools.Server.createWebServer("-webDaemon");
+        myH2adminGUI.start();
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "h2");
         final QuestionDAO dao = jdbi.onDemand(QuestionDAO.class);
-        Server myH2adminGUI = org.h2.tools.Server.createWebServer("-webDaemon");
-        myH2adminGUI.start();
+
         dao.createQuestionTable();
         Question q = new Question();
 
         //q.setId(2);
-        q.setQuestion("abc");
+        q.setquestion("abc");
         q.setCA(3);
         //dao.insQues(q);
-        dao.insQues(q);
-        environment.jersey().register(new QuestionResource(dao));
+        //dao.insQues(q);
+        environment.jersey().register(new QuestionResource(dao,q));
 
 
         //dao.createSomethingTable();
