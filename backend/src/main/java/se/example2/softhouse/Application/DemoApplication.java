@@ -5,6 +5,7 @@ import io.dropwizard.Application;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.QuestionDAO;
 import se.example2.softhouse.Resources.QuestionResource;
@@ -22,8 +23,11 @@ public class DemoApplication extends Application<DemoConfiguration> {
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "h2");
         final QuestionDAO dao = jdbi.onDemand(QuestionDAO.class);
+        Server myH2adminGUI = org.h2.tools.Server.createWebServer("-webDaemon");
+        myH2adminGUI.start();
         dao.createQuestionTable();
         environment.jersey().register(new QuestionResource(dao));
+
 
         //dao.createSomethingTable();
 

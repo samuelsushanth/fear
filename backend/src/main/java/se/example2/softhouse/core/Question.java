@@ -3,6 +3,8 @@ package se.example2.softhouse.core;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.util.ArrayList;
+
 
 public class Question {
     @JsonProperty
@@ -14,7 +16,7 @@ public class Question {
 
     @JsonProperty
     @NotEmpty
-    private NotEmpty.List choice;
+    private ArrayList choice;
 
 
     @JsonProperty
@@ -41,11 +43,11 @@ public class Question {
         this.question = question;
     }
 
-     public NotEmpty.List getchoice() {
+     public ArrayList getchoice() {
         return choice;
     }
 
-    public void setChoice(NotEmpty.List opc) {
+    public void setChoice(ArrayList opc) {
         this.choice = opc;
     }
 
