@@ -8,16 +8,20 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.Question;
 
+import java.util.List;
+
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface QuestionDAO {
 
 
 
-        @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(1000), choice varchar(80), ca varchar(80))")
+        @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(1000), ca int)")
         void createQuestionTable();
 
-        @SqlUpdate("insert into QUESTIONS (question, choice, ca) values (:question, :choice, :ca)")
+        @SqlUpdate("insert into QUESTIONS (question,ca) values (:question, :CA)")
         void insQues(@BindBean Question question);
 
+         @SqlQuery("select * from QUESTIONS")
+         List<Question> list();
 
 }

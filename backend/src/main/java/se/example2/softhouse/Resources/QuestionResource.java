@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 @Path("/addquestion")
 @Produces(MediaType.APPLICATION_JSON)
@@ -34,14 +35,16 @@ public class QuestionResource {
 
     @GET
     @Timed
-    public Question showquestiontoui()
+    public List showquestionstoui()
     {
-        ArrayList<String> k = new ArrayList<String>();
+        List k;
 
-        q1.setCA(2);
+       /* q1.setCA(2);
         q1.setChoice(k);
-        q1.setQuestion("abc");
-        return q1;
+        q1.setQuestion("abc");*/
+
+         k=qdao.list();
+        return k;
     }
 
     @POST

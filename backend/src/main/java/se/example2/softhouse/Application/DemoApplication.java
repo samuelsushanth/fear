@@ -9,6 +9,7 @@ import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.QuestionDAO;
 import se.example2.softhouse.Resources.QuestionResource;
+import se.example2.softhouse.core.Question;
 
 import java.sql.SQLException;
 
@@ -26,6 +27,13 @@ public class DemoApplication extends Application<DemoConfiguration> {
         Server myH2adminGUI = org.h2.tools.Server.createWebServer("-webDaemon");
         myH2adminGUI.start();
         dao.createQuestionTable();
+        Question q = new Question();
+
+        //q.setId(2);
+        q.setQuestion("abc");
+        q.setCA(3);
+        //dao.insQues(q);
+        dao.insQues(q);
         environment.jersey().register(new QuestionResource(dao));
 
 

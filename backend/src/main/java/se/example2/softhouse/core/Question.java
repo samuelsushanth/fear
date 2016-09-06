@@ -14,24 +14,30 @@ public class Question {
     @NotEmpty
     private String question;
 
-    @JsonProperty
+   /* @JsonProperty
     @NotEmpty
-    private ArrayList choice;
+    private ArrayList choice;*/
 
 
     @JsonProperty
     @NotEmpty
     private int CA;
 
+
     public Question() {
 
     }
+    public  Question(String ques,int corr)
+    {
+        question = ques;
+        CA=corr;
+    }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -43,14 +49,14 @@ public class Question {
         this.question = question;
     }
 
-     public ArrayList getchoice() {
+   /*  public ArrayList getchoice() {
         return choice;
     }
 
     public void setChoice(ArrayList opc) {
         this.choice = opc;
     }
-
+*/
     public int getCA() {
         return CA;
     }
