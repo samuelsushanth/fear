@@ -78,4 +78,5 @@ li a:hover:not(.active) {
 
 .panel-heading{
     background-color:lightgrey;
+    border-color:transparent;
 }
