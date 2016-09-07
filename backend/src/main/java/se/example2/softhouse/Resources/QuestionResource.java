@@ -56,13 +56,17 @@ public class QuestionResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addquestiontodb(Question q, List<Choice> ch, Exam e) {
-        q1=q;
-        e1=e;
-        if (q != null) {
-            qid=questiondao.insQues(q); //question table
+    public void addquestiontodb(Qfull qfull) {
+        q1.setText(qfull.getQuestiontext());
+        e1.setText(qfull.getExamtext());
 
-          /*  for( c : ch)
+        qid=questiondao.insQues(q1);
+
+
+        /*if (q1 != null) {
+            qid=questiondao.insQues(q1); //question table
+
+            for( c : ch)
             {
 
                 c.setQuestionId(qid);
@@ -73,11 +77,11 @@ public class QuestionResource {
                     aid=cid;
                 }
 
-            }*/
+            }
             qa.setQuestionId(qid);qa.setCorrectChoiceId(aid);
            questionAnswerdao.insQuestionAnswer(qa);  //questionanswer table
 
-            long eid=examdao.insQues(e);  //exam table
+            long eid=examdao.insQues(e1);  //exam table
             eq.setQuestionId(qid);eq.setExamId(eid);
             examQuestiondao.insExamQuestion(eq); //examquestions table
 
@@ -85,7 +89,7 @@ public class QuestionResource {
             throw new WebApplicationException(Response.Status.OK);
         } else {
             throw new WebApplicationException(Status.BAD_REQUEST);
-        }
+        }*/
 
     }
 
