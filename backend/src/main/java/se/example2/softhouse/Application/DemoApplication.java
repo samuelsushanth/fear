@@ -8,8 +8,10 @@ import io.dropwizard.setup.Environment;
 import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.ChoiceDAO;
+import se.example2.softhouse.DAO.QuestionAnswerDAO;
 import se.example2.softhouse.DAO.QuestionDAO;
 import se.example2.softhouse.Resources.ChoiceResource;
+import se.example2.softhouse.Resources.QuestionAnswerResource;
 import se.example2.softhouse.Resources.QuestionResource;
 
 import java.sql.SQLException;
@@ -28,14 +30,17 @@ public class DemoApplication extends Application<DemoConfiguration> {
         myH2adminGUI.start();
 
 
-        final QuestionDAO questiondao = jdbi.onDemand(QuestionDAO.class);
-        questiondao.createQuestionTable();
-        environment.jersey().register(new QuestionResource(questiondao));
+        final QuestionDAO questionDao = jdbi.onDemand(QuestionDAO.class);
+        final ChoiceDAO choiceDao = jdbi.onDemand(ChoiceDAO.class);
+        final QuestionAnswerDAO questionAnswerDAO = jdbi.onDemand(QuestionAnswerDAO.class);
 
-        final ChoiceDAO choicedao = jdbi.onDemand(ChoiceDAO.class);
-        choicedao.createChoiceTable();
-        environment.jersey().register(new ChoiceResource(choicedao));
+        questionDao.createQuestionTable();
+        choiceDao.createChoiceTable();
+        questionAnswerDAO.createQuestionAnswerTable();
 
+        environment.jersey().register(new QuestionResource(questionDao));
+        environment.jersey().register(new ChoiceResource(choiceDao, questionAnswerDAO));
+        environment.jersey().register(new QuestionAnswerResource(questionAnswerDAO));
 
     }
 

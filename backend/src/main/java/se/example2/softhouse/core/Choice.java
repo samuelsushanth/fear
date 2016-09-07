@@ -16,6 +16,9 @@ public class Choice {
     @NotEmpty
     private String choice;
 
+    @JsonProperty
+    private Boolean isCorrect = false;
+
     public Choice() {
 
     }
@@ -42,12 +45,21 @@ public class Choice {
 
     public void setChoice(String choice) {this.choice = choice;}
 
+    public Boolean getIsCorrect() {
+        return isCorrect;
+    }
+
+    public void setIsCorrect(Boolean is_correct) {
+        this.isCorrect = is_correct;
+    }
+
     @Override
     public String toString() {
-        return "Question{" +
+        return "Choice{" +
                 "id=" + id +
-                ", question_id='" + question_id + '\'' +
-                ", choice=" + choice +
+                ", question_id=" + question_id +
+                ", choice='" + choice + '\'' +
+                ", is_correct=" + isCorrect +
                 '}';
     }
 }

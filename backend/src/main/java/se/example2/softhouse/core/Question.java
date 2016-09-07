@@ -12,13 +12,8 @@ public class Question {
     @NotEmpty
     private String question;
 
-    @JsonProperty
-    @NotEmpty
-    private int ca;
 
-    public Question() {
-
-    }
+    public Question() {}
 
     public Integer getId() {
         return id;
@@ -36,20 +31,11 @@ public class Question {
         this.question = question;
     }
 
-    public int getCa() {
-        return ca;
-    }
-
-    public void setCa(int ca) {
-        this.ca = ca;
-    }
 
     @Override
     public String toString() {
         return "Question{" +
                 "id=" + id +
-                ", question='" + question + '\'' +
-                ", ca=" + ca +
-                '}';
+                ", question='" + question + '\'' +   '}';
     }
 }

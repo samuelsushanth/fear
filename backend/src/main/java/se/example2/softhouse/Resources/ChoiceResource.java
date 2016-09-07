@@ -1,8 +1,9 @@
 package se.example2.softhouse.Resources;
 
 import se.example2.softhouse.DAO.ChoiceDAO;
+import se.example2.softhouse.DAO.QuestionAnswerDAO;
 import se.example2.softhouse.core.Choice;
-import se.example2.softhouse.core.Question;
+import se.example2.softhouse.core.QuestionAnswer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -11,38 +12,48 @@ import java.util.Optional;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@Path("/question")
+@Path("/choice")
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 public class ChoiceResource {
 
     private ChoiceDAO choiceDAO;
+    private QuestionAnswerDAO questionAnswerDAO;
 
-    public ChoiceResource(ChoiceDAO choiceDAO) {
+    public ChoiceResource(ChoiceDAO choiceDAO, QuestionAnswerDAO questionAnswerDao) {
         this.choiceDAO = choiceDAO;
+        this.questionAnswerDAO = questionAnswerDao;
     }
 
     @GET
-    public List<Question> list() {
+    public List<Choice> list() {
         return choiceDAO.list();
     }
 
     @GET
     @Path("/{id}")
-    public Question retrieve(@PathParam("id") Integer id) {
+    public Choice retrieve(@PathParam("id") Integer id) {
         return choiceDAO.retrieve(id);
     }
 
     @POST
-    public Question create(Question question) {
-        int id = choiceDAO.create(question);
-        return choiceDAO.retrieve(id);
+    public Choice create(Choice choice) {
+        int id = choiceDAO.create(choice);
+        Choice addedChoice = choiceDAO.retrieve(id);
+
+        if (choice.getIsCorrect()) {
+            QuestionAnswer correctAnswer = new QuestionAnswer(choice.getQuestion_id(), id);
+            questionAnswerDAO.create(correctAnswer);
+            addedChoice.setIsCorrect(true);
+        }
+
+        return addedChoice;
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") int id, Choice choice) {
-        Optional<Question> update = Optional.ofNullable(choiceDAO.retrieve(id));
+        Optional<Choice> update = Optional.ofNullable(choiceDAO.retrieve(id));
 
         if (update.isPresent()) {
             choiceDAO.update(id, choice);
