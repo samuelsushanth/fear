@@ -33,8 +33,10 @@ public interface ExamDAO {
     @SqlUpdate("delete from Exam where (id)=(:id)")
     void delQues(@BindBean Exam exam);
 
-    @SqlUpdate("update QUESTIONS set (text)=(:text) where (id)=(:id)")
+    @SqlUpdate("update Exam set (text)=(:text) where (id)=(:id)")
     void updQues(@BindBean Exam exam);
 
+    @SqlQuery("select (id) from Exam where (text)=(:text)")
+    Long getExamId(@BindBean Exam exam );
 
 }

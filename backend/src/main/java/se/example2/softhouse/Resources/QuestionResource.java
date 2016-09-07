@@ -60,13 +60,13 @@ public class QuestionResource {
         q1=q;
         e1=e;
         if (q != null) {
-            qid=questiondao.insQues(q);
+            qid=questiondao.insQues(q); //question table
 
           /*  for( c : ch)
             {
 
                 c.setQuestionId(qid);
-                Long cid = choicedao.insChoice(c);
+                Long cid = choicedao.insChoice(c); //choice table
                 if (c.getIscorrect()=="true")
 
                 {
@@ -75,11 +75,11 @@ public class QuestionResource {
 
             }*/
             qa.setQuestionId(qid);qa.setCorrectChoiceId(aid);
-           questionAnswerdao.insQuestionAnswer(qa);
+           questionAnswerdao.insQuestionAnswer(qa);  //questionanswer table
 
-            long eid=examdao.insQues(e);
+            long eid=examdao.insQues(e);  //exam table
             eq.setQuestionId(qid);eq.setExamId(eid);
-            examQuestiondao.insExamQuestion(eq);
+            examQuestiondao.insExamQuestion(eq); //examquestions table
 
 
             throw new WebApplicationException(Response.Status.OK);

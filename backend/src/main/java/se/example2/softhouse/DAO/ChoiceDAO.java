@@ -34,4 +34,12 @@ public interface ChoiceDAO {
     @SqlUpdate("update CHOICE set (text,questionId)=(:text,:questionId) where (id)=(:id)")
     void updChoice(@BindBean Choice choice);
 
+    @SqlQuery("select (id) from CHOICE where (text)=(:text)")
+    Long getChoiceId(@BindBean Choice choice);
+
+    @SqlQuery("select * from CHOICE where (questionId) = (:questionId)")
+    List<Choice> getChoicesForQuestion(@BindBean Choice choice);
+
+
+
 }

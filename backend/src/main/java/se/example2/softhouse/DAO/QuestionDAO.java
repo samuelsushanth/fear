@@ -6,6 +6,7 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
+import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.Question;
 
 import java.util.List;
@@ -32,4 +33,8 @@ public interface QuestionDAO {
 
     @SqlUpdate("update QUESTIONS set (text)=(:text) where (id)=(:id)")
     void updQues(@BindBean Question question);
+
+    @SqlQuery("select (id) from QUESTIONS where (text)=(:text)")
+    Long getQuestionId(@BindBean Question question );
+
 }

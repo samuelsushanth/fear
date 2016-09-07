@@ -35,7 +35,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
 
         qdao.createQuestionTable();
         chdao.createChoiceTable();
-        qadao.createQuestionAnswerTable();
+        qadao.createQuestionAnswerTable();   //initial table creations
         edao.createExamTable();
         eqdao.createExamQuestionTable();
         //Question q = new Question();
@@ -45,7 +45,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
 
         //dao.insQues(q);
         //dao.insQues(q);
-        environment.jersey().register(new QuestionResource(qdao,chdao,qadao,edao,eqdao));
+        environment.jersey().register(new QuestionResource(qdao,chdao,qadao,edao,eqdao)); //registering resources
         environment.jersey().register(new ExamResource());
 
         //dao.createSomethingTable();
