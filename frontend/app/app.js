@@ -1,5 +1,6 @@
 
-angular.module('app', [])
+angular.module('app', ["ngRoute"])
+    .config(config)
     .factory('noteService', noteService)
     .factory("choiceService", choiceService)
     .component('noteForm', {
@@ -35,13 +36,14 @@ angular.module('app', [])
             data: '<'
         }
     })
-    // choiceForm becomes <choice-form> in HTML
-    .component('choiceForm', {
-        templateUrl: 'app/choice-form/choice-form.tpl',
+    // addquestionForm becomes <questions> in HTML
+    .component('addquestion', {
+        templateUrl: 'app/questions/add-question.tpl',
         controller: ChoiceFormController,
         controllerAs: 'vm',
 
         bindings: {
-            name: '@'
+            name: '@',
+            test: '@'
         }
     });

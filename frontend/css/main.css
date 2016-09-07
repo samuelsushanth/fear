@@ -39,6 +39,7 @@ li a {
 
 .panel-body span {
     float: right;
+    background-color: lightgray;
 }
 li a:hover:not(.active) {
     background-color: #1a1a1a;
@@ -57,4 +58,25 @@ li a:hover:not(.active) {
     width: 100%;
     background-color: black;
     color: white;
+}
+
+.nav-tabs{
+
+    float:left;
+    color:white;
+}
+
+.form1{
+
+    align:right;
+}
+
+.total_form{
+
+    background-color:lightgray;
+}
+
+.panel-heading{
+    background-color:lightgrey;
+    border-color:transparent;
 }

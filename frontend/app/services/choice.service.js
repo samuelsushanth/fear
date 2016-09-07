@@ -11,7 +11,7 @@ function choiceService($q,$http) {
      * This is the base URL to our API in the backend.
      * @type {String}
      */
-    var toListURL   = '/api/note/';
+    var toListURL   = '/addquestion';
 
 
     return {
