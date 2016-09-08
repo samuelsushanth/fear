@@ -14,7 +14,7 @@
                           <option value="option-2">Choice 2</option>
                           <option value="option-3">Choice 3</option>
                         </select><br>
-                        <tt>multipleSelect = {{data.multipleSelect}}</tt><br/>
+                        multipleSelect = {{data.multipleSelect}}<br/>
                       </form>
                     </div>
                     </div>
