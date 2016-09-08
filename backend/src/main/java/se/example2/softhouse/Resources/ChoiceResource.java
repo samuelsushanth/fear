@@ -36,6 +36,7 @@ public class ChoiceResource {
         return choiceDAO.retrieve(id);
     }
 
+
     @POST
     public Choice create(Choice choice) {
         int id = choiceDAO.create(choice);

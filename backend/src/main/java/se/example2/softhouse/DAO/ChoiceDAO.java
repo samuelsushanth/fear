@@ -10,7 +10,8 @@ import java.util.List;
 
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface ChoiceDAO{
-   @SqlUpdate("create table if not exists CHOICES (id int auto_increment primary key, question_id varchar(80), choice varchar(80))")
+
+ @SqlUpdate("create table if not exists CHOICES (id int auto_increment primary key, question_id varchar(80), choice varchar(80))")
     void createChoiceTable();
 
     @GetGeneratedKeys

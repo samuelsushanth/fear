@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * Created by sasanksaisujanadapa on 05/09/16.
  */
 public class QuestionAnswer {
+
     @JsonProperty
     @NotEmpty
     private int question_id;

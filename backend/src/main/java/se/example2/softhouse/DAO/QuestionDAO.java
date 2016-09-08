@@ -9,6 +9,7 @@ import java.util.List;
 
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface QuestionDAO {
+
     @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, question varchar(1000))")
     void createQuestionTable();
 

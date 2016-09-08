@@ -21,6 +21,7 @@ public class Choice {
 
     public Choice() {
 
+
     }
 
     public Integer getId() {

@@ -19,6 +19,7 @@ public class QuestionResource {
         this.questionDAO = questionDAO;
     }
 
+
     @GET
     public List<Question> list() {
         return questionDAO.list();

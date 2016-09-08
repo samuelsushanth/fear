@@ -11,6 +11,7 @@ import java.util.List;
 
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface QuestionAnswerDAO {
+
     @SqlUpdate("create table if not exists QUESTION_ANSWER (question_id int(10), answer_id int(10))")
     void createQuestionAnswerTable();
 
