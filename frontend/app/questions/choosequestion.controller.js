@@ -1,15 +1,20 @@
-function ChooseQuestion(choiceService) {
-    var vm =this;
+function ChooseQuestion() {
+    var am = this;
+    var q = [];
 
-    vm.$onInit = $onInit;
-    vm.chosenQuestion = chosenQuestion;
+    am.$onInit = $onInit;
+    am.chosenQuestion = chosenQuestion;
 
     function $onInit() {
-        vm.db_questions=["asd?", "das?"];
+        am.db_questions=["asd?", "das?"];
+        am.multipleSelectt = [];
     }
     
-    function chosenQuestion() {
-        
+    function chosenQuestion(q) {
+        alert("hello");
+        alert(q);
+        am.multipleSelectt.push(q);
+        alert(am.multipleSelectt);
     }
 
 }

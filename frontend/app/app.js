@@ -35,17 +35,15 @@ angular.module('app', ["ngRoute"])
         bindings: {
             data: '<'
         }
-    }) .component('choosequestion', {
+    })
+    //choosing the questions form
+    .component('choosequestion', {
     templateUrl: 'app/questions/choosequestion.tpl',
     controller: ChooseQuestion,
-    controllerAs: 'vm',
-
-    require: {
-        notesController: '^notes'
-    },
+    controllerAs: 'am',
 
     bindings: {
-        data: '<'
+        data: '@'
     }
     })
     // addquestionForm becomes <questions> in HTML
