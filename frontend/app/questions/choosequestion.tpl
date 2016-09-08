@@ -10,9 +10,9 @@
                         <hr>
                         <label for="multipleSelect">List of questions: </label><br>
                         <select name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
-                          <option value="option-1">Choice 1</option>
-                          <option value="option-2">Choice 2</option>
-                          <option value="option-3">Choice 3</option>
+                            <ol style="background-color:white;">
+                                <li style="border: 1px solid black;  width:250px; text-decoration:none;" ng-repeat="x in vm.db_questions">{{x}}</li>
+                            </ol>
                         </select><br>
                         multipleSelect = {{data.multipleSelect}}<br/>
                       </form>

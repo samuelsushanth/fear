@@ -1,3 +1,15 @@
-/**
- * Created by Raja on 9/7/2016.
- */
+function ChooseQuestion(choiceService) {
+    var vm =this;
+
+    vm.$onInit = $onInit;
+    vm.chosenQuestion = chosenQuestion;
+
+    function $onInit() {
+        vm.db_questions=["asd?", "das?"];
+    }
+    
+    function chosenQuestion() {
+        
+    }
+
+}
