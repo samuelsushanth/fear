@@ -43,14 +43,10 @@ public class QuestionResource {
     }
 
     @GET
-    @Timed
     @Produces(MediaType.APPLICATION_JSON)
     public List<Question> showquestionstoui()
     {
-        questions=new ArrayList<>();
-
-        questions=questiondao.list();
-        return questions;
+        return questiondao.list();
     }
 
 
