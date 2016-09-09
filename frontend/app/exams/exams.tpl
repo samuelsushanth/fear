@@ -1,9 +1,10 @@
 
-<form>
-    <input type="text" ng-model="vm.examname" title="asd">
+<form class="text-center">
+    <input type="text" ng-model="vm.examname" title="asd" >
     <button type="button" ng-click="vm.newExam()">Create</button>
 </form>
-<table class="table">
+<div class="container" class="table-responsive">
+<table class="table table-bordered" >
     <thead>
     <tr>
         <th> Exam Name</th>
@@ -17,3 +18,4 @@
     </tr>
     </tbody>
 </table>
+</div>
