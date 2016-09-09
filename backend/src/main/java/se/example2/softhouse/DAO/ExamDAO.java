@@ -26,12 +26,12 @@ public interface ExamDAO {
     List<Exam> list();
 
 
-    //@SqlQuery("select * from Exam where (id) =(:id)")
-    //Exam retrieve(@Bind("id") int id);
+   /* @SqlQuery("select * from Exam where (id) =(:id)")
+    Exam retrieve(@Bind("id") int id);
 
-    //@GetGeneratedKeys
-    //@SqlUpdate("insert into Exam (id, text) values (:id, :text)")
-    //int create(@BindBean Exam exam);
+    @GetGeneratedKeys
+    @SqlUpdate("insert into Exam (id, text) values (:id, :text)")
+    int create(@BindBean Exam exam);
 
     @SqlUpdate("delete from Exam where (id)=(:id)")
     void destroy(@BindBean Exam exam);
@@ -41,7 +41,7 @@ public interface ExamDAO {
 
     @SqlQuery("select (id) from Exam where (text)=(:text)")
     Long get(@BindBean Exam exam );
-
+*/
     @GetGeneratedKeys
     @SqlUpdate("insert into Exam (id, text) values (:id, :text)")
     int create(@BindBean Exam exam);
