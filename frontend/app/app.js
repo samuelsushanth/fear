@@ -56,4 +56,9 @@ angular.module('app', ["ngRoute"])
             name: '@',
             test: '@'
         }
+    })
+    .component('exams', {
+        templateUrl: 'app/exams/exams.tpl',
+        controller: ExamsController,
+        controllerAs: 'vm'
     });
