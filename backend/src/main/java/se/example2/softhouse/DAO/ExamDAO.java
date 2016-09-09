@@ -1,8 +1,6 @@
 package se.example2.softhouse.DAO;
 
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.Exam;
@@ -27,16 +25,33 @@ public interface ExamDAO {
     @SqlQuery("select * from Exam")
     List<Exam> list();
 
-    @SqlUpdate("insert into Exam (text) values (:text)")
-    Long insExam(@BindBean Exam exam);
+
+    //@SqlQuery("select * from Exam where (id) =(:id)")
+    //Exam retrieve(@Bind("id") int id);
+
+    //@GetGeneratedKeys
+    //@SqlUpdate("insert into Exam (id, text) values (:id, :text)")
+    //int create(@BindBean Exam exam);
 
     @SqlUpdate("delete from Exam where (id)=(:id)")
-    void delExam(@BindBean Exam exam);
+    void destroy(@BindBean Exam exam);
 
     @SqlUpdate("update Exam set (text)=(:text) where (id)=(:id)")
-    void updExam(@BindBean Exam exam);
+    void update(@BindBean Exam exam);
 
     @SqlQuery("select (id) from Exam where (text)=(:text)")
-    Long getExamId(@BindBean Exam exam );
+    Long get(@BindBean Exam exam );
 
+    @GetGeneratedKeys
+    @SqlUpdate("insert into Exam (id, text) values (:id, :text)")
+    int create(@BindBean Exam exam);
+
+    @SqlQuery("select * from Exam where id = :id")
+    Exam retrieve(@Bind("id") int id);
+
+    @SqlUpdate("delete from Exam where id = :id")
+    void delete(@Bind int id);
+
+    @SqlUpdate("update Exam set text = :u.text where id = :id")
+    void update(@Bind("id") int id, @BindBean("u") Exam exam);
 }

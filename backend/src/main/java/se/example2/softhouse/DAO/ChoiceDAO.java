@@ -39,7 +39,4 @@ public interface ChoiceDAO {
 
     @SqlQuery("select * from CHOICE where (questionId) = (:questionId)")
     List<Choice> getChoicesForQuestion(@BindBean Choice choice);
-
-
-
 }

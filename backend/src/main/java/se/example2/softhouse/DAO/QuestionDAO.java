@@ -1,9 +1,6 @@
 package se.example2.softhouse.DAO;
 
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.Choice;
@@ -13,9 +10,6 @@ import java.util.List;
 
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface QuestionDAO {
-
-
-
     @SqlUpdate("create table if not exists QUESTIONS (id Long auto_increment primary key, text varchar(2000))")
     void createQuestionTable();
 
@@ -36,5 +30,6 @@ public interface QuestionDAO {
 
     @SqlQuery("select (id) from QUESTIONS where (text)=(:text)")
     Long getQuestionId(@BindBean Question question );
+
 
 }
