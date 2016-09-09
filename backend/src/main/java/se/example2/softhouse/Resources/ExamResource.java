@@ -54,7 +54,7 @@ public class ExamResource {
 
     @DELETE
     @Path("/{id}")
-    public Response delete(@PathParam("id") Integer id) {
+    public Response delete(@PathParam("id") int id) {
         examdao.delete(id);
         return Response.ok().build();
     }
