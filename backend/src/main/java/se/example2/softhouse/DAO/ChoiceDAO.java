@@ -16,7 +16,7 @@ import java.util.List;
 
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface ChoiceDAO {
-    @SqlUpdate("create table if not exists CHOICE (id Long auto_increment primary key, text varchar(2000),questionId Long)")
+    @SqlUpdate("create table if not exists CHOICE (id int auto_increment primary key, text varchar(2000),questionId int)")
     void createChoiceTable();
 
     @SqlUpdate("delete table CHOICE")

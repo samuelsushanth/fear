@@ -10,6 +10,7 @@ import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.DAO.QuestionAnswerDAO;
 import se.example2.softhouse.Resources.ExamResource;
+import se.example2.softhouse.Resources.QuestionResource;
 
 import java.sql.SQLException;
 
@@ -44,7 +45,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         //dao.insQues(q);
         //environment.jersey().register(new QuestionResource(qdao,chdao,qadao,edao,eqdao)); //registering resources
         environment.jersey().register(new ExamResource(edao));
-
+        environment.jersey().register(new QuestionResource(qdao,edao,eqdao));
         //dao.createSomethingTable();
 
         //dao.insert(2, "Aaron");

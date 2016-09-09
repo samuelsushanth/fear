@@ -10,7 +10,7 @@ package se.example2.softhouse.core;
  */
 public class Choice {
     @JsonProperty
-    private Long id;
+    private int id;
 
     @JsonProperty
     @NotEmpty
@@ -18,7 +18,7 @@ public class Choice {
 
     @JsonProperty
     @NotEmpty
-    private Long questionId;
+    private int questionId;
 
     @JsonProperty
     @NotEmpty
@@ -41,11 +41,11 @@ public class Choice {
 
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     /*
@@ -62,11 +62,11 @@ public class Choice {
         this.text = text;
     }
 
-    public Long getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(Long questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 }

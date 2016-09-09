@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Question {
     @JsonProperty
-    private Long id;
+    private int id;
 
     @JsonProperty
     @NotEmpty
@@ -26,11 +26,11 @@ public class Question {
 
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

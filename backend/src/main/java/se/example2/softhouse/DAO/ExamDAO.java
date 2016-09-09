@@ -16,7 +16,7 @@ import java.util.List;
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface ExamDAO {
 
-    @SqlUpdate("create table if not exists Exam (id Long auto_increment primary key, text varchar(2000))")
+    @SqlUpdate("create table if not exists Exam (id int auto_increment primary key, text varchar(2000))")
     void createExamTable();
 
     @SqlUpdate("delete table Exam")

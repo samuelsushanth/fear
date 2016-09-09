@@ -25,7 +25,7 @@ public interface ExamQuestionDAO {
     List<ExamQuestion> list();
 
     @SqlUpdate("insert into ExamQuestion (examId,questionId) values (:examId,:questionId)")
-    void insExamQuestion(@BindBean ExamQuestion examquestion);
+    void createExamQuestion(@Bind("examId") long examId,@Bind("questionId") long questionId);
 
     @SqlUpdate("delete from ExamQuestion where (examId)=(:examId)")
     void delExamQuestion(@BindBean ExamQuestion examquestion);

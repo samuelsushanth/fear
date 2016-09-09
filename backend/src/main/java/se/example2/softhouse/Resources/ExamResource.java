@@ -1,7 +1,9 @@
 package se.example2.softhouse.Resources;
 
 import se.example2.softhouse.DAO.ExamDAO;
+import se.example2.softhouse.DAO.QuestionDAO;
 import se.example2.softhouse.core.Exam;
+import se.example2.softhouse.core.Question;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -17,7 +19,9 @@ public class ExamResource {
 
     public ExamResource(ExamDAO examDAO) {
         this.examDAO = examDAO;
+
     }
+
 
     @GET
     public List<Exam> list() {
@@ -32,7 +36,7 @@ public class ExamResource {
 
     @GET
     @Path("/{id}")
-    public Exam retrieve(@PathParam("id") Integer id) {
+    public Exam retrieve(@PathParam("id") int id) {
         return examDAO.retrieve(id);
     }
 
@@ -54,5 +58,8 @@ public class ExamResource {
     public Response delete(@PathParam("id") int id) {
         examDAO.delete(id);
         return Response.ok().build();
+
     }
+
+
 }

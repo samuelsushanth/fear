@@ -10,7 +10,7 @@ import java.util.List;
 
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface QuestionDAO {
-    @SqlUpdate("create table if not exists QUESTIONS (id Long auto_increment primary key, text varchar(2000))")
+    @SqlUpdate("create table if not exists QUESTIONS (id int auto_increment primary key, text varchar(2000))")
     void createQuestionTable();
 
     @SqlUpdate("delete table QUESTIONS")
@@ -19,7 +19,20 @@ public interface QuestionDAO {
     @SqlQuery("select * from QUESTIONS")
     List<Question> list();
 
-    @SqlUpdate("insert into QUESTIONS (text) values (:text)")
+   @GetGeneratedKeys
+   @SqlUpdate("insert into QUESTIONS (id, text) values (:id, :text)")
+   int create(@BindBean Question question);
+
+    @SqlQuery("select * from QUESTIONS where id = :id")
+    Question retrieve(@Bind("id") int id);
+
+    @SqlUpdate("delete from QUESTIONS where id = :id")
+    void delete(@Bind("id") int id);
+
+    @SqlUpdate("update QUESTIONS set text = :u.text where id = :id")
+    void update(@Bind("id") long id, @BindBean("u") Question question);
+
+    /* @SqlUpdate("insert into QUESTIONS (text) values (:text)")
     Long insQues(@BindBean Question question);
 
     @SqlUpdate("delete from QUESTIONS where (id)=(:id)")
@@ -29,7 +42,7 @@ public interface QuestionDAO {
     void updQues(@BindBean Question question);
 
     @SqlQuery("select (id) from QUESTIONS where (text)=(:text)")
-    Long getQuestionId(@BindBean Question question );
+    Long getQuestionId(@BindBean Question question );*/
 
 
 }
