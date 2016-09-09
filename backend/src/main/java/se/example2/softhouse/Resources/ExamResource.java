@@ -56,9 +56,11 @@ public class ExamResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void insertexams(Exam exam) {
+    public Exam insertexams(Exam exam) {
 
-        examdao.insExam(exam);
+       Long eid=examdao.insExam(exam);
+
+        return ()
     }
 
 
