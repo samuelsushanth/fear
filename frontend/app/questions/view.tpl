@@ -14,8 +14,19 @@
 
   <div class="row">
     <div class="col-xs-5" style="background-color:lightgray;">
-      <div ng-view>
+        <div class="total_form" style="background-color:white;" class="col-xs-1">
+            <div>
 
+
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#">Add</a></li>
+                    <li role="presentation"><a href="#">Choose</a></li>
+                </ul>
+
+
+
+            </div>
+        </div>
 <div class="panel panel-default" >
         <div>
             <div class="total_form" style="background-color:white;" class="col-xs-1">
@@ -35,7 +46,6 @@
         <div class="panel-body" style="background-color: lightgray;">
 
         </div>
-</div>
 </div>
     </div>
 
