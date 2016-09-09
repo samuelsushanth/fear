@@ -14,11 +14,12 @@ function ExamsController() {
     //to create new exam
     function newExam()
     {
-        //choiceService.update(vm.question, vm.choices, vm.answer).then(vm.refreshF())
+        //examService.get();
         if(!vm.examname)
             return;
         if(vm.exams.indexOf(vm.examname)==-1)
         {
+
             vm.exams.push(vm.examname);
             vm.examname ="";
         }

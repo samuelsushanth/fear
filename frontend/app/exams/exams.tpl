@@ -14,7 +14,7 @@
     <tbody>
     <tr ng-repeat="exams in vm.exams">
     <td> {{exams}}</td>
-    <td> <a class="btn btn-xs btn-default" href="#/xam">+Question</a></td>
+    <td> <a class="btn btn-xs btn-default" href="#">+Question</a></td>
     </tr>
     </tbody>
 </table>

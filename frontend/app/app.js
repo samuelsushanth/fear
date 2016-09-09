@@ -3,6 +3,7 @@ angular.module('app', ["ngRoute"])
     .config(config)
     .factory('noteService', noteService)
     .factory("choiceService", choiceService)
+    .factory("examsService", examsService)
     .component('noteForm', {
         templateUrl: 'app/note-form/note-form.tpl',
         controller: NoteFormController,
