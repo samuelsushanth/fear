@@ -28,13 +28,13 @@ public interface ExamDAO {
     List<Exam> list();
 
     @SqlUpdate("insert into Exam (text) values (:text)")
-    Long insQues(@BindBean Exam exam);
+    Long insExam(@BindBean Exam exam);
 
     @SqlUpdate("delete from Exam where (id)=(:id)")
-    void delQues(@BindBean Exam exam);
+    void delExam(@BindBean Exam exam);
 
     @SqlUpdate("update Exam set (text)=(:text) where (id)=(:id)")
-    void updQues(@BindBean Exam exam);
+    void updExam(@BindBean Exam exam);
 
     @SqlQuery("select (id) from Exam where (text)=(:text)")
     Long getExamId(@BindBean Exam exam );

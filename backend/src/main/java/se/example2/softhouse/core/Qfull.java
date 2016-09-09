@@ -12,9 +12,9 @@ public class Qfull {
     @JsonProperty
     private String questiontext;
 
-   /* @JsonProperty
+   @JsonProperty
     private List<Choice> choices;
-          */
+
     @JsonProperty
     private String examtext;
 

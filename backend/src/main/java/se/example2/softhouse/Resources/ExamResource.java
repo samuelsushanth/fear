@@ -43,16 +43,24 @@ public class ExamResource {
     }
 
 
-    private List<Exam> exams;
+
     @GET
-    @Timed
     @Produces(MediaType.APPLICATION_JSON)
     public List<Exam> showexams()
     {
-        exams=new ArrayList<>();
 
-        exams=examdao.list();
-        return exams;
+
+        return(examdao.list());
+
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void insertexams(Exam exam) {
+
+        examdao.insExam(exam);
+    }
+
+
 
 }
