@@ -37,9 +37,9 @@ angular.module('app', ["ngRoute"])
             data: '<'
         }
     })
-    //choosing the questions form
+    //choosing the old_questions form
     .component('choosequestion', {
-    templateUrl: 'app/questions/choosequestion.tpl',
+    templateUrl: 'app/old_questions/choosequestion.tpl',
     controller: ChooseQuestion,
     controllerAs: 'am',
 
@@ -47,9 +47,9 @@ angular.module('app', ["ngRoute"])
         data: '@'
     }
     })
-    // addquestionForm becomes <questions> in HTML
+    // addquestionForm becomes <old_questions> in HTML
     .component('addquestion', {
-        templateUrl: 'app/questions/add-question.tpl',
+        templateUrl: 'app/old_questions/add-question.tpl',
         controller: ChoiceFormController,
         controllerAs: 'vm',
 
