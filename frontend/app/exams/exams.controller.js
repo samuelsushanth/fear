@@ -6,7 +6,7 @@ function ExamsController() {
     vm.newExam = newExam;
 
     function $onInit() {
-       vm.examlist=[];
+       vm.exams=["asddsa","dsasd"];
         //call list of exams from backend and store in examlist
 
     }
@@ -15,6 +15,8 @@ function ExamsController() {
     function newExam()
     {
         //choiceService.update(vm.question, vm.choices, vm.answer).then(vm.refreshF())
+        vm.exams.push(vm.examname);
+        alert(vm.exams);
     }
 
 }

@@ -10,10 +10,9 @@ function config($routeProvider)
         .when('/',{
             template:'<addquestion name="siva"></addquestion>'
         })
-        .when('/choseqs',{
-            template:'<choosequestion></choosequestion>'
+        .when('/xam',{
+            template:'<exams> </exams>'
         })
-        .when('/test', { template: '<exams></exams>' })
         .when('/exam/:examId', { template: '<addquestion test="$resolve.examId"></addquestion>', resolve: examResolver });
 
 // http://fear.com/exam/6
