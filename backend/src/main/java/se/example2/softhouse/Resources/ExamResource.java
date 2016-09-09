@@ -1,9 +1,7 @@
 package se.example2.softhouse.Resources;
 
 import se.example2.softhouse.DAO.ExamDAO;
-import se.example2.softhouse.DAO.QuestionDAO;
 import se.example2.softhouse.core.Exam;
-import se.example2.softhouse.core.Question;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,38 +13,37 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ExamResource {
-    private ExamDAO examdao;
+    private ExamDAO examDAO;
 
     public ExamResource(ExamDAO examDAO) {
-        this.examdao = examDAO;
+        this.examDAO = examDAO;
     }
-
 
     @GET
     public List<Exam> list() {
-        return examdao.list();
+        return examDAO.list();
+    }
+
+    @POST
+    public Exam create(Exam exam) {
+        int id = examDAO.create(exam);
+        return examDAO.retrieve(id);
     }
 
     @GET
     @Path("/{id}")
     public Exam retrieve(@PathParam("id") Integer id) {
-        return examdao.retrieve(id);
-    }
-
-    @POST
-    public Exam create(Exam exam) {
-        int id = examdao.create(exam);
-        return examdao.retrieve(id);
+        return examDAO.retrieve(id);
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") int id, Exam exam) {
-        Optional<Exam> update = Optional.ofNullable(examdao.retrieve(id));
+        Optional<Exam> update = Optional.ofNullable(examDAO.retrieve(id));
 
         if (update.isPresent()) {
-            examdao.update(id, exam);
-            return Response.ok(examdao.retrieve(id)).build();
+            examDAO.update(id, exam);
+            return Response.ok(examDAO.retrieve(id)).build();
         } else {
             throw new NotFoundException();
         }
@@ -55,7 +52,7 @@ public class ExamResource {
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") Integer id) {
-        examdao.delete(id);
+        examDAO.delete(id);
         return Response.ok().build();
     }
 }
