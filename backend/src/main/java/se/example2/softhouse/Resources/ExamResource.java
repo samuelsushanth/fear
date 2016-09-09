@@ -15,39 +15,38 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ExamResource {
-    private ExamDAO examDAO;
+    private ExamDAO examdao;
 
     public ExamResource(ExamDAO examDAO) {
-        this.examDAO = examDAO;
-
+        this.examdao = examDAO;
     }
 
 
     @GET
     public List<Exam> list() {
-        return examDAO.list();
-    }
-
-    @POST
-    public Exam create(Exam exam) {
-        int id = examDAO.create(exam);
-        return examDAO.retrieve(id);
+        return examdao.list();
     }
 
     @GET
     @Path("/{id}")
-    public Exam retrieve(@PathParam("id") int id) {
-        return examDAO.retrieve(id);
+    public Exam retrieve(@PathParam("id") Integer id) {
+        return examdao.retrieve(id);
+    }
+
+    @POST
+    public Exam create(Exam exam) {
+        int id = examdao.create(exam);
+        return examdao.retrieve(id);
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") int id, Exam exam) {
-        Optional<Exam> update = Optional.ofNullable(examDAO.retrieve(id));
+        Optional<Exam> update = Optional.ofNullable(examdao.retrieve(id));
 
         if (update.isPresent()) {
-            examDAO.update(id, exam);
-            return Response.ok(examDAO.retrieve(id)).build();
+            examdao.update(id, exam);
+            return Response.ok(examdao.retrieve(id)).build();
         } else {
             throw new NotFoundException();
         }
@@ -56,10 +55,7 @@ public class ExamResource {
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") int id) {
-        examDAO.delete(id);
+        examdao.delete(id);
         return Response.ok().build();
-
     }
-
-
 }

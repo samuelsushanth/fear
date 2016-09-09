@@ -31,7 +31,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         final ExamDAO edao = jdbi.onDemand(ExamDAO.class);
         final ExamQuestionDAO eqdao= jdbi.onDemand(ExamQuestionDAO.class);
 
-        qdao.createQuestionTable();
+       qdao.createQuestionTable();
         chdao.createChoiceTable();
         qadao.createQuestionAnswerTable();   //initial table creations
         edao.createExamTable();
@@ -45,7 +45,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         //dao.insQues(q);
         //environment.jersey().register(new QuestionResource(qdao,chdao,qadao,edao,eqdao)); //registering resources
         environment.jersey().register(new ExamResource(edao));
-        environment.jersey().register(new QuestionResource(qdao,edao,eqdao));
+       environment.jersey().register(new QuestionResource(qdao,eqdao));
         //dao.createSomethingTable();
 
         //dao.insert(2, "Aaron");

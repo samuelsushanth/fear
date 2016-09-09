@@ -9,17 +9,17 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Exam {
 
     @JsonProperty
-    private int id;
+    private Long id;
 
     @JsonProperty
     @NotEmpty
     private String text;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

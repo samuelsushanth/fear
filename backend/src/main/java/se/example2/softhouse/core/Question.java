@@ -3,43 +3,31 @@ package se.example2.softhouse.core;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import java.util.ArrayList;
-
-
+/**
+ * Created by charan on 9/6/2016.
+ */
 public class Question {
+
     @JsonProperty
-    private int id;
+    private Long id;
 
     @JsonProperty
     @NotEmpty
     private String text;
 
-
-
-
-    public Question() {
-
-    }
-    public  Question(String ques)
-    {
-        text = ques;
-
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getText() {
         return text;
     }
-
-    public void setText(String question) {
-        this.text = question;
-    }
-
 }
