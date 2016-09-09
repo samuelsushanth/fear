@@ -1,16 +1,21 @@
-function ExamsController() {
+function ExamsController(examsService) {
     var vm = this;
 
 
     vm.$onInit = $onInit;
     vm.newExam = newExam;
+    vm.refreshExams = refreshExams;
 
     function $onInit() {
-       vm.exams=["asddsa","dsasd"];
-        //call list of exams from backend and store in examlist
+
+        refreshExams();
 
     }
-
+    function refreshExams() {
+        return examsService.list().then(function refreshedExams(response) {
+            vm.exams = response.data;
+        });
+    }
     //to create new exam
     function newExam()
     {
@@ -19,8 +24,9 @@ function ExamsController() {
             return;
         if(vm.exams.indexOf(vm.examname)==-1)
         {
-
-            vm.exams.push(vm.examname);
+            examsService.create(vm.examname);
+            //vm.exams.push(vm.examname);
+            refreshExams();
             vm.examname ="";
         }
         else{

@@ -13,9 +13,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="exams in vm.exams" bgcolor="#d3d3d3">
-    <td style="text-align: center"> {{exams}}</td>
-    <td style="text-align: center"> <a class="btn btn-xs btn-default" href="#/xam">+Question</a></td>
+    <tr ng-repeat="exam in vm.exams" bgcolor="#d3d3d3">
+    <td style="text-align: center"> {{exam.text}}</td>
+    <td style="text-align: center"> <a class="btn btn-xs btn-default" href="#/xam/{{exam.id}}">+Question</a></td>
     </tr>
     </tbody>
 </table>

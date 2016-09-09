@@ -10,15 +10,9 @@ import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.DAO.QuestionAnswerDAO;
 import se.example2.softhouse.Resources.ExamResource;
-//import se.example2.softhouse.Resources.QuestionResource;
-import se.example2.softhouse.core.Question;
-import se.example2.softhouse.core.QuestionAnswer;
 
 import java.sql.SQLException;
 
-/**
- * Created by hxs on 2016-08-16.
- */
 public class DemoApplication extends Application<DemoConfiguration> {
 
     @Override
@@ -38,21 +32,8 @@ public class DemoApplication extends Application<DemoConfiguration> {
         qadao.createQuestionAnswerTable();   //initial table creations
         edao.createExamTable();
         eqdao.createExamQuestionTable();
-        //Question q = new Question();
 
-        //q.setId(2);
-        //q.setText("abc");
-
-        //dao.insQues(q);
-        //dao.insQues(q);
-        //environment.jersey().register(new QuestionResource(qdao,chdao,qadao,edao,eqdao)); //registering resources
         environment.jersey().register(new ExamResource(edao));
-
-        //dao.createSomethingTable();
-
-        //dao.insert(2, "Aaron");
-
-        //String name = dao.findNameById(2);
 
 
     }
