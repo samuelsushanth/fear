@@ -36,6 +36,16 @@ angular.module('app', ["ngRoute"])
             data: '<'
         }
     })
+    //choosing the questions form
+    .component('choosequestion', {
+    templateUrl: 'app/questions/choosequestion.tpl',
+    controller: ChooseQuestion,
+    controllerAs: 'am',
+
+    bindings: {
+        data: '@'
+    }
+    })
     // addquestionForm becomes <questions> in HTML
     .component('addquestion', {
         templateUrl: 'app/questions/add-question.tpl',
@@ -46,4 +56,9 @@ angular.module('app', ["ngRoute"])
             name: '@',
             test: '@'
         }
+    })
+    .component('exams', {
+        templateUrl: 'app/exams/exams.tpl',
+        controller: ExamsController,
+        controllerAs: 'vm'
     });
