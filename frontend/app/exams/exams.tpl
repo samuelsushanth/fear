@@ -1,7 +1,7 @@
 
 <form>
-    <input type="text" ng-model="examname" title="asd">
-    <button type="button" ng-click="newExam()">Create</button>
+    <input type="text" ng-model="vm.examname" title="asd">
+    <button type="button" ng-click="vm.newExam()">Create</button>
 </form>
 <table class="table">
     <thead>
