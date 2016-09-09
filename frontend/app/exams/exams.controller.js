@@ -15,8 +15,16 @@ function ExamsController() {
     function newExam()
     {
         //choiceService.update(vm.question, vm.choices, vm.answer).then(vm.refreshF())
-        vm.exams.push(vm.examname);
-        alert(vm.exams);
+        if(!vm.examname)
+            return;
+        if(vm.exams.indexOf(vm.examname)==-1)
+        {
+            vm.exams.push(vm.examname);
+            vm.examname ="";
+        }
+        else{
+            return;
+        }
     }
 
 }
