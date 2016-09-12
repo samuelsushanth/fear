@@ -60,5 +60,12 @@ public interface QuestionDAO {
     @SqlUpdate("insert into ExamQuestion (examId, questionId) values (:examId, :questionId)")
     void createinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
 
+    @SqlQuery("SELECT ExamQUESTION.questionId WHERE EXAMQUESTION.EXAMID= :examId")
+    List<Long> checkQuestionInExamQuestion(@Bind("examId") int examId);
+
+    @SqlUpdate("delete from ExamQuestion where examId = :examId")
+    void deleteinExamQuestionByExamId(@Bind("examId") int examId);
+
+
 
 }

@@ -40,11 +40,16 @@ public interface ChoiceDAO {
     List<Choice> getChoices(@Bind("questionId") int questionId);
 
     @SqlUpdate("delete from QuestionAnswer where choiceId = :choiceId")
-    void deleteInQuestionChoice(@Bind("choiceId") int choiceId);
+    void deleteInQuestionAnswer(@Bind("choiceId") int choiceId);
+
+    @SqlUpdate("delete from QuestionAnswer where questionId = :questionId")
+    void deleteInQuestionAnswerByQuestionId(@Bind("questionId") int questionId);
 
     @SqlUpdate("insert into QuestionAnswer (questionId, choiceId) values (:questionId, :choiceId)")
-    void createInQuestionChoice(@Bind("questionId") int questionId,@Bind("choiceId") int choiceId);
+    void createInQuestionAnswer(@Bind("questionId") int questionId,@Bind("choiceId") int choiceId);
 
+    @SqlUpdate("delete from Choice where questionId = :questionId")
+    void deleteByQuestion(@Bind("questionId") int questionId);
 
 
 

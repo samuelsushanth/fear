@@ -1,9 +1,7 @@
 package se.example2.softhouse.Resources;
 
-import se.example2.softhouse.DAO.ExamDAO;
-import se.example2.softhouse.DAO.ExamQuestionDAO;
-import se.example2.softhouse.DAO.QuestionAnswerDAO;
-import se.example2.softhouse.DAO.QuestionDAO;
+import se.example2.softhouse.DAO.*;
+import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.Exam;
 import se.example2.softhouse.core.ExamQuestion;
 import se.example2.softhouse.core.Question;
@@ -21,10 +19,12 @@ public class QuestionResource {
 
     private QuestionDAO questionDAO;
     private ExamQuestionDAO examQuestionDAO;
+    private ChoiceDAO choiceDAO;
     private ExamQuestion examQuestion =new ExamQuestion();
-    public QuestionResource(QuestionDAO questionDAO,ExamQuestionDAO examQuestionDAO ) {
+    public QuestionResource(QuestionDAO questionDAO, ExamQuestionDAO examQuestionDAO, ChoiceDAO choiceDAO) {
         this.questionDAO = questionDAO;
         this.examQuestionDAO =examQuestionDAO;
+        this.choiceDAO=choiceDAO;
     }
 
 
@@ -67,7 +67,12 @@ public class QuestionResource {
     @Path("/{questionId}")
     public Response delete(@PathParam("examId") int examId,@PathParam("questionId") int questionId) {
         questionDAO.delete(questionId);
-        questionDAO.deleteinExamQuestion(examId,questionId);
+        questionDAO.deleteinExamQuestion(examId, questionId);
+        Optional<List<Choice>> update = Optional.ofNullable(choiceDAO.getChoices(questionId));
+        if (update.isPresent()) {
+            choiceDAO.deleteByQuestion(questionId);
+            choiceDAO.deleteInQuestionAnswerByQuestionId(questionId);
+        }
         return Response.ok().build();
     }
 }

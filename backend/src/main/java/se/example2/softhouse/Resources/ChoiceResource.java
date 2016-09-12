@@ -36,7 +36,7 @@ public class ChoiceResource {
            examQuestion.setQuestionId((long)questionId);
            examQuestionDAO.create(examQuestion);*/
       if (choice.getIsCorrect()=="true") {
-          choiceDAO.createInQuestionChoice(questionId, choiceId);
+          choiceDAO.createInQuestionAnswer(questionId, choiceId);
       }
         return choiceDAO.retrieve(choiceId);
     }
@@ -67,7 +67,7 @@ public class ChoiceResource {
     public Response delete(@PathParam("choiceId") int choiceId,Choice choice) {
         choiceDAO.delete(choiceId);
         if (choice.getIsCorrect()=="true") {
-            choiceDAO.deleteInQuestionChoice(choiceId);
+            choiceDAO.deleteInQuestionAnswer(choiceId);
         }
         return Response.ok().build();
     }
