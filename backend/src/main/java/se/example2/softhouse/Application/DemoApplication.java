@@ -45,7 +45,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         //dao.insQues(q);
         //dao.insQues(q);
         //environment.jersey().register(new QuestionResource(qdao,chdao,qadao,edao,eqdao)); //registering resources
-        environment.jersey().register(new ExamResource(edao));
+        environment.jersey().register(new ExamResource(edao,qdao,chdao));
        environment.jersey().register(new QuestionResource(qdao,eqdao,chdao));
         environment.jersey().register(new ChoiceResource(chdao));
         //dao.createSomethingTable();
