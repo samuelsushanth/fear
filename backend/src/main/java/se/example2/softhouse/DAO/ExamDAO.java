@@ -46,7 +46,7 @@ public interface ExamDAO {
     Exam retrieve(@Bind("id") int id);
 
     @SqlUpdate("delete from Exam where id = :id")
-    void delete(@Bind int id);
+    void delete(@Bind("id") int id);
 
     @SqlUpdate("update Exam set text = :u.text where id = :id")
     void update(@Bind("id") int id, @BindBean("u") Exam exam);

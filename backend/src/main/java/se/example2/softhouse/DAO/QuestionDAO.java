@@ -46,8 +46,19 @@ public interface QuestionDAO {
     Question retrieve(@Bind("id") int id);
 
     @SqlUpdate("delete from Question where id = :id")
-    void delete(@Bind int id);
+    void delete(@Bind("id") int id);
 
     @SqlUpdate("update Question set text = :u.text where id = :id")
     void update(@Bind("id") int id, @BindBean("u") Question question);
+
+    @SqlQuery("SELECT QUESTION.id,QUESTION.text FROM QUESTION JOIN EXAMQUESTION ON QUESTION.ID=EXAMQUESTION.QUESTIONID WHERE EXAMQUESTION.EXAMID= :examId")
+    List<Question> getQuestions(@Bind("examId") int examId);
+
+    @SqlUpdate("delete from ExamQuestion where examId = :examId AND questionId = :questionId")
+    void deleteinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
+
+    @SqlUpdate("insert into ExamQuestion (examId, questionId) values (:examId, :questionId)")
+    void createinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
+
+
 }

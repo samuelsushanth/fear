@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
-@Path("/exam/{id}/question")
+@Path("/exam/{examId}/question")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class QuestionResource {
@@ -29,42 +29,45 @@ public class QuestionResource {
 
 
     @GET
-    public List<Question> list() {
-        return questionDAO.list();
+    public List<Question> list(@PathParam("examId") Integer id) {
+
+        return questionDAO.getQuestions(id);
     }
 
     @GET
-    @Path("/{id}")
-    public Question retrieve(@PathParam("id") Integer id) {
+    @Path("/{questionId}")
+    public Question retrieve(@PathParam("questionId") Integer id) {
         return questionDAO.retrieve(id);
     }
 
     @POST
-    public Question create(@PathParam("id") int id, Question question) {
+    public Question create(@PathParam("examId") int examId, Question question) {
         int questionId = questionDAO.create(question);
-          examQuestion.setExamId((long)id);
+     /*     examQuestion.setExamId((long)examId);
            examQuestion.setQuestionId((long)questionId);
-           examQuestionDAO.create(examQuestion);
+           examQuestionDAO.create(examQuestion);*/
+       questionDAO.createinExamQuestion(examId,questionId);
         return questionDAO.retrieve(questionId);
     }
 
     @PUT
-    @Path("/{id}")
-    public Response update(@PathParam("id") int id, Question question) {
-        Optional<Question> update = Optional.ofNullable(questionDAO.retrieve(id));
+    @Path("/{questionId}")
+    public Response update(@PathParam("questionId") int questionId, Question question) {
+        Optional<Question> update = Optional.ofNullable(questionDAO.retrieve(questionId));
 
         if (update.isPresent()) {
-            questionDAO.update(id, question);
-            return Response.ok(questionDAO.retrieve(id)).build();
+            questionDAO.update(questionId, question);
+            return Response.ok(questionDAO.retrieve(questionId)).build();
         } else {
             throw new NotFoundException();
         }
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response delete(@PathParam("id") int id) {
-        questionDAO.delete(id);
+    @Path("/{questionId}")
+    public Response delete(@PathParam("examId") int examId,@PathParam("questionId") int questionId) {
+        questionDAO.delete(questionId);
+        questionDAO.deleteinExamQuestion(examId,questionId);
         return Response.ok().build();
     }
 }

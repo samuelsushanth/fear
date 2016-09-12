@@ -3,10 +3,7 @@ package se.example2.softhouse.DAO;
 /**
  * Created by charan on 9/6/2016.
  */
-import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.BindBean;
-import org.skife.jdbi.v2.sqlobject.SqlQuery;
-import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.Choice;
@@ -16,27 +13,39 @@ import java.util.List;
 
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface ChoiceDAO {
-    @SqlUpdate("create table if not exists CHOICE (id int auto_increment primary key, text varchar(2000),questionId int)")
+    @SqlUpdate("create table if not exists Choice (id Long auto_increment primary key, text varchar(2000),questionId Long)")
     void createChoiceTable();
 
-    @SqlUpdate("delete table CHOICE")
+    @SqlUpdate("delete table Choice")
     void deleteChoiceTable();
 
-    @SqlQuery("select * from CHOICE")
+    @SqlQuery("select * from Choice")
     List<Choice> list();
 
-    @SqlUpdate("insert into CHOICE (text,questionId) values (:text,:questionId)")
-    Long insChoice(@BindBean Choice choice);
+    @GetGeneratedKeys
+    @SqlUpdate("insert into Choice (id, text, questionId) values (:id, :text, :questionId)")
+    int create(@BindBean Choice choice,@Bind("questionId") int questionId);
 
-    @SqlUpdate("delete from CHOICE where (id)=(:id)")
-    void delChoice(@BindBean Choice choice);
+    @SqlQuery("select * from Choice where id = :id")
+    Choice retrieve(@Bind("id") int id);
 
-    @SqlUpdate("update CHOICE set (text,questionId)=(:text,:questionId) where (id)=(:id)")
-    void updChoice(@BindBean Choice choice);
+    @SqlUpdate("delete from Choice where id = :id")
+    void delete(@Bind("id") int id);
 
-    @SqlQuery("select (id) from CHOICE where (text)=(:text)")
-    Long getChoiceId(@BindBean Choice choice);
+    @SqlUpdate("update Choice set text = :u.text where id = :id")
+    void update(@Bind("id") int id, @BindBean("u") Choice choice);
 
-    @SqlQuery("select * from CHOICE where (questionId) = (:questionId)")
-    List<Choice> getChoicesForQuestion(@BindBean Choice choice);
+
+    @SqlQuery("select * from Choice where questionId = :questionId")
+    List<Choice> getChoices(@Bind("questionId") int questionId);
+
+    @SqlUpdate("delete from QuestionAnswer where choiceId = :choiceId")
+    void deleteInQuestionChoice(@Bind("choiceId") int choiceId);
+
+    @SqlUpdate("insert into QuestionAnswer (questionId, choiceId) values (:questionId, :choiceId)")
+    void createInQuestionChoice(@Bind("questionId") int questionId,@Bind("choiceId") int choiceId);
+
+
+
+
 }

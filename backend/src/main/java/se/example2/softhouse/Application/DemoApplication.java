@@ -9,6 +9,7 @@ import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.DAO.QuestionAnswerDAO;
+import se.example2.softhouse.Resources.ChoiceResource;
 import se.example2.softhouse.Resources.ExamResource;
 import se.example2.softhouse.Resources.QuestionResource;
 
@@ -46,6 +47,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         //environment.jersey().register(new QuestionResource(qdao,chdao,qadao,edao,eqdao)); //registering resources
         environment.jersey().register(new ExamResource(edao));
        environment.jersey().register(new QuestionResource(qdao,eqdao));
+        environment.jersey().register(new ChoiceResource(chdao));
         //dao.createSomethingTable();
 
         //dao.insert(2, "Aaron");
