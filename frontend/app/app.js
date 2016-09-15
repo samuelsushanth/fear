@@ -62,4 +62,9 @@ angular.module('app', ["ngRoute"])
         templateUrl: 'app/exams/exams.tpl',
         controller: ExamsController,
         controllerAs: 'vm'
-    });
+    })
+    .component('questions',{
+        templateUrl: 'app/questions/addquestions.tpl',
+        controller: QuestionsController,
+        controllerAs: 'vm'
+    })
