@@ -1,7 +1,9 @@
 package se.example2.softhouse.Resources;
 
+import se.example2.softhouse.DAO.ChoiceDAO;
 import se.example2.softhouse.DAO.ExamDAO;
 import se.example2.softhouse.DAO.QuestionDAO;
+import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.Exam;
 import se.example2.softhouse.core.Question;
 
@@ -16,9 +18,10 @@ import java.util.Optional;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ExamResource {
     private ExamDAO examdao;
-
-    public ExamResource(ExamDAO examDAO) {
-        this.examdao = examDAO;
+    private QuestionDAO questionDAO;
+    private ChoiceDAO choiceDAO;
+    public ExamResource(ExamDAO examDAO,QuestionDAO questionDAO,ChoiceDAO choiceDAO) {
+        this.examdao = examDAO;this.questionDAO=questionDAO;
     }
 
 
@@ -28,8 +31,8 @@ public class ExamResource {
     }
 
     @GET
-    @Path("/{id}")
-    public Exam retrieve(@PathParam("id") Integer id) {
+    @Path("/{examId}")
+    public Exam retrieve(@PathParam("examId") Integer id) {
         return examdao.retrieve(id);
     }
 
@@ -40,8 +43,8 @@ public class ExamResource {
     }
 
     @PUT
-    @Path("/{id}")
-    public Response update(@PathParam("id") int id, Exam exam) {
+    @Path("/{examId}")
+    public Response update(@PathParam("examId") int id, Exam exam) {
         Optional<Exam> update = Optional.ofNullable(examdao.retrieve(id));
 
         if (update.isPresent()) {
@@ -53,9 +56,19 @@ public class ExamResource {
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response delete(@PathParam("id") int id) {
+    @Path("/{examId}")
+    public Response delete(@PathParam("examId") int id) {
         examdao.delete(id);
+        Optional<List<Long>> update = Optional.ofNullable(questionDAO.checkQuestionInExamQuestion(id));
+        if (update.isPresent()) {
+            questionDAO.deleteinExamQuestionByExamId(id);
+
+          /*  for(Integer questionId : update) {               //deleting for each question
+                questionDAO.delete(questionId);
+                choiceDAO.deleteByQuestion(questionId);
+                choiceDAO.deleteInQuestionAnswerByQuestionId(questionId);
+            }*/
+        }
         return Response.ok().build();
     }
 }

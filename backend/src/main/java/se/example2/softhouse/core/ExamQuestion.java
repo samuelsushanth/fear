@@ -12,20 +12,10 @@ public class ExamQuestion {
     private Long id;
 
     @JsonProperty
-    @NotEmpty
     private Long examId;
 
     @JsonProperty
-    @NotEmpty
-    private Long questionId;
-
-    public Long getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
-    }
+    private  Long questionId;
 
     public Long getId() {
         return id;
@@ -35,12 +25,19 @@ public class ExamQuestion {
         this.id = id;
     }
 
-    public Long getExamId() {
-        return examId;
-    }
-
     public void setExamId(Long examId) {
         this.examId = examId;
     }
 
+    public Long getExamId() {
+        return examId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
 }

@@ -22,37 +22,23 @@ public class Choice {
 
     @JsonProperty
     @NotEmpty
-    private String iscorrect;
+    private String isCorrect;
 
-    public void setIscorrect(String iscorrect) {
-        this.iscorrect = iscorrect;
+    public String getIsCorrect() {
+        return isCorrect;
     }
 
-    public String getIscorrect() {
-        return iscorrect;
+    public void setIsCorrect(String isCorrect) {
+        this.isCorrect = isCorrect;
     }
 
-    public Choice() {
-
-    }
-    public  Choice(String choic)
-    {
-        text = choic;
-
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public Long getId() {
-        return id;
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    /*
-        public void setId(int id) {
-            this.id = id;
-        }
-    */
 
     public String getText() {
         return text;
@@ -62,11 +48,11 @@ public class Choice {
         this.text = text;
     }
 
-    public Long getQuestionId() {
-        return questionId;
+    public Long getId() {
+        return id;
     }
 
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

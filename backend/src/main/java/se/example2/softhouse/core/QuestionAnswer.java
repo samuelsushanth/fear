@@ -8,37 +8,37 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class QuestionAnswer {
     @JsonProperty
-    private Long id;
+    private int id;
 
     @JsonProperty
     @NotEmpty
-    private Long questionId;
+    private int questionId;
 
     @JsonProperty
     @NotEmpty
-    private Long correctChoiceId;
+    private int correctChoiceId;
 
-    public void setQuestionId(Long questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 
-    public Long getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public Long getCorrectChoiceId() {
+    public int getCorrectChoiceId() {
         return correctChoiceId;
     }
 
-    public void setCorrectChoiceId(Long correctChoiceId) {
+    public void setCorrectChoiceId(int correctChoiceId) {
         this.correctChoiceId = correctChoiceId;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
