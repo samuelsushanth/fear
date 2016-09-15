@@ -32,20 +32,6 @@ function ChoiceFormController(choiceService) {
             vm.errortext = "The choice is already in your list.";
             vm.choiceText = "";
         }
-    }
-    function submitQuestion(){
-        if(!vm.answer)
-        {return;}
-        if(vm.choices.indexOf(vm.answer)== -1)
-            alert("Please include the answer in the list of choices..");
-
-        else
-        {
-            alert("You have chosen answer "+vm.answer+"for the question "+vm.question+"");
-            vm.answer = vm.choices.indexOf(vm.answer);
-            //choiceService.update(vm.question, vm.choices, vm.answer).then(vm.refreshF())
-            vm.refreshF();
-        }
 
     }
     function removeItem(x){

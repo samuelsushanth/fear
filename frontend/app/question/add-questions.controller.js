@@ -1,4 +1,4 @@
-function ExamsController(examsService) {
+function QuestionsController(questionsService) {
     var vm = this;
 
 
@@ -12,20 +12,20 @@ function ExamsController(examsService) {
 
     }
     function refreshQuestions() {
-        return examsService.list().then(function refreshedquestions(response) {
+        return questionsService.list().then(function refreshedquestions(response) {
             vm.questions = response.data;
         });
     }
-    //to create new exam
+    //to create new question
     function newQuestion()
     {
-        //examService.get();
+        //questionService.get();
         if(!vm.questionname)
             return;
-        if(vm.exams.indexOf(vm.questionname)==-1)
+        if(vm.questions.indexOf(vm.questionname)==-1)
         {
-            examsService.create(vm.questionname);
-            //vm.exams.push(vm.questionname);
+            questionsService.create(vm.questionname);
+            //vm.questions.push(vm.questionname);
             refreshQuestions();
             vm.questionname ="";
         }
