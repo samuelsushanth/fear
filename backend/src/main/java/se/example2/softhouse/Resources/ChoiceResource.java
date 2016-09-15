@@ -35,10 +35,12 @@ public class ChoiceResource {
      /*     examQuestion.setExamId((long)examId);
            examQuestion.setQuestionId((long)questionId);
            examQuestionDAO.create(examQuestion);*/
+
       if (choice.getIsCorrect()=="true") {
-          choiceDAO.createInQuestionAnswer(questionId, choiceId);
+          choiceDAO.createInQuestionAnswer(questionId,choiceId);
       }
         return choiceDAO.retrieve(choiceId);
+
     }
 
     @GET

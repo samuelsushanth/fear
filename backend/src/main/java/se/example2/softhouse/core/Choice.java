@@ -21,7 +21,6 @@ public class Choice {
     private Long questionId;
 
     @JsonProperty
-    @NotEmpty
     private String isCorrect;
 
     public String getIsCorrect() {

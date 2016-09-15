@@ -16,7 +16,7 @@ public class QuestionAnswer {
 
     @JsonProperty
     @NotEmpty
-    private int correctChoiceId;
+    private int choiceId;
 
     public void setQuestionId(int questionId) {
         this.questionId = questionId;
@@ -26,12 +26,13 @@ public class QuestionAnswer {
         return questionId;
     }
 
-    public int getCorrectChoiceId() {
-        return correctChoiceId;
+
+    public int getChoiceId() {
+        return choiceId;
     }
 
-    public void setCorrectChoiceId(int correctChoiceId) {
-        this.correctChoiceId = correctChoiceId;
+    public void setChoiceId(int choiceId) {
+        this.choiceId = choiceId;
     }
 
     public int getId() {

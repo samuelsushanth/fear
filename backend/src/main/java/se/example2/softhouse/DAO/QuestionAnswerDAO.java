@@ -17,7 +17,7 @@ import se.example2.softhouse.core.QuestionAnswer;
 import java.util.List;
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface QuestionAnswerDAO {
-    @SqlUpdate("create table if not exists QuestionAnswer (id int auto_increment primary key,examId int,questionId int)")
+    @SqlUpdate("create table if not exists QuestionAnswer (id int auto_increment primary key,questionId int,choiceId int)")
     void createQuestionAnswerTable();
 
     @SqlUpdate("delete table QuestionAnswer")
