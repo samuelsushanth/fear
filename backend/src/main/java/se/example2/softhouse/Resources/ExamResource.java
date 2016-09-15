@@ -31,8 +31,8 @@ public class ExamResource {
     }
 
     @GET
-    @Path("/{id}")
-    public Exam retrieve(@PathParam("id") Integer id) {
+    @Path("/{examId}")
+    public Exam retrieve(@PathParam("examId") Integer id) {
         return examdao.retrieve(id);
     }
 
@@ -43,8 +43,8 @@ public class ExamResource {
     }
 
     @PUT
-    @Path("/{id}")
-    public Response update(@PathParam("id") int id, Exam exam) {
+    @Path("/{examId}")
+    public Response update(@PathParam("examId") int id, Exam exam) {
         Optional<Exam> update = Optional.ofNullable(examdao.retrieve(id));
 
         if (update.isPresent()) {
@@ -56,8 +56,8 @@ public class ExamResource {
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response delete(@PathParam("id") int id) {
+    @Path("/{examId}")
+    public Response delete(@PathParam("examId") int id) {
         examdao.delete(id);
         Optional<List<Long>> update = Optional.ofNullable(questionDAO.checkQuestionInExamQuestion(id));
         if (update.isPresent()) {
