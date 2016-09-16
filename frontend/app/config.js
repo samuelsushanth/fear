@@ -15,9 +15,9 @@ function config($routeProvider)
         })
         .when('/exam/:xamId', { template: '<addquestion test="$resolve.examId"></addquestion>', resolve: examResolver })
         .when('/xam/:examId', {
-            //template:'asdas<questions exam-id="$resolve.examId"></questions>',
-            template: '<questions></questions>'
-            //resolve: examResolver
+            template:'asdas<questions xam-id="$resolve.examId"></questions>',
+            //template: '<questions></questions>'
+            resolve: examResolver
         });
 
     console.log($routeProvider);

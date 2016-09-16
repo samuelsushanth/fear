@@ -11,12 +11,13 @@ function QuestionsController(questionsService) {
         //alert(vm.exams);
         refreshQuestions();
         console.log(vm);
+        console.log(vm.examId);
 
     }
     function refreshQuestions() {
-        return questionsService.list().then(function refreshedquestions(response) {
+        /*return questionsService.list().then(function refreshedquestions(response) {
             vm.questions = response.data;
-        });
+        });*/
     }
     //to create new questions
     function newQuestion()
@@ -27,7 +28,7 @@ function QuestionsController(questionsService) {
         if(vm.questions.indexOf(vm.questionname)==-1)
         {
 
-            questionsService.create(vm.questionname);
+            //questionsService.create(vm.questionname);
             //vm.questions.push(vm.questionname);
             refreshQuestions();
             vm.questionname ="";

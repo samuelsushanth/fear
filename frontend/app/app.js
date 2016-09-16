@@ -36,6 +36,6 @@ angular.module('app', ["ngRoute"])
         controllerAs: 'vm',
 
         bindings:{
-            examId:'@'
+            xamId:'@'
         }
     })
