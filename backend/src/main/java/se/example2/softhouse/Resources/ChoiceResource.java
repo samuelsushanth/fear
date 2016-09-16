@@ -30,17 +30,21 @@ public class ChoiceResource {
     }
     @POST
     public Choice create(@PathParam("questionId") int questionId, Choice choice) {
+
         int choiceId = choiceDAO.create(choice,questionId);
 
      /*     examQuestion.setExamId((long)examId);
            examQuestion.setQuestionId((long)questionId);
            examQuestionDAO.create(examQuestion);*/
 
-      if (choice.getIsCorrect()=="true") {
+      if (choice.getIsCorrect()== 1)
+      {
+
           choiceDAO.createInQuestionAnswer(questionId,choiceId);
       }
-        return choiceDAO.retrieve(choiceId);
-
+      choice.setIsCorrect(choice.getIsCorrect());
+        //return choiceDAO.retrieve(choiceId);
+        return choice;
     }
 
     @GET
@@ -68,7 +72,7 @@ public class ChoiceResource {
     @Path("/{choiceId}")
     public Response delete(@PathParam("choiceId") int choiceId,Choice choice) {
         choiceDAO.delete(choiceId);
-        if (choice.getIsCorrect()=="true") {
+        if (choice.getIsCorrect()== 1) {
             choiceDAO.deleteInQuestionAnswer(choiceId);
         }
         return Response.ok().build();

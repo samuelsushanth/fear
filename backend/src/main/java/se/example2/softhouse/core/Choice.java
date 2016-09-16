@@ -21,13 +21,14 @@ public class Choice {
     private Long questionId;
 
     @JsonProperty
-    private String isCorrect;
+    @NotEmpty
+    private  Long isCorrect;
 
-    public String getIsCorrect() {
+    public Long getIsCorrect() {
         return isCorrect;
     }
 
-    public void setIsCorrect(String isCorrect) {
+    public void setIsCorrect(Long isCorrect) {
         this.isCorrect = isCorrect;
     }
 
@@ -50,6 +51,8 @@ public class Choice {
     public Long getId() {
         return id;
     }
+
+
 
     public void setId(Long id) {
         this.id = id;
