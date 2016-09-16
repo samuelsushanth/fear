@@ -7,8 +7,8 @@ function ExamsController(examsService) {
     vm.refreshExams = refreshExams;
 
     function $onInit() {
-    //vm.exams ={"id":33,"text":"q1"};
-        refreshExams();
+    //vm.exams ={"id":33,"text":"q1"}
+        vm.refreshExams();
 
     }
     function refreshExams() {
