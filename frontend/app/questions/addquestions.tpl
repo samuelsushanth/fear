@@ -1,7 +1,7 @@
 
 <form class="text-center">
 
-    <input type="text" ng-model="vm.examname" title="asd" required placeholder="Enter the question">
+    <input type="text" ng-model="vm.questionname" title="asd" required placeholder="Enter the question">
     <button type="button" ng-click="vm.newQuestion()">Create Question</button>
 </form><br />
 <div class="container" class="table-responsive">
@@ -13,9 +13,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="exams in vm.exams" bgcolor="#d3d3d3">
+        asdafad
+        <tr ng-repeat="questions in vm.questions" bgcolor="#d3d3d3">
             <td style="text-align: center"> {{questions}}</td>
-            <td style="text-align: center"> <a class="btn btn-xs btn-default" href="#/xam">+Choice</a></td>
+            <td style="text-align: center"> <a class="btn btn-xs btn-default" href="#/question/{{questions.questionId}}">+Choice</a></td>
 
 
     </table>

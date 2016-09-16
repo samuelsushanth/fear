@@ -1,9 +1,8 @@
 
 angular.module('app', ["ngRoute"])
-    .config(config)
-    .factory('noteService', noteService)
     .factory("choiceService", choiceService)
     .factory("examsService", examsService)
+    .config(config)
     .component('noteForm', {
         templateUrl: 'app/note-form/note-form.tpl',
         controller: NoteFormController,
@@ -49,7 +48,7 @@ angular.module('app', ["ngRoute"])
     })
     // addquestionForm becomes <old_questions> in HTML
     .component('addquestion', {
-        templateUrl: 'app/old_questions/add-question.tpl',
+        templateUrl: 'app/old_questions/add-questions.tpl',
         controller: ChoiceFormController,
         controllerAs: 'vm',
 
@@ -66,5 +65,9 @@ angular.module('app', ["ngRoute"])
     .component('questions',{
         templateUrl: 'app/questions/addquestions.tpl',
         controller: QuestionsController,
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+
+        bindings:{
+            examId:'@'
+        }
     })

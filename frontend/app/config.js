@@ -13,10 +13,14 @@ function config($routeProvider)
         .when('/xam',{
             template:'<exams> </exams>'
         })
-        .when('/exam/:examId', { template: '<addquestion test="$resolve.examId"></addquestion>', resolve: examResolver })
-        .when('/xam/"?"/questions',{
-            template:'<questions></questions>'
-        })
+        .when('/exam/:xamId', { template: '<addquestion test="$resolve.examId"></addquestion>', resolve: examResolver })
+        .when('/xam/:examId', {
+            //template:'asdas<questions exam-id="$resolve.examId"></questions>',
+            template: '<exams></exams>'
+            //resolve: examResolver
+        });
+
+    console.log($routeProvider);
 // http://fear.com/exam/6
 
 }
