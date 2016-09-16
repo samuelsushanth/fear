@@ -30,7 +30,7 @@ public interface UserRegisterDAO {
     @SqlQuery("select * from User where id = :id")
     UserDetails retrieve(@Bind("id") int id);
 
-    @SqlQuery("select (occupation) from User where (username)= (:userName) and (password)=(:password)")
-    String retrieveoccupation(@BindBean UserDetails userDetails);
+    @SqlQuery("select * from User where (username)= (:userName) and (password)=(:password)")
+    UserDetails retrieveoccupation(@BindBean UserDetails userDetails);
 
 }
