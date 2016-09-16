@@ -7,8 +7,10 @@ function QuestionsController(questionsService) {
     vm.refreshQuestions = refreshQuestions;
 
     function $onInit() {
-        vm.questions ={"id":33,"text":"q1"};
+        //vm.questions ={"id":33,"text":"q1"};
+        alert(vm.exams);
         refreshQuestions();
+
 
     }
     function refreshQuestions() {
@@ -24,6 +26,7 @@ function QuestionsController(questionsService) {
             return;
         if(vm.questions.indexOf(vm.questionname)==-1)
         {
+
             questionsService.create(vm.questionname);
             //vm.questions.push(vm.questionname);
             refreshQuestions();

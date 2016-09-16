@@ -4,7 +4,7 @@ function questionsService($http, $interpolate) {
      * This is the base URL to our API in the backend.
      * @type {String}
      */
-    var toListURL = 'http://localhost:8080/api/question';
+    var toListURL = 'http://localhost:8080/api/exam/{{vm.examId}}/question';
 
     /**
      * This is the detail URL to our API in the backend. It handles requests with path parameters.

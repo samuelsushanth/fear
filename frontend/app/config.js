@@ -14,7 +14,7 @@ function config($routeProvider)
             template:'<exams> </exams>'
         })
         .when('/exam/:examId', { template: '<addquestion test="$resolve.examId"></addquestion>', resolve: examResolver })
-        .when('/xam/{{id}}',{
+        .when('/xam/"?"/questions',{
             template:'<questions></questions>'
         })
 // http://fear.com/exam/6
