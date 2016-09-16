@@ -9,9 +9,7 @@ import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.DAO.QuestionAnswerDAO;
-import se.example2.softhouse.Resources.ChoiceResource;
-import se.example2.softhouse.Resources.ExamResource;
-import se.example2.softhouse.Resources.QuestionResource;
+import se.example2.softhouse.Resources.*;
 
 import java.sql.SQLException;
 
@@ -28,16 +26,20 @@ public class DemoApplication extends Application<DemoConfiguration> {
         final QuestionAnswerDAO qadao = jdbi.onDemand(QuestionAnswerDAO.class);
         final ExamDAO edao = jdbi.onDemand(ExamDAO.class);
         final ExamQuestionDAO eqdao= jdbi.onDemand(ExamQuestionDAO.class);
+        final UserRegisterDAO userRegisterDAO= jdbi.onDemand(UserRegisterDAO.class);
 
        qdao.createQuestionTable();
         chdao.createChoiceTable();
         qadao.createQuestionAnswerTable();   //initial table creations
         edao.createExamTable();
         eqdao.createExamQuestionTable();
+        userRegisterDAO.createUserTable();
 
         environment.jersey().register(new ExamResource(edao,qdao,chdao));
        environment.jersey().register(new QuestionResource(qdao,eqdao,chdao));
         environment.jersey().register(new ChoiceResource(chdao));
+        environment.jersey().register(new UserRegisterResource(userRegisterDAO));
+        environment.jersey().register(new UserAuthentication(userRegisterDAO));
     }
 
     @Override
