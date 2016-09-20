@@ -13,10 +13,9 @@
         </tr>
         </thead>
         <tbody>
-        asdafad
         <tr ng-repeat="questions in vm.questions" bgcolor="#d3d3d3">
             <td style="text-align: center"> {{questions}}</td>
-            <td style="text-align: center"> <a class="btn btn-xs btn-default" href="#/question/{{questions.questionId}}">+Choice</a></td>
+            <td style="text-align: center"> <a class="btn btn-xs btn-default" href="#/question/{{questions.id}}">+Choice</a></td>
 
 
     </table>

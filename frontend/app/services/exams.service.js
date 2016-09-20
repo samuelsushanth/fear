@@ -1,4 +1,4 @@
-function examsService($http) {
+function examsService($http, $interpolate) {
     /**
      * This is the base URL to our API in the backend.
      * @type {String}
@@ -10,7 +10,7 @@ function examsService($http) {
      * E.g. /api/note/5/
      * @type {Function}
      */
-    //var toDetailURL = $interpolate('http://localhost:8080/api/exam/{{id}}/');
+    var toDetailURL = $interpolate('http://localhost:8080/api/exam/{{id}}/');
 
 
     return {

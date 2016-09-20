@@ -2,7 +2,7 @@
 angular.module('app', ["ngRoute"])
     .factory("choiceService", choiceService)
     .factory("examsService", examsService)
-    .config(config)
+    .factory("questionsService",questionsService)
 
     //choosing the old_questions form
     .component('choosequestion', {
@@ -35,7 +35,11 @@ angular.module('app', ["ngRoute"])
         controller: QuestionsController,
         controllerAs: 'vm',
 
-        bindings:{
-            xamId:'@'
-        }
     })
+    .component('choices',{
+        templateUrl: 'app/choices/add-choices.tpl',
+        controller: ChoiceFormController,
+        controllerAs: 'vm',
+
+
+    }).config(config)
