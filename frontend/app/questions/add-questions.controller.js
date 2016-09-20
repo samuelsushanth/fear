@@ -11,7 +11,7 @@ function QuestionsController(questionsService) {
         //alert(vm.exams);
         refreshQuestions();
         console.log(vm);
-        console.log(vm.examId);
+        console.log(vm.id);
 
     }
     function refreshQuestions() {
