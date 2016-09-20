@@ -14,7 +14,7 @@ import java.util.List;
 @RegisterMapperFactory(BeanMapperFactory.class)
 
 public interface UserRegisterDAO {
-    @SqlUpdate("create table if not exists User (id Long auto_increment primary key, username varchar(2000),emailaddress varchar(20),password varchar(8),occupation varchar(20))")
+    @SqlUpdate("create table if not exists User (id Long auto_increment , username varchar(2000) primary key,emailaddress varchar(20),password varchar(8),occupation varchar(20))")
     void createUserTable();
 
     @SqlUpdate("delete table User")
@@ -32,5 +32,9 @@ public interface UserRegisterDAO {
 
     @SqlQuery("select * from User where (username)= (:userName) and (password)=(:password)")
     UserDetails retrieveoccupation(@BindBean UserDetails userDetails);
+
+    @SqlQuery("select * from User where userName = :userName")
+    UserDetails  retrieveByUserName(@Bind("userName") String userName );
+
 
 }

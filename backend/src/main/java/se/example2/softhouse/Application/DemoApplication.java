@@ -10,8 +10,10 @@ import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.DAO.QuestionAnswerDAO;
 import se.example2.softhouse.Resources.*;
+import se.example2.softhouse.core.UserDetails;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class DemoApplication extends Application<DemoConfiguration> {
 
@@ -40,6 +42,17 @@ public class DemoApplication extends Application<DemoConfiguration> {
         environment.jersey().register(new ChoiceResource(chdao));
         environment.jersey().register(new UserRegisterResource(userRegisterDAO));
         environment.jersey().register(new UserAuthentication(userRegisterDAO));
+        UserDetails userDetails= new UserDetails("charan","ypcharan3@gmail.com","charan","Teacher");
+        Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveByUserName(userDetails.getUserName()));
+        if(update.isPresent())
+        {
+
+        }
+        else
+        {
+            userRegisterDAO.create(userDetails);
+        }
+
     }
 
     @Override

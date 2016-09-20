@@ -29,8 +29,10 @@ public class UserAuthentication {
     @POST
     public UserDetails registerUser(UserDetails userDetails) {
 
-       return userRegisterDAO.retrieveoccupation(userDetails);
 
+       userDetails=userRegisterDAO.retrieveoccupation(userDetails);
+        userDetails.setPassword("");
+        return userDetails;
 
     }
 }

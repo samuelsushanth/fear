@@ -26,6 +26,19 @@ public class UserDetails {
     @NotEmpty
     private String occupation;
 
+    public UserDetails()
+    {
+
+    }
+    public UserDetails(String userName,String emailAddress,String password,String occupation)
+    {
+        this.userName=userName;
+        this.emailAddress=emailAddress;
+        this.password=password;
+        this.occupation=occupation;
+
+    }
+
     public Long getId() {
         return id;
     }
