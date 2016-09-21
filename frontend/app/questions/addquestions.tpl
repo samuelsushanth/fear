@@ -14,8 +14,8 @@
         </thead>
         <tbody>
         <tr ng-repeat="questions in vm.questions" bgcolor="#d3d3d3">
-            <td style="text-align: center"> {{questions}}</td>
-            <td style="text-align: center"> <a class="btn btn-xs btn-default" href="#/question/{{questions.id}}">+Choice</a></td>
+            <td style="text-align: center"> {{questions.text}}</td>
+            <td style="text-align: center"> <a class="btn btn-xs btn-default" href="#/xam/{{vm.xamId}}/question/{{questions.id}}/choice">+Choice</a></td>
 
 
     </table>

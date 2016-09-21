@@ -32,13 +32,13 @@ angular.module('app', ["ngRoute"])
     .component('questions',{
         templateUrl: 'app/questions/addquestions.tpl',
         controller: QuestionsController,
-        controllerAs: 'vm',
+        controllerAs: 'vm'
 
     })
     .component('choices',{
         templateUrl: 'app/choices/add-choices.tpl',
-        controller: ChoiceFormController,
-        controllerAs: 'vm',
+        controller: ChoiceController,
+        controllerAs: 'vm'
 
 
-    }).config(config)
+    }).config(config);

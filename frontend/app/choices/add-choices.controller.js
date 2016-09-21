@@ -8,23 +8,22 @@ function ChoiceController(choiceService, $route) {
 
     function $onInit() {
         //vm.choices ={"id":33,"text":"q1"};
-        //alert(vm.choices);
-        refreshChoice();
-        console.log($route.current.params.questionId);
-        vm.xamId = $route.current.params.questionId;
-        console.log(vm.xamId);
+        vm.choices= [];
 
+        vm.examId = $route.current.params.eexamId;
+        vm.questionId = $route.current.params.questionId;
+        refreshChoices();
     }
 
-    function refreshChoice() {
-        return choiceService.list().then(function refreshedchoices(response) {
+    function refreshChoices() {
+        return choiceService.list( vm.examId, vm.questionId).then(function refreshedchoices(response) {
             vm.choices = response.data;
         });
     }
     //to create new choices
     function newChoice()
     {
-        //questionService.get();
+       /* //questionService.get();
         if(!vm.choicename)
             return;
         if(vm.choices.indexOf(vm.choicename)==-1)
@@ -37,7 +36,6 @@ function ChoiceController(choiceService, $route) {
         }
         else{
             return;
-        }
+        }*/
     }
-
 }
