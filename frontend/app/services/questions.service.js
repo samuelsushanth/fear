@@ -1,17 +1,17 @@
 
-function questionsService($http, $interpolate) {
+function questionsService($http, $interpolate, $route) {
     /**
      * This is the base URL to our API in the backend.
      * @type {String}
      */
-    var toListURL = 'http://localhost:8080/api/exam/';
+    var toListURL = 'http://localhost:8080/api/exam/'+$route.current.params.examId+'/question';
 
     /**
      * This is the detail URL to our API in the backend. It handles requests with path parameters.
      * E.g. /api/note/5/
      * @type {Function}
      */
-    var toDetailURL = $interpolate('localhost:8080/api/exam/1/question');
+    var toDetailURL = $interpolate('http://localhost:8080/api/exam/'+$route.current.params.examId+'/question');
 
 
     return {

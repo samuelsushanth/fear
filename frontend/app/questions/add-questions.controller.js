@@ -30,7 +30,7 @@ function QuestionsController(questionsService, $route) {
         if(vm.questions.indexOf(vm.questionname)==-1)
         {
 
-           // questionsService.create(vm.questionname);
+           questionsService.create(vm.questionname);
             //vm.questions.push(vm.questionname);
             refreshQuestions();
             vm.questionname ="";
