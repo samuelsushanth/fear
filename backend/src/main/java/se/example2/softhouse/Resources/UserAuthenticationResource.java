@@ -14,9 +14,9 @@ import java.util.List;
 @Path("/login")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserAuthentication {
+public class UserAuthenticationResource {
     private UserRegisterDAO userRegisterDAO;
-    public UserAuthentication(UserRegisterDAO userRegisterDAO){
+    public UserAuthenticationResource(UserRegisterDAO userRegisterDAO){
         this.userRegisterDAO=userRegisterDAO;
 
     }

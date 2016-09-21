@@ -50,11 +50,7 @@ public class UserRegisterResource {
 
             int userId = userRegisterDAO.create(userDetails);
              String occupation=userDetails.getOccupation();
-            if(occupation=="student"||occupation=="Student")
-            {
-                studentExamDAO.createStudentExamTable(userDetails.getUserName());
-            }
-            return userRegisterDAO.retrieve(userId) ;
+             return userRegisterDAO.retrieve(userId) ;
         }
 
 

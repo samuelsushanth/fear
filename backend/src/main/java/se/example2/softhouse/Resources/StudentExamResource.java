@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * Created by charan on 9/21/2016.
  */
-@Path("/student/Takeatest/{examId}/{userId}/question")
+@Path("/student/takeatest/{examId}/{userId}/question")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class StudentExamResource {
@@ -61,9 +61,11 @@ public class StudentExamResource {
 
     @PUT
     @Path("/{questionId}")
-    public StudentExam update(@PathParam("examId") int examId,@PathParam("userId") int userId,@PathParam("questionId") int questionId, Qfull qfull) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public StudentExam update(@PathParam("examId") int examId,@PathParam("userId") int userId,@PathParam("questionId") int questionId,Qfull qfull) {
            int marks =0;
-            long selectedId=qfull.getSelectedId();
+       long selectedId=qfull.getSelectedId();
+
         long answerId= questionAnswerDAO.getChoiceId(questionId);
         if(selectedId==answerId)
         {
@@ -71,8 +73,13 @@ public class StudentExamResource {
         }
         StudentExam studentExam= new StudentExam(userId,examId,questionId,selectedId,marks);
         int id=studentExamDAO.create(studentExam);
-        String userName=userRegisterDAO.retrieveUserName(userId);
-        return studentExamDAO.retrieve(userName,id);
+        return studentExamDAO.retrieve(id);
+    }
+
+    @DELETE
+    @Path("/{questionId}")
+    public void delete() {
+
     }
 
 

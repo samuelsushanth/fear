@@ -40,11 +40,11 @@ public class ChoiceResource {
       if (choice.getIsCorrect()== 1)
       {
 
-          choiceDAO.createInQuestionAnswer(questionId,choiceId);
+          int choiceid=choiceDAO.createInQuestionAnswer(questionId,choiceId);
       }
-      choice.setIsCorrect(choice.getIsCorrect());
-        //return choiceDAO.retrieve(choiceId);
-        return choice;
+      //choice.setIsCorrect(choice.getIsCorrect());
+        return choiceDAO.retrieve(choiceId);
+        //return choice;
     }
 
     @GET

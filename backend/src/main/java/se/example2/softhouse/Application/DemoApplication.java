@@ -29,19 +29,20 @@ public class DemoApplication extends Application<DemoConfiguration> {
         final ExamDAO edao = jdbi.onDemand(ExamDAO.class);
         final ExamQuestionDAO eqdao= jdbi.onDemand(ExamQuestionDAO.class);
         final UserRegisterDAO userRegisterDAO= jdbi.onDemand(UserRegisterDAO.class);
-
+        final StudentExamDAO studentExamDAO=jdbi.onDemand(StudentExamDAO.class);
        qdao.createQuestionTable();
         chdao.createChoiceTable();
         qadao.createQuestionAnswerTable();   //initial table creations
         edao.createExamTable();
         eqdao.createExamQuestionTable();
         userRegisterDAO.createUserTable();
-
+        studentExamDAO.createStudentExamTable();
         environment.jersey().register(new ExamResource(edao,qdao,chdao));
        environment.jersey().register(new QuestionResource(qdao,eqdao,chdao));
         environment.jersey().register(new ChoiceResource(chdao));
-        environment.jersey().register(new UserRegisterResource(userRegisterDAO));
-        environment.jersey().register(new UserAuthentication(userRegisterDAO));
+        environment.jersey().register(new UserRegisterResource(userRegisterDAO,studentExamDAO));
+        environment.jersey().register(new UserAuthenticationResource(userRegisterDAO));
+        environment.jersey().register(new StudentExamResource(userRegisterDAO,qdao,eqdao,chdao,studentExamDAO,qadao));
         UserDetails userDetails= new UserDetails("charan","ypcharan3@gmail.com","charan","Teacher");
         Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveByUserName(userDetails.getUserName()));
         if(update.isPresent())
