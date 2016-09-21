@@ -7,10 +7,8 @@ function QuestionsController(questionsService, $route) {
     vm.refreshQuestions = refreshQuestions;
 
     function $onInit() {
-        //vm.questions ={"id":33,"text":"q1"};
-        //alert(vm.exams);
+
         refreshQuestions();
-        console.log($route.current.params.examId);
         vm.xamId = $route.current.params.examId;
         console.log(vm.xamId);
 
@@ -24,14 +22,13 @@ function QuestionsController(questionsService, $route) {
     //to create new questions
     function newQuestion()
     {
-        //questionService.get();
+
         if(!vm.questionname)
             return;
         if(vm.questions.indexOf(vm.questionname)==-1)
         {
 
            questionsService.create(vm.questionname);
-            //vm.questions.push(vm.questionname);
             refreshQuestions();
             vm.questionname ="";
         }
