@@ -4,14 +4,14 @@ function choiceService($http, $interpolate) {
      * This is the base URL to our API in the backend.
      * @type {String}
      */
-    var toListURL = 'http://localhost:8080/api/choice';
+    var toListURL = 'http://localhost:8080/api/exam/';
 
     /**
      * This is the detail URL to our API in the backend. It handles requests with path parameters.
      * E.g. /api/note/5/
      * @type {Function}
      */
-    var toDetailURL = $interpolate('http://localhost:8080/api/choice/{{choiceId}}/');
+    var toDetailURL = $interpolate('localhost:8080/api/exam/1/question/1/choice');
 
 
     return {

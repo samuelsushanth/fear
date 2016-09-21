@@ -1,55 +1,43 @@
-/**
- * Created by sindh on 15-09-2016.
- */
-function ChoiceFormController(choiceService) {
+function ChoiceController(choiceService, $route) {
     var vm = this;
 
+
     vm.$onInit = $onInit;
-    vm.choiceWasSubmitted = choiceWasSubmitted;
-    vm.removeItem = removeItem;
-    vm.submitQuestion = submitQuestion;
-    vm.refreshF = refreshF;
+    vm.newChoice = newChoice;
+    vm.refreshChoices = refreshChoices;
 
     function $onInit() {
-        vm.choices = [];
+        //vm.choices ={"id":33,"text":"q1"};
+        //alert(vm.choices);
+        refreshChoice();
+        console.log($route.current.params.questionId);
+        vm.xamId = $route.current.params.questionId;
+        console.log(vm.xamId);
+
     }
 
-    function choices() {
-        console.log("A choice was submitted. The text of it is: " + vm.choiceText);
+    function refreshChoice() {
+        return choiceService.list().then(function refreshedchoices(response) {
+            vm.choices = response.data;
+        });
+    }
+    //to create new choices
+    function newChoice()
+    {
+        //questionService.get();
+        if(!vm.choicename)
+            return;
+        if(vm.choices.indexOf(vm.choicename)==-1)
+        {
 
-        vm.errortext = "";
-        //vm.choices.push(vm.choiceText)
-
-        if (!vm.choiceText) {
+            // questionsService.create(vm.questionname);
+            //vm.questions.push(vm.questionname);
+            refreshQuestions();
+            vm.choicename ="";
+        }
+        else{
             return;
         }
-        if (vm.choices.indexOf(vm.choiceText) == -1) {
-            vm.choices.push(vm.choiceText);
-            //( alert(vm.choices);
-            vm.choiceText = "";
-            vm.choiceList = "hyf";
-        } else {
-            vm.errortext = "The choice is already in your list.";
-            vm.choiceText = "";
-        }
+    }
 
-    }
-    function removeItem(x){
-        vm.errortext = "";
-        vm.choices.splice(x, 1);
-    }
-    function refreshF(){
-        vm.question = "";
-        vm.choices = [];
-        vm.answer= "";
-        vm.choiceText ="";
-    }
-    // this is just for basic understanding
-    /*function $onInit() {
-     console.log("A new instance of ChoiceFormController has been created.")
-     choiceService.list().then(function(response) {
-     //console.log("got", response);
-     vm.choices = response.data;
-     })
-     }*/
 }

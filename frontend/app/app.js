@@ -1,4 +1,3 @@
-
 angular.module('app', ["ngRoute"])
     .factory("choiceService", choiceService)
     .factory("examsService", examsService)
@@ -6,13 +5,13 @@ angular.module('app', ["ngRoute"])
 
     //choosing the old_questions form
     .component('choosequestion', {
-    templateUrl: 'app/old_questions/choosequestion.tpl',
-    controller: ChooseQuestion,
-    controllerAs: 'am',
+        templateUrl: 'app/old_questions/choosequestion.tpl',
+        controller: ChooseQuestion,
+        controllerAs: 'am',
 
-    bindings: {
-        data: '@'
-    }
+        bindings: {
+            data: '@'
+        }
     })
     // addquestionForm becomes <old_questions> in HTML
     .component('addquestion', {
