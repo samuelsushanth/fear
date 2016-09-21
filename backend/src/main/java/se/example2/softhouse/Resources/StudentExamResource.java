@@ -63,17 +63,27 @@ public class StudentExamResource {
     @Path("/{questionId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public StudentExam update(@PathParam("examId") int examId,@PathParam("userId") int userId,@PathParam("questionId") int questionId,Qfull qfull) {
-           int marks =0;
+           int marks =0;int id;
        long selectedId=qfull.getSelectedId();
 
         long answerId= questionAnswerDAO.getChoiceId(questionId);
-        if(selectedId==answerId)
-        {
-            marks=1;
+        if(selectedId==answerId) {
+            marks = 1;
         }
         StudentExam studentExam= new StudentExam(userId,examId,questionId,selectedId,marks);
-        int id=studentExamDAO.create(studentExam);
-        return studentExamDAO.retrieve(id);
+      /*  id = studentExamDAO.create(studentExam);
+        return studentExamDAO.retrieve(id);*/
+        Optional<StudentExam> update = Optional.ofNullable(studentExamDAO.retrieveByQuestionId(questionId));
+        if (update.isPresent()) {
+           studentExamDAO.update(questionId,studentExam);
+            id=studentExamDAO.retrieveIdByQuestionId(questionId);
+           return studentExamDAO.retrieve(id);
+
+        }
+        else {
+           id = studentExamDAO.create(studentExam);
+           return studentExamDAO.retrieve(id);
+        }
     }
 
     @DELETE
@@ -82,5 +92,13 @@ public class StudentExamResource {
 
     }
 
+    @GET
+    @Path("/result")
+    public List<StudentExam> retrieve(@PathParam("userId") int userId,@PathParam("examId") int examId)
+    {
+
+        return studentExamDAO.retrieveAnswers(userId,examId);
+
+    }
 
 }

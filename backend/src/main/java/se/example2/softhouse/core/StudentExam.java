@@ -24,6 +24,10 @@ public class StudentExam {
     @JsonProperty
     private long marks;
 
+    @JsonProperty
+    private long score;
+
+
     public StudentExam()
     {
 
@@ -35,6 +39,14 @@ public class StudentExam {
         this.questionId=questionId;
         this.selectedId=selectedId;
         this.marks=marks;
+    }
+
+    public long getScore() {
+        return score;
+    }
+
+    public void setScore(long score) {
+        this.score = score;
     }
 
     public Long getId() {

@@ -30,5 +30,16 @@ public interface StudentExamDAO {
     @SqlQuery("select * from studentexam where id = :id")
     StudentExam retrieve(@Bind("id") int id);
 
+    @SqlQuery("select * from studentexam where questionId = :questionId")
+    StudentExam retrieveByQuestionId(@Bind("questionId") int questionId);
+
+    @SqlUpdate("update studentexam set selectedId = :u.selectedId,marks=:u.marks where questionId = :questionId")
+    void update(@Bind("questionId") int questionId, @BindBean("u") StudentExam studentExam);
+
+    @SqlQuery("select id from studentexam where questionId = :questionId")
+    int retrieveIdByQuestionId(@Bind("questionId") int questionId);
+
+    @SqlQuery("select * from studentexam where userId = :userId and examId=:examId")
+    List<StudentExam> retrieveAnswers(@Bind("userId") int userId,@Bind("examId") int examId);
 
 }
