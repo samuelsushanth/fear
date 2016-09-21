@@ -38,6 +38,9 @@ public interface QuestionAnswerDAO {
     @SqlQuery("select * from QuestionAnswer where (questionId)=(:questionId) ")
     List<QuestionAnswer> listQuestions(@BindBean QuestionAnswer questionAnswer);
 
+    @SqlQuery("select choiceId from QuestionAnswer where (questionId)=(:questionId) ")
+    int getChoiceId(@Bind("questionId") int questionId);
+
 
 
 }

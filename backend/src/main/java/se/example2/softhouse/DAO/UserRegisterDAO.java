@@ -36,5 +36,8 @@ public interface UserRegisterDAO {
     @SqlQuery("select * from User where userName = :userName")
     UserDetails  retrieveByUserName(@Bind("userName") String userName );
 
+    @SqlQuery("select username from User where id = :id")
+    String  retrieveUserName(@Bind("id") int id );
+
 
 }

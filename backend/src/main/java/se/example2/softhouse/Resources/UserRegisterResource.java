@@ -3,6 +3,7 @@ package se.example2.softhouse.Resources;
 
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
+import se.example2.softhouse.DAO.StudentExamDAO;
 import se.example2.softhouse.DAO.UserRegisterDAO;
 import se.example2.softhouse.core.Question;
 import se.example2.softhouse.core.UserDetails;
@@ -25,8 +26,10 @@ import java.util.Optional;
 public class UserRegisterResource {
 
   private UserRegisterDAO userRegisterDAO;
-    public UserRegisterResource(UserRegisterDAO userRegisterDAO){
+    private StudentExamDAO studentExamDAO;
+    public UserRegisterResource(UserRegisterDAO userRegisterDAO,StudentExamDAO studentExamDAO){
      this.userRegisterDAO=userRegisterDAO;
+        this.studentExamDAO=studentExamDAO;
 
     }
 
@@ -46,6 +49,11 @@ public class UserRegisterResource {
         } else {
 
             int userId = userRegisterDAO.create(userDetails);
+             String occupation=userDetails.getOccupation();
+            if(occupation=="student"||occupation=="Student")
+            {
+                studentExamDAO.createStudentExamTable(userDetails.getUserName());
+            }
             return userRegisterDAO.retrieve(userId) ;
         }
 
