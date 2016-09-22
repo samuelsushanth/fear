@@ -9,6 +9,7 @@ import se.example2.softhouse.core.StudentExam;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,9 +37,19 @@ public class StudentExamResource {
     }
 
     @GET
-    public List<Question> list(@PathParam("examId") Integer id) {
+    public List<Qfull> list(@PathParam("examId") Integer id) {
+       List<Question> questionList=questionDAO.getQuestions(id);
+        List<Qfull> qfullList=new ArrayList<Qfull>();
 
-        return questionDAO.getQuestions(id);
+        for (int i = 0; i <questionList.size(); i++) {
+            Question question=questionList.get(i);
+            long questionId = question.getId();
+             question = questionDAO.retrieve(questionId);
+            List<Choice> choices = choiceDAO.getChoices(questionId);
+            Qfull qfull = new Qfull(question, choices);
+           qfullList.add(qfull);
+        }
+        return qfullList;
     }
 
     @GET
@@ -55,8 +66,28 @@ public class StudentExamResource {
     }
 
     @POST
-    public void create() {
+    public StudentExam create(@PathParam("examId") int examId,@PathParam("userId") int userId,Qfull qfull) {
+        int marks =0;int id;
+        long selectedId=qfull.getSelectedId();
+        int questionId = (int) qfull.getQuestionId();
+        long answerId= questionAnswerDAO.getChoiceId(questionId);
+        if(selectedId==answerId) {
+            marks = 1;
+        }
+        StudentExam studentExam= new StudentExam(userId,examId,questionId,selectedId,marks);
+      /*  id = studentExamDAO.create(studentExam);
+        return studentExamDAO.retrieve(id);*/
+        Optional<StudentExam> update = Optional.ofNullable(studentExamDAO.retrieveByQuestionId(questionId));
+        if (update.isPresent()) {
+            studentExamDAO.update(questionId,studentExam);
+            id=studentExamDAO.retrieveIdByQuestionId(questionId);
+            return studentExamDAO.retrieve(id);
 
+        }
+        else {
+            id = studentExamDAO.create(studentExam);
+            return studentExamDAO.retrieve(id);
+        }
     }
 
     @PUT

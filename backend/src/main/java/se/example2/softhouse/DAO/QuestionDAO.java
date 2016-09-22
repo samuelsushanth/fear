@@ -66,6 +66,7 @@ public interface QuestionDAO {
     @SqlUpdate("delete from ExamQuestion where examId = :examId")
     void deleteinExamQuestionByExamId(@Bind("examId") int examId);
 
-
+    @SqlQuery("select * from Question where id = :id")
+    Question retrieve(@Bind("id") long id);
 
 }

@@ -39,6 +39,10 @@ public interface ChoiceDAO {
     @SqlQuery("select * from Choice where questionId = :questionId")
     List<Choice> getChoices(@Bind("questionId") int questionId);
 
+    @SqlQuery("select * from Choice where questionId = :questionId")
+    List<Choice> getChoices(@Bind("questionId") long questionId);
+
+
     @SqlUpdate("delete from QuestionAnswer where choiceId = :choiceId")
     void deleteInQuestionAnswer(@Bind("choiceId") int choiceId);
 
