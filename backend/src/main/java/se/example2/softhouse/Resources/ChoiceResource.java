@@ -30,18 +30,27 @@ public class ChoiceResource {
     }
     @POST
     public Choice create(@PathParam("questionId") int questionId, Choice choice) {
+        int choiceId;
 
-        int choiceId = choiceDAO.create(choice,questionId);
 
-     /*     examQuestion.setExamId((long)examId);
+        /*     examQuestion.setExamId((long)examId);
            examQuestion.setQuestionId((long)questionId);
            examQuestionDAO.create(examQuestion);*/
 
       if (choice.getIsCorrect()== 1)
       {
+             if(questionAnswerDAO.getChoiceId(questionId)!=null)
+             {
+                 choiceId=0;choice.setText("correct answer already exists");
+             }
+             else {
+                 choiceId = choiceDAO.create(choice, questionId);
+                 int choiceid = questionAnswerDAO.createInQuestionAnswer(questionId, choiceId);
+             }
 
-          int choiceid=questionAnswerDAO.createInQuestionAnswer(questionId,choiceId);
-
+      }
+      else {
+           choiceId = choiceDAO.create(choice,questionId);
       }
       //choice.setIsCorrect(choice.getIsCorrect());
         return choiceDAO.retrieve(choiceId);
