@@ -22,7 +22,7 @@ public class StudentExamResultResource {
     private QuestionAnswerDAO questionAnswerDAO;
     private UserRegisterDAO userRegisterDAO;
 
-    public StudentExamResultResource(UserRegisterDAO userRegisterDAO,QuestionDAO questionDAO, ExamQuestionDAO examQuestionDAO, ChoiceDAO choiceDAO, StudentExamDAO studentExamDAO, QuestionAnswerDAO questionAnswerDAO) {
+    public StudentExamResultResource(StudentExamDAO studentExamDAO) {
         this.questionDAO = questionDAO;
         this.examQuestionDAO =examQuestionDAO;
         this.choiceDAO=choiceDAO;

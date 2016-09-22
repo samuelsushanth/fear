@@ -1,10 +1,12 @@
 package se.example2.softhouse.Resources;
 
 import se.example2.softhouse.DAO.UserRegisterDAO;
+import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.UserDetails;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Optional;
 
 /**
  * Created by charan on 9/21/2016.
@@ -29,10 +31,16 @@ public class StudentLoginResource {
     @POST
     public UserDetails registerUser(UserDetails userDetails) {
 
+      //  Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveoccupation(userDetails));
 
         userDetails=userRegisterDAO.retrieveoccupation(userDetails);
-        userDetails.setPassword("");
-        return userDetails;
+            userDetails.setPassword("");
+            return userDetails;
+
+
+
+
+
 
     }
 }

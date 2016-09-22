@@ -20,11 +20,13 @@ public class QuestionResource {
     private QuestionDAO questionDAO;
     private ExamQuestionDAO examQuestionDAO;
     private ChoiceDAO choiceDAO;
+    private QuestionAnswerDAO questionAnswerDAO;
     private ExamQuestion examQuestion =new ExamQuestion();
-    public QuestionResource(QuestionDAO questionDAO, ExamQuestionDAO examQuestionDAO, ChoiceDAO choiceDAO) {
+    public QuestionResource(QuestionDAO questionDAO, ExamQuestionDAO examQuestionDAO, ChoiceDAO choiceDAO,QuestionAnswerDAO questionAnswerDAO) {
         this.questionDAO = questionDAO;
         this.examQuestionDAO =examQuestionDAO;
         this.choiceDAO=choiceDAO;
+        this.questionAnswerDAO=questionAnswerDAO;
     }
 
 
@@ -46,7 +48,7 @@ public class QuestionResource {
      /*     examQuestion.setExamId((long)examId);
            examQuestion.setQuestionId((long)questionId);
            examQuestionDAO.create(examQuestion);*/
-       questionDAO.createinExamQuestion(examId,questionId);
+       examQuestionDAO.createinExamQuestion(examId,questionId);
         return questionDAO.retrieve(questionId);
     }
 
@@ -71,7 +73,7 @@ public class QuestionResource {
         Optional<List<Choice>> update = Optional.ofNullable(choiceDAO.getChoices(questionId));
         if (update.isPresent()) {
             choiceDAO.deleteByQuestion(questionId);
-            choiceDAO.deleteInQuestionAnswerByQuestionId(questionId);
+            questionAnswerDAO.deleteInQuestionAnswerByQuestionId(questionId);
         }
         return Response.ok().build();
     }
