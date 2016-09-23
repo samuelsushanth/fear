@@ -39,9 +39,17 @@ public class ExamResource {
     }
 
     @POST
-    public Exam create(Exam exam) {
-        int id = examdao.create(exam);
-        return examdao.retrieve(id);
+    public Response create(Exam exam) {
+        Optional<Exam> update = Optional.ofNullable(examdao.retrieveByText(exam.getText()));
+
+        if (update.isPresent()) {
+            throw new NotFoundException();
+        } else {
+            int examId = examdao.create(exam);
+            return Response.ok(examdao.retrieve(examId)).build();
+
+        }
+
     }
 
     @PUT

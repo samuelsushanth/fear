@@ -6,6 +6,7 @@ import se.example2.softhouse.core.UserDetails;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 /**
@@ -29,15 +30,17 @@ public class StudentLoginResource {
     }
 
     @POST
-    public UserDetails registerUser(UserDetails userDetails) {
+    public Response registerUser(UserDetails userDetails) {
 
-      //  Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveoccupation(userDetails));
+      Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveoccupation(userDetails));
 
-        userDetails=userRegisterDAO.retrieveoccupation(userDetails);
+        if (update.isPresent()) {
+            userDetails=userRegisterDAO.retrieveoccupation(userDetails);
             userDetails.setPassword("");
-            return userDetails;
-
-
+            return Response.ok(userDetails).build();
+        } else {
+            throw new NotFoundException();
+        }
 
 
 

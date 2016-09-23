@@ -37,4 +37,8 @@ public interface ExamDAO {
 
     @SqlUpdate("update Exam set text = :u.text where id = :id")
     void update(@Bind("id") int id, @BindBean("u") Exam exam);
+
+    @SqlQuery("select * from Exam where text = :text")
+    Exam retrieveByText(@Bind("text") String text);
+
 }

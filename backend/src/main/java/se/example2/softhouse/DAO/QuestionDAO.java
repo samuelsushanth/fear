@@ -4,6 +4,7 @@ import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.core.Exam;
+import se.example2.softhouse.core.Qfull;
 import se.example2.softhouse.core.Question;
 
 import java.util.List;
@@ -25,19 +26,6 @@ public interface QuestionDAO {
     @SqlQuery("select * from Question")
     List<Question> list();
 
-
-    /* @SqlQuery("select * from Exam where (id) =(:id)")
-     Exam retrieve(@Bind("id") int id);
-     @GetGeneratedKeys
-     @SqlUpdate("insert into Exam (id, text) values (:id, :text)")
-     int create(@BindBean Exam exam);
-     @SqlUpdate("delete from Exam where (id)=(:id)")
-     void destroy(@BindBean Exam exam);
-     @SqlUpdate("update Exam set (text)=(:text) where (id)=(:id)")
-     void update(@BindBean Exam exam);
-     @SqlQuery("select (id) from Exam where (text)=(:text)")
-     Long get(@BindBean Exam exam );
- */
     @GetGeneratedKeys
     @SqlUpdate("insert into Question (id, text) values (:id, :text)")
     int create(@BindBean Question question);
@@ -68,5 +56,8 @@ public interface QuestionDAO {
 
     @SqlQuery("select * from Question where id = :id")
     Question retrieve(@Bind("id") long id);
+
+    @SqlQuery("select * from Question where text = :text")
+    Question retrieveByTextInExam(@Bind("text") String text);
 
 }

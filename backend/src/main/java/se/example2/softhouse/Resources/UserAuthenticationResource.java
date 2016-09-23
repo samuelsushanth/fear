@@ -5,7 +5,9 @@ import se.example2.softhouse.core.UserDetails;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by charan on 9/16/2016.
@@ -27,12 +29,17 @@ public class UserAuthenticationResource {
     }
 
     @POST
-    public UserDetails registerUser(UserDetails userDetails) {
+    public Response registerUser(UserDetails userDetails) {
 
+        Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveoccupation(userDetails));
 
-       userDetails=userRegisterDAO.retrieveoccupation(userDetails);
-        userDetails.setPassword("");
-        return userDetails;
+        if (update.isPresent()) {
+            userDetails=userRegisterDAO.retrieveoccupation(userDetails);
+            userDetails.setPassword("");
+            return Response.ok(userDetails).build();
+        } else {
+            throw new NotFoundException();
+        }
 
     }
 }

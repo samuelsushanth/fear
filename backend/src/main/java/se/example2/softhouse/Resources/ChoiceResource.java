@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalLong;
 
@@ -24,24 +25,30 @@ public class ChoiceResource {
             this.questionAnswerDAO=questionAnswerDAO;
     }
     @GET
-    public List<Choice> list(@PathParam("questionId") Integer id) {
+    public List<Choice> list(@PathParam("questionId") Integer questionId) {
 
-        return choiceDAO.getChoices(id);
+        return choiceDAO.getChoices(questionId);
     }
     @POST
-    public Choice create(@PathParam("questionId") int questionId, Choice choice) {
+    public Response create(@PathParam("questionId") int questionId, Choice choice) {
         int choiceId;
 
 
-        /*     examQuestion.setExamId((long)examId);
-           examQuestion.setQuestionId((long)questionId);
-           examQuestionDAO.create(examQuestion);*/
+        List<Choice> choiceList=choiceDAO.getChoices(questionId);
 
-      if (choice.getIsCorrect()== 1)
+        for (int i = 0; i <choiceList.size(); i++) {
+            Choice choice1 = choiceList.get(i);
+            if (Objects.equals(choice.getText(), choice1.getText())) {
+                throw new NotFoundException();
+            }
+
+        }
+
+        if (choice.getIsCorrect()== 1)
       {
              if(questionAnswerDAO.getChoiceId(questionId)!=null)
              {
-                 choiceId=0;choice.setText("correct answer already exists");
+                 return Response.ok().build();
              }
              else {
                  choiceId = choiceDAO.create(choice, questionId);
@@ -52,9 +59,9 @@ public class ChoiceResource {
       else {
            choiceId = choiceDAO.create(choice,questionId);
       }
-      //choice.setIsCorrect(choice.getIsCorrect());
-        return choiceDAO.retrieve(choiceId);
-        //return choice;
+        return Response.ok(choiceDAO.retrieve(choiceId)).build();
+
+
     }
 
     @GET
