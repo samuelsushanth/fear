@@ -1,11 +1,5 @@
 function config($routeProvider)
 {
-    var examResolver = {
-        examId: function($route) {
-            return $route.current.params.examId;
-        }
-    };
-
     $routeProvider
         .when('/',{
             template:'<addquestion name="siva"></addquestion>'
@@ -13,12 +7,9 @@ function config($routeProvider)
         .when('/xam',{
             template:'<exams> </exams>'
         })
-        .when('/exam/:xamId', { template: '<addquestion test="$resolve.examId"></addquestion>', resolve: examResolver })
-        .when('/xam/:examId', {
-            template:'asdas<questions xam-id="$resolve.examId"></questions>',
-            //template: '<questions></questions>'
-            resolve: examResolver
-        });
+        //.when('/exam/:xamId', { template: '<addquestion test="$resolve.examId"></addquestion>', resolve: examResolver })
+        .when('/xam/:examId/question', { template:'<questions></questions>' })
+        .when('/xam/:eexamId/question/:questionId/choice', { template:'<choices></choices>' });
 
     console.log($routeProvider);
 // http://fear.com/exam/6

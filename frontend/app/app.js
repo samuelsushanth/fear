@@ -1,18 +1,17 @@
-
 angular.module('app', ["ngRoute"])
     .factory("choiceService", choiceService)
     .factory("examsService", examsService)
-    .config(config)
+    .factory("questionsService",questionsService)
 
     //choosing the old_questions form
     .component('choosequestion', {
-    templateUrl: 'app/old_questions/choosequestion.tpl',
-    controller: ChooseQuestion,
-    controllerAs: 'am',
+        templateUrl: 'app/old_questions/choosequestion.tpl',
+        controller: ChooseQuestion,
+        controllerAs: 'am',
 
-    bindings: {
-        data: '@'
-    }
+        bindings: {
+            data: '@'
+        }
     })
     // addquestionForm becomes <old_questions> in HTML
     .component('addquestion', {
@@ -33,9 +32,13 @@ angular.module('app', ["ngRoute"])
     .component('questions',{
         templateUrl: 'app/questions/addquestions.tpl',
         controller: QuestionsController,
-        controllerAs: 'vm',
+        controllerAs: 'vm'
 
-        bindings:{
-            xamId:'@'
-        }
     })
+    .component('choices',{
+        templateUrl: 'app/choices/add-choices.tpl',
+        controller: ChoiceController,
+        controllerAs: 'vm'
+
+
+    }).config(config);
