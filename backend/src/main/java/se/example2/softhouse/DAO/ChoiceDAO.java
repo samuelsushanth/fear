@@ -39,14 +39,18 @@ public interface ChoiceDAO {
     @SqlQuery("select * from Choice where questionId = :questionId")
     List<Choice> getChoices(@Bind("questionId") int questionId);
 
+    @SqlQuery("select * from Choice where questionId = :questionId")
+    List<Choice> getChoices(@Bind("questionId") long questionId);
+
+
     @SqlUpdate("delete from QuestionAnswer where choiceId = :choiceId")
     void deleteInQuestionAnswer(@Bind("choiceId") int choiceId);
 
     @SqlUpdate("delete from QuestionAnswer where questionId = :questionId")
     void deleteInQuestionAnswerByQuestionId(@Bind("questionId") int questionId);
-
+    @GetGeneratedKeys
     @SqlUpdate("insert into QuestionAnswer (questionId, choiceId) values (:questionId, :choiceId)")
-    void createInQuestionAnswer(@Bind("questionId") int questionId,@Bind("choiceId") int choiceId);
+    int createInQuestionAnswer(@Bind("questionId") int questionId,@Bind("choiceId") int choiceId);
 
     @SqlUpdate("delete from Choice where questionId = :questionId")
     void deleteByQuestion(@Bind("questionId") int questionId);

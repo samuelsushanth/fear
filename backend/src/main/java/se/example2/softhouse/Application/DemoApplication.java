@@ -9,11 +9,11 @@ import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.DAO.QuestionAnswerDAO;
-import se.example2.softhouse.Resources.ChoiceResource;
-import se.example2.softhouse.Resources.ExamResource;
-import se.example2.softhouse.Resources.QuestionResource;
+import se.example2.softhouse.Resources.*;
+import se.example2.softhouse.core.UserDetails;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class DemoApplication extends Application<DemoConfiguration> {
 
@@ -23,21 +23,40 @@ public class DemoApplication extends Application<DemoConfiguration> {
         myH2adminGUI.start();
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "h2");
-        final QuestionDAO qdao = jdbi.onDemand(QuestionDAO.class);
-        final ChoiceDAO chdao = jdbi.onDemand(ChoiceDAO.class);
-        final QuestionAnswerDAO qadao = jdbi.onDemand(QuestionAnswerDAO.class);
-        final ExamDAO edao = jdbi.onDemand(ExamDAO.class);
-        final ExamQuestionDAO eqdao= jdbi.onDemand(ExamQuestionDAO.class);
+        final QuestionDAO questionDAO = jdbi.onDemand(QuestionDAO.class);
+        final ChoiceDAO choiceDAO = jdbi.onDemand(ChoiceDAO.class);
+        final QuestionAnswerDAO questionAnswerDAO = jdbi.onDemand(QuestionAnswerDAO.class);
+        final ExamDAO examDAO = jdbi.onDemand(ExamDAO.class);
+        final ExamQuestionDAO examQuestionDAO= jdbi.onDemand(ExamQuestionDAO.class);
+        final UserRegisterDAO userRegisterDAO= jdbi.onDemand(UserRegisterDAO.class);
+        final StudentExamDAO studentExamDAO=jdbi.onDemand(StudentExamDAO.class);
+       questionDAO.createQuestionTable();
+        choiceDAO.createChoiceTable();
+        questionAnswerDAO.createQuestionAnswerTable();   //initial table creations
+        examDAO.createExamTable();
+        examQuestionDAO.createExamQuestionTable();
+        userRegisterDAO.createUserTable();
+        studentExamDAO.createStudentExamTable();
+        environment.jersey().register(new ExamResource(examDAO,questionDAO,choiceDAO,examQuestionDAO));
+       environment.jersey().register(new QuestionResource(questionDAO,examQuestionDAO,choiceDAO,questionAnswerDAO));
+        environment.jersey().register(new ChoiceResource(choiceDAO,questionAnswerDAO));
+        environment.jersey().register(new UserRegisterResource(userRegisterDAO,studentExamDAO));
+        environment.jersey().register(new UserAuthenticationResource(userRegisterDAO));
+        environment.jersey().register(new StudentExamResource(userRegisterDAO,questionDAO,examQuestionDAO,choiceDAO,studentExamDAO,questionAnswerDAO));
+        environment.jersey().register(new StudentLoginResource(userRegisterDAO));
+        environment.jersey().register(new StudentExamResultResource(studentExamDAO));
 
-       qdao.createQuestionTable();
-        chdao.createChoiceTable();
-        qadao.createQuestionAnswerTable();   //initial table creations
-        edao.createExamTable();
-        eqdao.createExamQuestionTable();
+        UserDetails userDetails= new UserDetails("charan","ypcharan3@gmail.com","charan","Teacher");
+        Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveByUserName(userDetails.getUserName()));
+        if(update.isPresent())
+        {
 
-        environment.jersey().register(new ExamResource(edao,qdao,chdao));
-       environment.jersey().register(new QuestionResource(qdao,eqdao,chdao));
-        environment.jersey().register(new ChoiceResource(chdao));
+        }
+        else
+        {
+            userRegisterDAO.create(userDetails);
+        }
+
     }
 
     @Override

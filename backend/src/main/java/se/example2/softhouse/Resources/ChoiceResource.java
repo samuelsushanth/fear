@@ -4,47 +4,64 @@ package se.example2.softhouse.Resources;
  * Created by charan on 9/12/2016.
  */
 import se.example2.softhouse.DAO.*;
-import se.example2.softhouse.core.Choice;
-import se.example2.softhouse.core.Exam;
-import se.example2.softhouse.core.ExamQuestion;
-import se.example2.softhouse.core.Question;
+import se.example2.softhouse.core.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalLong;
+
 @Path("/exam/{examId}/question/{questionId}/choice")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ChoiceResource {
   private ChoiceDAO choiceDAO;
-    public ChoiceResource(ChoiceDAO choiceDAO ) {
+    private  QuestionAnswerDAO questionAnswerDAO;
+        public ChoiceResource(ChoiceDAO choiceDAO,QuestionAnswerDAO questionAnswerDAO ) {
         this.choiceDAO = choiceDAO;
-
+            this.questionAnswerDAO=questionAnswerDAO;
     }
     @GET
-    public List<Choice> list(@PathParam("questionId") Integer id) {
+    public List<Choice> list(@PathParam("questionId") Integer questionId) {
 
-        return choiceDAO.getChoices(id);
+        return choiceDAO.getChoices(questionId);
     }
     @POST
-    public Choice create(@PathParam("questionId") int questionId, Choice choice) {
+    public Response create(@PathParam("questionId") int questionId, Choice choice) {
+        int choiceId;
 
-        int choiceId = choiceDAO.create(choice,questionId);
 
-     /*     examQuestion.setExamId((long)examId);
-           examQuestion.setQuestionId((long)questionId);
-           examQuestionDAO.create(examQuestion);*/
+        List<Choice> choiceList=choiceDAO.getChoices(questionId);
 
-      if (choice.getIsCorrect()== 1)
+        for (int i = 0; i <choiceList.size(); i++) {
+            Choice choice1 = choiceList.get(i);
+            if (Objects.equals(choice.getText(), choice1.getText())) {
+                throw new NotFoundException();
+            }
+
+        }
+
+        if (choice.getIsCorrect()== 1)
       {
+             if(questionAnswerDAO.getChoiceId(questionId)!=null)
+             {
+                 return Response.ok().build();
+             }
+             else {
+                 choiceId = choiceDAO.create(choice, questionId);
+                 int choiceid = questionAnswerDAO.createInQuestionAnswer(questionId, choiceId);
+             }
 
-          choiceDAO.createInQuestionAnswer(questionId,choiceId);
       }
-      choice.setIsCorrect(choice.getIsCorrect());
-        //return choiceDAO.retrieve(choiceId);
-        return choice;
+      else {
+           choiceId = choiceDAO.create(choice,questionId);
+      }
+        return Response.ok(choiceDAO.retrieve(choiceId)).build();
+
+
     }
 
     @GET
@@ -70,12 +87,24 @@ public class ChoiceResource {
 
     @DELETE
     @Path("/{choiceId}")
-    public Response delete(@PathParam("choiceId") int choiceId,Choice choice) {
+    public Response delete(@PathParam("choiceId") int choiceId,@PathParam("questionId") int questionId) {
         choiceDAO.delete(choiceId);
-        if (choice.getIsCorrect()== 1) {
-            choiceDAO.deleteInQuestionAnswer(choiceId);
-        }
+
+        long choiceIdold=questionAnswerDAO.getChoiceId(questionId);
+     //   questionAnswerDAO.deleteInQuestionAnswer(choiceId);
+
+            if(choiceIdold==choiceId) {
+                questionAnswerDAO.deleteInQuestionAnswer(choiceId);
+            }
+
         return Response.ok().build();
     }
+
+    @GET
+    @Path("/correctChoiceId")
+    public long retrieveCorrectchoice(@PathParam("questionId") int questionId) {
+        return questionAnswerDAO.getChoiceId(questionId);
+    }
+
 
 }

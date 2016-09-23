@@ -51,4 +51,17 @@ public interface ExamQuestionDAO {
 
     @SqlUpdate("update ExamQuestion set questionId = :u.questionId where id = :id")
     void update(@Bind("id") int id, @BindBean("u") ExamQuestion examQuestion);
+
+    @SqlUpdate("delete from ExamQuestion where examId = :examId AND questionId = :questionId")
+    void deleteinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
+
+    @SqlUpdate("insert into ExamQuestion (examId, questionId) values (:examId, :questionId)")
+    void createinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
+
+    @SqlQuery("SELECT questionId from ExamQuestion WHERE EXAMQUESTION.EXAMID= :examId")
+    List<Long> checkQuestionInExamQuestion(@Bind("examId") int examId);
+
+    @SqlUpdate("delete from ExamQuestion where examId = :examId")
+    void deleteinExamQuestionByExamId(@Bind("examId") int examId);
+
 }
