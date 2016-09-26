@@ -42,7 +42,7 @@ public class UserRegisterResource {
     }
 
     @POST
-     public UserDetails registerUser(@Auth UserDetails userDetails)
+     public UserDetails registerUser(UserDetails userDetails)
     {
         Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveByUserName(userDetails.getUserName()));
 

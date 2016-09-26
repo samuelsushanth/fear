@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by charan on 9/21/2016.
  */
-@Path("/student/takeatest/{examId}/{userId}/result")
+@Path("/student/takeatest/{examId}/result")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class StudentExamResultResource {

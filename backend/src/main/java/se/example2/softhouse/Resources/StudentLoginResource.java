@@ -5,6 +5,7 @@ import se.example2.softhouse.DAO.UserRegisterDAO;
 import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.UserDetails;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -16,7 +17,7 @@ import java.util.Optional;
 @Path("/student/takeatest/{examId}/login")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-
+@RolesAllowed({"student"})
 public class StudentLoginResource {
 
     private UserRegisterDAO userRegisterDAO;

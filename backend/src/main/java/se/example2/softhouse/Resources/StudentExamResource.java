@@ -4,6 +4,7 @@ import io.dropwizard.auth.Auth;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.core.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,9 +15,10 @@ import java.util.Optional;
 /**
  * Created by charan on 9/21/2016.
  */
-@Path("/student/takeatest/{examId}/{userId}/question")
+@Path("/student/takeatest/{examId}/test")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@RolesAllowed({"student"})
 public class StudentExamResource {
     private QuestionDAO questionDAO;
     private ExamQuestionDAO examQuestionDAO;
