@@ -50,7 +50,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         environment.jersey().register(new UserAuthenticationResource(userRegisterDAO));
         environment.jersey().register(new StudentExamResource(userRegisterDAO,questionDAO,examQuestionDAO,choiceDAO,studentExamDAO,questionAnswerDAO));
         environment.jersey().register(new StudentLoginResource(userRegisterDAO));
-        environment.jersey().register(new StudentExamResultResource(studentExamDAO));
+       // environment.jersey().register(new StudentExamResultResource(studentExamDAO));
 
         UserDetails userDetails= new UserDetails("charan","ypcharan3@gmail.com","charan","teacher");
         Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveByUserName(userDetails.getUserName()));
