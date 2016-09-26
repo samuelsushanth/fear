@@ -8,6 +8,7 @@ import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.Exam;
 import se.example2.softhouse.core.Question;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @Path("/exam")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@RolesAllowed({"teacher"})
 public class ExamResource {
     private ExamDAO examdao;
     private QuestionDAO questionDAO;
@@ -34,7 +36,7 @@ public class ExamResource {
 
     @GET
     @Path("/{examId}")
-    public Exam retrieve(@PathParam("examId") Integer id) {
+    public Exam retrieve(@PathParam("examId") Long id) {
         return examdao.retrieve(id);
     }
 
@@ -45,7 +47,7 @@ public class ExamResource {
         if (update.isPresent()) {
             throw new NotFoundException();
         } else {
-            int examId = examdao.create(exam);
+            long examId = examdao.create(exam);
             return Response.ok(examdao.retrieve(examId)).build();
 
         }
@@ -54,7 +56,7 @@ public class ExamResource {
 
     @PUT
     @Path("/{examId}")
-    public Response update(@PathParam("examId") int id, Exam exam) {
+    public Response update(@PathParam("examId") long id, Exam exam) {
         Optional<Exam> update = Optional.ofNullable(examdao.retrieve(id));
 
         if (update.isPresent()) {
@@ -67,7 +69,7 @@ public class ExamResource {
 
     @DELETE
     @Path("/{examId}")
-    public Response delete(@PathParam("examId") int id) {
+    public Response delete(@PathParam("examId") long id) {
         examdao.delete(id);
         Optional<List<Long>> update = Optional.ofNullable(examQuestionDAO.checkQuestionInExamQuestion(id));
         if (update.isPresent()) {

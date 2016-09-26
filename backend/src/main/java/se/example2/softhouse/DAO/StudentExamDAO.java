@@ -25,21 +25,21 @@ public interface StudentExamDAO {
 
     @GetGeneratedKeys
     @SqlUpdate("insert into studentexam (id, userId,examId,questionId,selectedId,marks) values (:id,:userId,:examId,:questionId,:selectedId,:marks)")
-    int create(@BindBean StudentExam studentExam);
+    long create(@BindBean StudentExam studentExam);
 
     @SqlQuery("select * from studentexam where id = :id")
-    StudentExam retrieve(@Bind("id") int id);
+    StudentExam retrieve(@Bind("id") long id);
 
     @SqlQuery("select * from studentexam where questionId = :questionId")
-    StudentExam retrieveByQuestionId(@Bind("questionId") int questionId);
+    StudentExam retrieveByQuestionId(@Bind("questionId") long questionId);
 
     @SqlUpdate("update studentexam set selectedId = :u.selectedId,marks=:u.marks where questionId = :questionId")
-    void update(@Bind("questionId") int questionId, @BindBean("u") StudentExam studentExam);
+    void update(@Bind("questionId") long questionId, @BindBean("u") StudentExam studentExam);
 
     @SqlQuery("select id from studentexam where questionId = :questionId")
-    int retrieveIdByQuestionId(@Bind("questionId") int questionId);
+    long retrieveIdByQuestionId(@Bind("questionId") long questionId);
 
     @SqlQuery("select * from studentexam where userId = :userId and examId=:examId")
-    List<StudentExam> retrieveAnswers(@Bind("userId") int userId,@Bind("examId") int examId);
+    List<StudentExam> retrieveAnswers(@Bind("userId") long userId,@Bind("examId") long examId);
 
 }

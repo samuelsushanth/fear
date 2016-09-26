@@ -1,10 +1,8 @@
 package se.example2.softhouse.Resources;
 
+import io.dropwizard.auth.Auth;
 import se.example2.softhouse.DAO.*;
-import se.example2.softhouse.core.Choice;
-import se.example2.softhouse.core.Qfull;
-import se.example2.softhouse.core.Question;
-import se.example2.softhouse.core.StudentExam;
+import se.example2.softhouse.core.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -37,7 +35,7 @@ public class StudentExamResource {
     }
 
     @GET
-    public List<Qfull> list(@PathParam("examId") Integer id) {
+    public List<Qfull> list(@PathParam("examId") Long id) {
        List<Question> questionList=questionDAO.getQuestions(id);
         List<Qfull> qfullList=new ArrayList<Qfull>();
 
@@ -54,7 +52,7 @@ public class StudentExamResource {
 
     @GET
     @Path("/{questionId}")
-    public Qfull retrieve(@PathParam("questionId") Integer questionId)
+    public Qfull retrieve(@PathParam("questionId") Long questionId)
     {
 
       Question question = questionDAO.retrieve(questionId);
@@ -66,14 +64,16 @@ public class StudentExamResource {
     }
 
     @POST
-    public StudentExam create(@PathParam("examId") int examId,@PathParam("userId") int userId,Qfull qfull) {
-        int marks =0;int id;
+    public StudentExam create(@PathParam("examId") Long examId,@Auth UserDetails userDetails, Qfull qfull) {
+        long marks =0;long id;
         long selectedId=qfull.getSelectedId();
-        int questionId = (int) qfull.getQuestionId();
+        long questionId = qfull.getQuestionId();
         long answerId= questionAnswerDAO.getChoiceId(questionId);
         if(selectedId==answerId) {
             marks = 1;
         }
+        String userName=userDetails.getUserName();
+        long userId=userRegisterDAO.retrieveUserId(userName);
         StudentExam studentExam= new StudentExam(userId,examId,questionId,selectedId,marks);
       /*  id = studentExamDAO.create(studentExam);
         return studentExamDAO.retrieve(id);*/
@@ -93,10 +93,11 @@ public class StudentExamResource {
     @PUT
     @Path("/{questionId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public StudentExam update(@PathParam("examId") int examId,@PathParam("userId") int userId,@PathParam("questionId") int questionId,Qfull qfull) {
-           int marks =0;int id;
+    public StudentExam update(@PathParam("examId") Long examId,@Auth UserDetails userDetails,@PathParam("questionId") Long questionId,Qfull qfull) {
+           long marks =0;long id;
        long selectedId=qfull.getSelectedId();
-
+        String userName=userDetails.getUserName();
+        long userId=userRegisterDAO.retrieveUserId(userName);
         long answerId= questionAnswerDAO.getChoiceId(questionId);
         if(selectedId==answerId) {
             marks = 1;
@@ -125,9 +126,10 @@ public class StudentExamResource {
 
     @GET
     @Path("/result")
-    public List<StudentExam> retrieve(@PathParam("userId") int userId,@PathParam("examId") int examId)
+    public List<StudentExam> retrieve(@Auth UserDetails userDetails,@PathParam("examId") Long examId)
     {
-
+        String userName=userDetails.getUserName();
+        long userId=userRegisterDAO.retrieveUserId(userName);
         return studentExamDAO.retrieveAnswers(userId,examId);
 
     }

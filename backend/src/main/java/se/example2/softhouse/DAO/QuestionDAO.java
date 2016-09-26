@@ -28,34 +28,34 @@ public interface QuestionDAO {
 
     @GetGeneratedKeys
     @SqlUpdate("insert into Question (id, text) values (:id, :text)")
-    int create(@BindBean Question question);
-
-    @SqlQuery("select * from Question where id = :id")
-    Question retrieve(@Bind("id") int id);
-
-    @SqlUpdate("delete from Question where id = :id")
-    void delete(@Bind("id") int id);
-
-    @SqlUpdate("update Question set text = :u.text where id = :id")
-    void update(@Bind("id") int id, @BindBean("u") Question question);
-
-    @SqlQuery("SELECT QUESTION.id,QUESTION.text FROM QUESTION JOIN EXAMQUESTION ON QUESTION.ID=EXAMQUESTION.QUESTIONID WHERE EXAMQUESTION.EXAMID= :examId")
-    List<Question> getQuestions(@Bind("examId") int examId);
-
-    @SqlUpdate("delete from ExamQuestion where examId = :examId AND questionId = :questionId")
-    void deleteinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
-
-    @SqlUpdate("insert into ExamQuestion (examId, questionId) values (:examId, :questionId)")
-    void createinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
-
-    @SqlQuery("SELECT ExamQUESTION.questionId WHERE EXAMQUESTION.EXAMID= :examId")
-    List<Long> checkQuestionInExamQuestion(@Bind("examId") int examId);
-
-    @SqlUpdate("delete from ExamQuestion where examId = :examId")
-    void deleteinExamQuestionByExamId(@Bind("examId") int examId);
+    long create(@BindBean Question question);
 
     @SqlQuery("select * from Question where id = :id")
     Question retrieve(@Bind("id") long id);
+
+    @SqlUpdate("delete from Question where id = :id")
+    void delete(@Bind("id") long id);
+
+    @SqlUpdate("update Question set text = :u.text where id = :id")
+    void update(@Bind("id") long id, @BindBean("u") Question question);
+
+    @SqlQuery("SELECT QUESTION.id,QUESTION.text FROM QUESTION JOIN EXAMQUESTION ON QUESTION.ID=EXAMQUESTION.QUESTIONID WHERE EXAMQUESTION.EXAMID= :examId")
+    List<Question> getQuestions(@Bind("examId") long examId);
+
+    @SqlUpdate("delete from ExamQuestion where examId = :examId AND questionId = :questionId")
+    void deleteinExamQuestion(@Bind("examId") long examId,@Bind("questionId") long questionId);
+
+    @SqlUpdate("insert into ExamQuestion (examId, questionId) values (:examId, :questionId)")
+    void createinExamQuestion(@Bind("examId") long examId,@Bind("questionId") long questionId);
+
+    @SqlQuery("SELECT ExamQUESTION.questionId WHERE EXAMQUESTION.EXAMID= :examId")
+    List<Long> checkQuestionInExamQuestion(@Bind("examId") long examId);
+
+    @SqlUpdate("delete from ExamQuestion where examId = :examId")
+    void deleteinExamQuestionByExamId(@Bind("examId") long examId);
+
+    /*@SqlQuery("select * from Question where id = :id")
+    Question retrieve(@Bind("id") long id);*/
 
     @SqlQuery("select * from Question where text = :text")
     Question retrieveByTextInExam(@Bind("text") String text);

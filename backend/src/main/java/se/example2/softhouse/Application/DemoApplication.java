@@ -2,16 +2,22 @@ package se.example2.softhouse.Application;
 
 import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
 import io.dropwizard.Application;
+import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.eclipse.jetty.server.session.SessionHandler;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.h2.tools.Server;
 import org.skife.jdbi.v2.DBI;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.DAO.QuestionAnswerDAO;
 import se.example2.softhouse.Resources.*;
+import se.example2.softhouse.core.CustomAuthenticator;
+import se.example2.softhouse.core.CustomAuthorizer;
 import se.example2.softhouse.core.UserDetails;
-
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -46,7 +52,7 @@ public class DemoApplication extends Application<DemoConfiguration> {
         environment.jersey().register(new StudentLoginResource(userRegisterDAO));
         environment.jersey().register(new StudentExamResultResource(studentExamDAO));
 
-        UserDetails userDetails= new UserDetails("charan","ypcharan3@gmail.com","charan","Teacher");
+        UserDetails userDetails= new UserDetails("charan","ypcharan3@gmail.com","charan","teacher");
         Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveByUserName(userDetails.getUserName()));
         if(update.isPresent())
         {
@@ -56,8 +62,19 @@ public class DemoApplication extends Application<DemoConfiguration> {
         {
             userRegisterDAO.create(userDetails);
         }
+        environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<UserDetails>()
+                .setAuthenticator(new CustomAuthenticator(userRegisterDAO))
+                .setAuthorizer(new CustomAuthorizer(userRegisterDAO))
+                .setRealm("SUPER SECRET STUFF")
+                .buildAuthFilter()));
+        environment.jersey().register(RolesAllowedDynamicFeature.class);
+        //environment.jersey().register(new LoginResource());
+        //If you want to use @Auth to inject a custom Principal type into your resource
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(UserDetails.class));
 
-    }
+
+
+       }
 
     @Override
     public void initialize(Bootstrap<DemoConfiguration> configuration) {

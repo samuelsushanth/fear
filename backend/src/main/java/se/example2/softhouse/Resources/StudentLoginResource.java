@@ -1,5 +1,6 @@
 package se.example2.softhouse.Resources;
 
+import io.dropwizard.auth.Auth;
 import se.example2.softhouse.DAO.UserRegisterDAO;
 import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.UserDetails;
@@ -30,17 +31,21 @@ public class StudentLoginResource {
     }
 
     @POST
-    public Response registerUser(UserDetails userDetails) {
+    public Response registerUser(@Auth UserDetails userDetails) {
 
-      Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveoccupation(userDetails));
+      Optional<UserDetails> update = Optional.ofNullable(userRegisterDAO.retrieveUser(userDetails));
+        String userName=userDetails.getUserName();
 
-        if (update.isPresent()) {
-            userDetails=userRegisterDAO.retrieveoccupation(userDetails);
+        userDetails=userRegisterDAO.retrieveByUserName(userName);
+        userDetails.setPassword("");
+        return Response.ok(userDetails).build();
+       /* if (update.isPresent()) {
+            userDetails=userRegisterDAO.retrieveUser(userDetails);
             userDetails.setPassword("");
             return Response.ok(userDetails).build();
         } else {
             throw new NotFoundException();
-        }
+        }*/
 
 
 

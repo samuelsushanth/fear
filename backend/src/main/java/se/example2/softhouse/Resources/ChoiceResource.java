@@ -6,6 +6,7 @@ package se.example2.softhouse.Resources;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.core.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,6 +18,7 @@ import java.util.OptionalLong;
 @Path("/exam/{examId}/question/{questionId}/choice")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@RolesAllowed({"teacher"})
 public class ChoiceResource {
   private ChoiceDAO choiceDAO;
     private  QuestionAnswerDAO questionAnswerDAO;
@@ -25,13 +27,13 @@ public class ChoiceResource {
             this.questionAnswerDAO=questionAnswerDAO;
     }
     @GET
-    public List<Choice> list(@PathParam("questionId") Integer questionId) {
+    public List<Choice> list(@PathParam("questionId") Long questionId) {
 
         return choiceDAO.getChoices(questionId);
     }
     @POST
-    public Response create(@PathParam("questionId") int questionId, Choice choice) {
-        int choiceId;
+    public Response create(@PathParam("questionId") Long questionId, Choice choice) {
+        long choiceId;
 
 
         List<Choice> choiceList=choiceDAO.getChoices(questionId);
@@ -52,7 +54,7 @@ public class ChoiceResource {
              }
              else {
                  choiceId = choiceDAO.create(choice, questionId);
-                 int choiceid = questionAnswerDAO.createInQuestionAnswer(questionId, choiceId);
+                 long choiceid = questionAnswerDAO.createInQuestionAnswer(questionId, choiceId);
              }
 
       }
@@ -66,7 +68,7 @@ public class ChoiceResource {
 
     @GET
     @Path("/{choiceId}")
-    public Choice retrieve(@PathParam("choiceId") Integer id) {
+    public Choice retrieve(@PathParam("choiceId") Long id) {
         return choiceDAO.retrieve(id);
     }
 
@@ -74,7 +76,7 @@ public class ChoiceResource {
 
     @PUT
     @Path("/{choiceId}")
-    public Response update(@PathParam("choiceId") int choiceId,Choice choice) {
+    public Response update(@PathParam("choiceId") Long choiceId,Choice choice) {
         Optional<Choice> update = Optional.ofNullable(choiceDAO.retrieve(choiceId));
 
         if (update.isPresent()) {
@@ -87,7 +89,7 @@ public class ChoiceResource {
 
     @DELETE
     @Path("/{choiceId}")
-    public Response delete(@PathParam("choiceId") int choiceId,@PathParam("questionId") int questionId) {
+    public Response delete(@PathParam("choiceId") Long choiceId,@PathParam("questionId") Long questionId) {
         choiceDAO.delete(choiceId);
 
         long choiceIdold=questionAnswerDAO.getChoiceId(questionId);
@@ -102,7 +104,7 @@ public class ChoiceResource {
 
     @GET
     @Path("/correctChoiceId")
-    public long retrieveCorrectchoice(@PathParam("questionId") int questionId) {
+    public long retrieveCorrectchoice(@PathParam("questionId") Long questionId) {
         return questionAnswerDAO.getChoiceId(questionId);
     }
 

@@ -1,8 +1,10 @@
 package se.example2.softhouse.Resources;
 
+import io.dropwizard.auth.Auth;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.core.Question;
 import se.example2.softhouse.core.StudentExam;
+import se.example2.softhouse.core.UserDetails;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -32,9 +34,10 @@ public class StudentExamResultResource {
     }
 
     @GET
-    public List<StudentExam> retrieve(@PathParam("userId") int userId, @PathParam("examId") int examId)
+    public List<StudentExam> retrieve(@Auth UserDetails userDetails, @PathParam("examId") Long examId)
     {
-
+        String userName=userDetails.getUserName();
+        long userId=userRegisterDAO.retrieveUserId(userName);
         return studentExamDAO.retrieveAnswers(userId,examId);
 
     }
