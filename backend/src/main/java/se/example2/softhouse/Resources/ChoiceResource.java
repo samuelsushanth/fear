@@ -3,6 +3,7 @@ package se.example2.softhouse.Resources;
 /**
  * Created by charan on 9/12/2016.
  */
+import io.dropwizard.auth.Auth;
 import se.example2.softhouse.DAO.*;
 import se.example2.softhouse.core.*;
 
@@ -28,12 +29,12 @@ public class ChoiceResource {
             this.questionAnswerDAO=questionAnswerDAO;
     }
     @GET
-    public List<Choice> list(@PathParam("questionId") Long questionId) {
+    public List<Choice> list(@Auth UserDetails userDetails,@PathParam("questionId") Long questionId) {
 
         return choiceDAO.getChoices(questionId);
     }
     @POST
-    public Response create(@PathParam("questionId") Long questionId, Choice choice) {
+    public Response create(@Auth UserDetails userDetails,@PathParam("questionId") Long questionId, Choice choice) {
         long choiceId;
 
 
@@ -71,7 +72,7 @@ public class ChoiceResource {
 
     @GET
     @Path("/{choiceId}")
-    public Choice retrieve(@PathParam("choiceId") Long id) {
+    public Choice retrieve(@Auth UserDetails userDetails,@PathParam("choiceId") Long id) {
         return choiceDAO.retrieve(id);
     }
 
@@ -79,7 +80,7 @@ public class ChoiceResource {
 
     @PUT
     @Path("/{choiceId}")
-    public Response update(@PathParam("choiceId") Long choiceId,Choice choice) {
+    public Response update(@Auth UserDetails userDetails,@PathParam("choiceId") Long choiceId,Choice choice) {
         Optional<Choice> update = Optional.ofNullable(choiceDAO.retrieve(choiceId));
 
         if (update.isPresent()) {
@@ -92,7 +93,7 @@ public class ChoiceResource {
 
     @DELETE
     @Path("/{choiceId}")
-    public Response delete(@PathParam("choiceId") Long choiceId,@PathParam("questionId") Long questionId) {
+    public Response delete(@Auth UserDetails userDetails,@PathParam("choiceId") Long choiceId,@PathParam("questionId") Long questionId) {
         choiceDAO.delete(choiceId);
 
         long choiceIdold=questionAnswerDAO.getChoiceId(questionId);
@@ -107,7 +108,7 @@ public class ChoiceResource {
 
     @GET
     @Path("/correctChoiceId")
-    public Response retrieveCorrectchoice(@PathParam("questionId") Long questionId) {
+    public Response retrieveCorrectchoice(@Auth UserDetails userDetails,@PathParam("questionId") Long questionId) {
         Optional<Long> update = Optional.ofNullable(questionAnswerDAO.getChoiceId(questionId));
         if (update.isPresent()) {
 
