@@ -1,6 +1,7 @@
 <form class="text-center">
     <input type="text" ng-model="vm.choicetext" title="asd" required placeholder="Enter the question">
     <button type="button" ng-click="vm.newChoice()">Add Choice</button>
+    <button type="button" ng-click="vm.answerChoice()" ng-disabled="vm.btndisable">Add answer Choice</button>
 </form>
 <div class="table-responsive">
     <table class="table table-bordered" >

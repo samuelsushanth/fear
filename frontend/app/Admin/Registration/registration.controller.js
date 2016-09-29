@@ -10,7 +10,7 @@ function registerController(registerService) {
         atpos = email.indexOf("@");
         dotpos = email.lastIndexOf(".");
         if (email == "" || atpos < 1 || ( dotpos - atpos < 2 )) {
-            alert("Please enter correct email ID")
+            alert("Please enter correct email ID");
             return false;
         }
 
