@@ -41,27 +41,27 @@ public interface ExamQuestionDAO {
  */
     @GetGeneratedKeys
     @SqlUpdate("insert into ExamQuestion (id, examId, questionId) values (:id, :examId, :questionId)")
-    int create(@BindBean ExamQuestion examQuestion);
+    long create(@BindBean ExamQuestion examQuestion);
 
     @SqlQuery("select * from ExamQuestion where id = :id")
-    ExamQuestion retrieve(@Bind("id") int id);
+    ExamQuestion retrieve(@Bind("id") long id);
 
     @SqlUpdate("delete from ExamQuestion where id = :id")
-    void delete(@Bind int id);
+    void delete(@Bind long id);
 
     @SqlUpdate("update ExamQuestion set questionId = :u.questionId where id = :id")
-    void update(@Bind("id") int id, @BindBean("u") ExamQuestion examQuestion);
+    void update(@Bind("id") long id, @BindBean("u") ExamQuestion examQuestion);
 
     @SqlUpdate("delete from ExamQuestion where examId = :examId AND questionId = :questionId")
-    void deleteinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
+    void deleteinExamQuestion(@Bind("examId") long examId,@Bind("questionId") long questionId);
 
     @SqlUpdate("insert into ExamQuestion (examId, questionId) values (:examId, :questionId)")
-    void createinExamQuestion(@Bind("examId") int examId,@Bind("questionId") int questionId);
+    void createinExamQuestion(@Bind("examId") long examId,@Bind("questionId") long questionId);
 
     @SqlQuery("SELECT questionId from ExamQuestion WHERE EXAMQUESTION.EXAMID= :examId")
-    List<Long> checkQuestionInExamQuestion(@Bind("examId") int examId);
+    List<Long> checkQuestionInExamQuestion(@Bind("examId") long examId);
 
     @SqlUpdate("delete from ExamQuestion where examId = :examId")
-    void deleteinExamQuestionByExamId(@Bind("examId") int examId);
+    void deleteinExamQuestionByExamId(@Bind("examId") long examId);
 
 }

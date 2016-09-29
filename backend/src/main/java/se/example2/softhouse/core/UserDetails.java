@@ -3,10 +3,12 @@ package se.example2.softhouse.core;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.security.Principal;
+
 /**
  * Created by charan on 9/16/2016.
  */
-public class UserDetails {
+public class UserDetails implements Principal {
     @JsonProperty
     private Long id;
 
@@ -28,6 +30,11 @@ public class UserDetails {
 
     public UserDetails()
     {
+
+    }
+    public UserDetails(String userName)
+    {
+        this.userName=userName;
 
     }
     public UserDetails(String userName,String emailAddress,String password,String occupation)
@@ -77,6 +84,11 @@ public class UserDetails {
 
     public void setOccupation(String occupation) {
         this.occupation = occupation;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }
 

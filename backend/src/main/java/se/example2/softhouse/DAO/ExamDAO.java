@@ -16,7 +16,7 @@ import java.util.List;
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface ExamDAO {
 
-    @SqlUpdate("create table if not exists Exam (id Long auto_increment primary key, text varchar(2000))")
+    @SqlUpdate("create table if not exists Exam (id Long auto_increment primary key, text varchar(2000),link varchar(50))")
     void createExamTable();
 
     @SqlUpdate("delete table Exam")
@@ -27,18 +27,21 @@ public interface ExamDAO {
 
     @GetGeneratedKeys
     @SqlUpdate("insert into Exam (id, text) values (:id, :text)")
-    int create(@BindBean Exam exam);
+    long create(@BindBean Exam exam);
 
     @SqlQuery("select * from Exam where id = :id")
-    Exam retrieve(@Bind("id") int id);
+    Exam retrieve(@Bind("id") long id);
 
     @SqlUpdate("delete from Exam where id = :id")
-    void delete(@Bind("id") int id);
+    void delete(@Bind("id") long id);
 
     @SqlUpdate("update Exam set text = :u.text where id = :id")
-    void update(@Bind("id") int id, @BindBean("u") Exam exam);
+    void update(@Bind("id") long id, @BindBean("u") Exam exam);
 
     @SqlQuery("select * from Exam where text = :text")
     Exam retrieveByText(@Bind("text") String text);
+    @SqlUpdate("update Exam set link = :u.link where id = :id")
+    void updateLink(@Bind("id") long id, @BindBean("u") Exam exam);
+
 
 }

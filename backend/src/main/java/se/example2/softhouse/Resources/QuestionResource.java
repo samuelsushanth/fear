@@ -1,11 +1,10 @@
 package se.example2.softhouse.Resources;
 
+import io.dropwizard.auth.Auth;
 import se.example2.softhouse.DAO.*;
-import se.example2.softhouse.core.Choice;
-import se.example2.softhouse.core.Exam;
-import se.example2.softhouse.core.ExamQuestion;
-import se.example2.softhouse.core.Question;
+import se.example2.softhouse.core.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,6 +16,7 @@ import java.util.Optional;
 @Path("/exam/{examId}/question")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@RolesAllowed({"teacher"})
 public class QuestionResource {
 
     private QuestionDAO questionDAO;
@@ -33,22 +33,24 @@ public class QuestionResource {
 
 
     @GET
-    public List<Question> list(@PathParam("examId") Integer id) {
+    public List<Question> list(@Auth UserDetails userDetails, @PathParam("examId") Integer id) {
 
         return questionDAO.getQuestions(id);
     }
 
     @GET
     @Path("/{questionId}")
-    public Question retrieve(@PathParam("questionId") Integer id) {
+    public Question retrieve(@PathParam("questionId") Long id) {
         return questionDAO.retrieve(id);
     }
 
     @POST
-    public Response create(@PathParam("examId") int examId, Question question) {
+    public Response create(@PathParam("examId") Long examId, Question question) {
 
         List<Question>  questionList=questionDAO.getQuestions(examId);
 
+        if(question.getText()==null||question.getText()=="")
+            throw new NotFoundException();
        for (int i = 0; i <questionList.size(); i++) {
            Question question1 = questionList.get(i);
 
@@ -58,14 +60,14 @@ public class QuestionResource {
 
         }
 
-       int questionId = questionDAO.create(question);
+       long questionId = questionDAO.create(question);
             examQuestionDAO.createinExamQuestion(examId, questionId);
         return Response.ok(questionDAO.retrieve(questionId)).build();
     }
 
     @PUT
     @Path("/{questionId}")
-    public Response update(@PathParam("questionId") int questionId, Question question) {
+    public Response update(@PathParam("questionId") Long questionId, Question question) {
         Optional<Question> update = Optional.ofNullable(questionDAO.retrieve(questionId));
         if (update.isPresent()) {
             questionDAO.update(questionId, question);
@@ -77,7 +79,7 @@ public class QuestionResource {
 
     @DELETE
     @Path("/{questionId}")
-    public Response delete(@PathParam("examId") int examId,@PathParam("questionId") int questionId) {
+    public Response delete(@PathParam("examId") long examId,@PathParam("questionId") long questionId) {
         questionDAO.delete(questionId);
         questionDAO.deleteinExamQuestion(examId, questionId);
         Optional<List<Choice>> update = Optional.ofNullable(choiceDAO.getChoices(questionId));

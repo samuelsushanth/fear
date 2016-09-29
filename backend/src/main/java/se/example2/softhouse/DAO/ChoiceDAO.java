@@ -24,36 +24,36 @@ public interface ChoiceDAO {
 
     @GetGeneratedKeys
     @SqlUpdate("insert into Choice (id, text, questionId) values (:id, :text, :questionId)")
-    int create(@BindBean Choice choice,@Bind("questionId") int questionId);
+    long create(@BindBean Choice choice,@Bind("questionId") long questionId);
 
     @SqlQuery("select * from Choice where id = :id")
-    Choice retrieve(@Bind("id") int id);
+    Choice retrieve(@Bind("id") long id);
 
     @SqlUpdate("delete from Choice where id = :id")
-    void delete(@Bind("id") int id);
+    void delete(@Bind("id") long id);
 
     @SqlUpdate("update Choice set text = :u.text where id = :id")
-    void update(@Bind("id") int id, @BindBean("u") Choice choice);
+    void update(@Bind("id") long id, @BindBean("u") Choice choice);
 
-
-    @SqlQuery("select * from Choice where questionId = :questionId")
-    List<Choice> getChoices(@Bind("questionId") int questionId);
 
     @SqlQuery("select * from Choice where questionId = :questionId")
     List<Choice> getChoices(@Bind("questionId") long questionId);
 
+    /*@SqlQuery("select * from Choice where questionId = :questionId")
+    List<Choice> getChoices(@Bind("questionId") long questionId);*/
+
 
     @SqlUpdate("delete from QuestionAnswer where choiceId = :choiceId")
-    void deleteInQuestionAnswer(@Bind("choiceId") int choiceId);
+    void deleteInQuestionAnswer(@Bind("choiceId") long choiceId);
 
     @SqlUpdate("delete from QuestionAnswer where questionId = :questionId")
-    void deleteInQuestionAnswerByQuestionId(@Bind("questionId") int questionId);
+    void deleteInQuestionAnswerByQuestionId(@Bind("questionId") long questionId);
     @GetGeneratedKeys
     @SqlUpdate("insert into QuestionAnswer (questionId, choiceId) values (:questionId, :choiceId)")
-    int createInQuestionAnswer(@Bind("questionId") int questionId,@Bind("choiceId") int choiceId);
+    long createInQuestionAnswer(@Bind("questionId") long questionId,@Bind("choiceId") long choiceId);
 
     @SqlUpdate("delete from Choice where questionId = :questionId")
-    void deleteByQuestion(@Bind("questionId") int questionId);
+    void deleteByQuestion(@Bind("questionId") long questionId);
 
 
 

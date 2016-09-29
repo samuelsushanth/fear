@@ -1,6 +1,7 @@
 package se.example2.softhouse.Resources;
 
 
+import io.dropwizard.auth.Auth;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 import se.example2.softhouse.DAO.StudentExamDAO;
@@ -9,6 +10,7 @@ import se.example2.softhouse.core.Question;
 import se.example2.softhouse.core.UserDetails;
 
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,6 +25,7 @@ import java.util.Optional;
 @Path("/login/register")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@RolesAllowed({"teacher"})
 public class UserRegisterResource {
 
   private UserRegisterDAO userRegisterDAO;
@@ -48,7 +51,7 @@ public class UserRegisterResource {
 
         } else {
 
-            int userId = userRegisterDAO.create(userDetails);
+            long userId = userRegisterDAO.create(userDetails);
              String occupation=userDetails.getOccupation();
              return userRegisterDAO.retrieve(userId) ;
         }

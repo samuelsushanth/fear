@@ -25,19 +25,26 @@ public interface UserRegisterDAO {
 
     @GetGeneratedKeys
     @SqlUpdate("insert into User (id, username, emailaddress, password, occupation) values (:id,:userName,:emailAddress,:password,:occupation)")
-    int create(@BindBean UserDetails userDetails);
+    long create(@BindBean UserDetails userDetails);
 
     @SqlQuery("select * from User where id = :id")
-    UserDetails retrieve(@Bind("id") int id);
+    UserDetails retrieve(@Bind("id") long id);
 
     @SqlQuery("select * from User where (username)= (:userName) and (password)=(:password)")
-    UserDetails retrieveoccupation(@BindBean UserDetails userDetails);
+    UserDetails retrieveUser(@BindBean UserDetails userDetails);
 
     @SqlQuery("select * from User where userName = :userName")
     UserDetails  retrieveByUserName(@Bind("userName") String userName );
 
     @SqlQuery("select username from User where id = :id")
-    String  retrieveUserName(@Bind("id") int id );
+    String  retrieveUserName(@Bind("id") long id );
 
+    @SqlQuery("select * from User where (username)= (:userName) and (password)=(:password)")
+    UserDetails retrieveUser(@Bind("userName") String userName,@Bind("password") String password);
 
+    @SqlQuery("select occupation from User where username = :userName")
+    String  retrieveOccupation(@Bind("userName") String userName);
+
+    @SqlQuery("select id from User where username = :userName")
+    long  retrieveUserId(@Bind("userName") String userName);
 }
