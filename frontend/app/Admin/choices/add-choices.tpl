@@ -19,3 +19,4 @@
         <tr><td colspan="2">Add new choice</td></tr>
     </table>
 </div>
+ 
