@@ -4,6 +4,9 @@ function config($routeProvider)
         .when('/',{
             template:'<addquestion name="siva"></addquestion>'
         })
+        .when('/register',{
+            template:'<registration></registration>'
+        })
         .when('/xam',{
             template:'<exams> </exams>'
         })

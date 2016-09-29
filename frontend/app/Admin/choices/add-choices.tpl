@@ -1,8 +1,13 @@
-<div class="container" class="table-responsive">
+<form class="text-center">
+    <input type="text" ng-model="vm.choicetext" title="asd" required placeholder="Enter the question">
+    <button type="button" ng-click="vm.newChoice()">Add Choice</button>
+    <button type="button" ng-click="vm.answerChoice()" ng-disabled="vm.btndisable">Add answer Choice</button>
+</form>
+<div class="table-responsive">
     <table class="table table-bordered" >
         <thead>
         <tr class="info">
-            <th style="text-align: center"> Question Name</th>
+            <th style="text-align: center"> Choices</th>
             <th> </th>
         </tr>
         </thead>
@@ -12,6 +17,5 @@
             <td style="text-align: center"> <a class="btn btn-xs btn-default">Edit</a></td>
         </tr>
         <tr><td colspan="2">Add new choice</td></tr>
-        </tbody>
     </table>
 </div>

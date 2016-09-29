@@ -25,20 +25,24 @@ angular.module('app', ["ngRoute"])
         }
     })
     .component('exams', {
-        templateUrl: 'app/exams/exams.tpl',
+        templateUrl: 'app/Admin/exams/exams.tpl',
         controller: ExamsController,
         controllerAs: 'vm'
     })
     .component('questions',{
-        templateUrl: 'app/questions/addquestions.tpl',
+        templateUrl: 'app/Admin/questions/addquestions.tpl',
         controller: QuestionsController,
         controllerAs: 'vm'
 
     })
     .component('choices',{
-        templateUrl: 'app/choices/add-choices.tpl',
+        templateUrl: 'app/Admin/choices/add-choices.tpl',
         controller: ChoiceController,
         controllerAs: 'vm'
-
-
-    }).config(config);
+    })
+    .component('registration',{
+        templateUrl: 'app/Admin/Registration/registration.tpl',
+        controller: registerController,
+        controllerAs: 'vm'
+    })
+    .config(config);
