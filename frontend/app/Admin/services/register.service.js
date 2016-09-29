@@ -1,10 +1,10 @@
 
-function choiceService($http, $interpolate) {
+function registerService($http, $interpolate) {
     /**
      * This is the base URL to our API in the backend.
      * @type {String}
      */
-    //var toListURL = 'http://localhost:8080/api/exam/'+$route.current.params.eexamId+'/question/'+$route.current.params.questionId+'/choice';
+        //var toListURL = 'http://localhost:8080/api/exam/'+$route.current.params.eexamId+'/question/'+$route.current.params.questionId+'/choice';
     var toListURL = $interpolate('/api/exam/{{examId}}/question/{{questionId}}/choice');
     /**
      * This is the detail URL to our API in the backend. It handles requests with path parameters.
