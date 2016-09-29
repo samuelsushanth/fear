@@ -26,7 +26,7 @@ public class ResultResource {
     private StudentExamDAO studentExamDAO;
     private QuestionAnswerDAO questionAnswerDAO;
     private UserRegisterDAO userRegisterDAO;
-    Result result;
+
 
     public ResultResource(UserRegisterDAO userRegisterDAO, QuestionDAO questionDAO, ExamQuestionDAO examQuestionDAO, ChoiceDAO choiceDAO, StudentExamDAO studentExamDAO, QuestionAnswerDAO questionAnswerDAO) {
         this.questionDAO = questionDAO;
@@ -46,11 +46,12 @@ public class ResultResource {
         int numberofQuestions=studentExams.size();
         List<StudentExam> studentExams1=studentExamDAO.retrieveCorrectAnswers(userId,examId);
         int correctAnswers =studentExams1.size();
-        result.setResult(studentExamDAO.retrieveAnswers(userId,examId));
-        result.setNumberOfCorrectanswers(correctAnswers);
-        result.setNumberOfQuestions(numberofQuestions);
+        Result result=new Result(studentExams,numberofQuestions,correctAnswers);
+        //result.setResult(studentExams);
+       // result.setNumberOfCorrectanswers(correctAnswers);
+        //result.setNumberOfQuestions(numberofQuestions);
         return Response.ok(result).build();
-
+           //return studentExams;
     }
     @POST
     public void registerUser(@Auth UserDetails userDetails) {

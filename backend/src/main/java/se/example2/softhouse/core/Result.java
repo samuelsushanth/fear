@@ -10,8 +10,7 @@ import java.util.List;
  */
 public class Result {
     @JsonProperty
-    @NotEmpty
-    private List result;
+    private List<StudentExam> result;
 
     @JsonProperty
     private int numberOfQuestions;
@@ -19,6 +18,12 @@ public class Result {
     @JsonProperty
     private int numberOfCorrectanswers;
 
+    public Result(List<StudentExam> result,int numberOfQuestions,int numberOfCorrectanswers)
+    {
+        result=result;
+        numberOfCorrectanswers=numberOfCorrectanswers;
+        numberOfQuestions=numberOfQuestions;
+    }
     public int getNumberOfCorrectanswers() {
         return numberOfCorrectanswers;
     }
@@ -35,11 +40,11 @@ public class Result {
         this.numberOfQuestions = numberOfQuestions;
     }
 
-    public List getResult() {
+    public List<StudentExam> getResult() {
         return result;
     }
 
-    public void setResult(List result) {
+    public void setResult(List<StudentExam> result) {
         this.result = result;
     }
 }
