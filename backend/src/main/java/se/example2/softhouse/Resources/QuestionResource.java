@@ -49,6 +49,8 @@ public class QuestionResource {
 
         List<Question>  questionList=questionDAO.getQuestions(examId);
 
+        if(question.getText()==null||question.getText()=="")
+            throw new NotFoundException();
        for (int i = 0; i <questionList.size(); i++) {
            Question question1 = questionList.get(i);
 

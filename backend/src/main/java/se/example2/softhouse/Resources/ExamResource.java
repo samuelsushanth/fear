@@ -44,10 +44,15 @@ public class ExamResource {
     public Response create(Exam exam) {
         Optional<Exam> update = Optional.ofNullable(examdao.retrieveByText(exam.getText()));
 
+        if(exam.getText()==null||exam.getText()=="")
+            throw new NotFoundException();
         if (update.isPresent()) {
             throw new NotFoundException();
         } else {
+
             long examId = examdao.create(exam);
+            exam.setLink("/api/student/takeatest/"+examId+"/login");
+            examdao.updateLink(examId,exam);
             return Response.ok(examdao.retrieve(examId)).build();
 
         }

@@ -46,7 +46,7 @@ public class ChoiceResource {
             }
 
         }
-      if(choice.getIsCorrect()==null)
+      if(choice.getIsCorrect()==null||choice.getText()==null||choice.getText()=="")
           throw new NotFoundException();
 
         if (choice.getIsCorrect()== 1)
@@ -107,8 +107,15 @@ public class ChoiceResource {
 
     @GET
     @Path("/correctChoiceId")
-    public long retrieveCorrectchoice(@PathParam("questionId") Long questionId) {
-        return questionAnswerDAO.getChoiceId(questionId);
+    public Response retrieveCorrectchoice(@PathParam("questionId") Long questionId) {
+        Optional<Long> update = Optional.ofNullable(questionAnswerDAO.getChoiceId(questionId));
+        if (update.isPresent()) {
+
+            return Response.ok(questionAnswerDAO.getChoiceId(questionId)).build();
+        } else {
+            throw new NotFoundException();
+        }
+
     }
 
 

@@ -16,7 +16,7 @@ import java.util.List;
 @RegisterMapperFactory(BeanMapperFactory.class)
 public interface ExamDAO {
 
-    @SqlUpdate("create table if not exists Exam (id Long auto_increment primary key, text varchar(2000))")
+    @SqlUpdate("create table if not exists Exam (id Long auto_increment primary key, text varchar(2000),link varchar(50))")
     void createExamTable();
 
     @SqlUpdate("delete table Exam")
@@ -40,5 +40,8 @@ public interface ExamDAO {
 
     @SqlQuery("select * from Exam where text = :text")
     Exam retrieveByText(@Bind("text") String text);
+    @SqlUpdate("update Exam set link = :u.link where id = :id")
+    void updateLink(@Bind("id") long id, @BindBean("u") Exam exam);
+
 
 }

@@ -15,6 +15,10 @@ public class Exam {
     @NotEmpty
     private String text;
 
+    @JsonProperty
+    @NotEmpty
+    private String link;
+
     public Long getId() {
         return id;
     }
@@ -29,5 +33,13 @@ public class Exam {
 
     public String getText() {
         return text;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }
