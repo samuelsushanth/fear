@@ -20,9 +20,9 @@ public class Result {
 
     public Result(List<StudentExam> result,int numberOfQuestions,int numberOfCorrectanswers)
     {
-        result=result;
-        numberOfCorrectanswers=numberOfCorrectanswers;
-        numberOfQuestions=numberOfQuestions;
+        this.result=result;
+        this.numberOfCorrectanswers=numberOfCorrectanswers;
+        this.numberOfQuestions=numberOfQuestions;
     }
     public int getNumberOfCorrectanswers() {
         return numberOfCorrectanswers;
