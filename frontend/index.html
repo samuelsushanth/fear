@@ -40,6 +40,7 @@
 
         <div class="footer">
             CopyRights
+
         </div>
         </div>
         </div>
@@ -59,4 +60,17 @@
 <script src="app/Admin/services/register.service.js"></script>
 <script src="app/config.js"></script>
 <script src="app/app.js"></script>
+
+<style type="text/css" media="print">
+    .printbutton {
+        visibility: hidden;
+        display: none;
+    }
+</style>
+<script>
+    document.write("<input type='button' " +
+            "onClick='window.print()' " +
+            "class='printbutton' " +
+            "value='Print This Page'/>");
+</script>
 </html>
