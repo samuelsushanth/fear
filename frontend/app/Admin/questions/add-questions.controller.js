@@ -1,4 +1,4 @@
-function QuestionsController(questionsService, $route) {
+function QuestionsController(questionsService, $route, $http) {
     var vm = this;
 
 
@@ -22,7 +22,6 @@ function QuestionsController(questionsService, $route) {
     //to create new questions
     function newQuestion()
     {
-
         if(!vm.questionname)
             return;
         if(vm.questions.indexOf(vm.questionname)==-1)
