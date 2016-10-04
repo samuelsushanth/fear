@@ -5,8 +5,6 @@ import com.bazaarvoice.dropwizard.assets.AssetsConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
-import se.example2.softhouse.Application.Note.Note;
-import se.example2.softhouse.core.Question;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -14,7 +12,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by hxs on 2016-08-16.
  */
-public class ExamConfiguration extends Configuration implements AssetsBundleConfiguration{
+public class DemoConfiguration extends Configuration implements AssetsBundleConfiguration{
 
 
     @Valid
