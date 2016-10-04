@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by hxs on 2016-08-16.
  */
-public class DemoConfiguration extends Configuration implements AssetsBundleConfiguration{
+public class ExamConfiguration extends Configuration implements AssetsBundleConfiguration{
 
 
     @Valid
