@@ -21,10 +21,10 @@ import se.example2.softhouse.core.UserDetails;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class DemoApplication extends Application<DemoConfiguration> {
+public class ExamApplication extends Application<ExamConfiguration> {
 
     @Override
-    public void run(DemoConfiguration configuration, Environment environment) throws SQLException {
+    public void run(ExamConfiguration configuration, Environment environment) throws SQLException {
         Server myH2adminGUI = org.h2.tools.Server.createWebServer("-webDaemon");
         myH2adminGUI.start();
         final DBIFactory factory = new DBIFactory();
@@ -77,12 +77,12 @@ public class DemoApplication extends Application<DemoConfiguration> {
        }
 
     @Override
-    public void initialize(Bootstrap<DemoConfiguration> configuration) {
+    public void initialize(Bootstrap<ExamConfiguration> configuration) {
         configuration.addBundle(new ConfiguredAssetsBundle("/assets/", "/", "index.html"));
     }
 
     public static void main(String[] args) throws Exception {
-        new DemoApplication().run(args);
+        new ExamApplication().run(args);
     }
 }
 
