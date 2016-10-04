@@ -6,7 +6,7 @@
 
 </head>
 <body>
-<form action="#" name="Registration">
+<form action="#" name="Registration" class="form1">
 
     <table class="t1">
 

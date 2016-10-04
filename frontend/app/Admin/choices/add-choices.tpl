@@ -1,10 +1,11 @@
 <form class="text-center">
-    <input type="text" ng-model="vm.choicetext" title="asd" required placeholder="Enter the question">
+    <input type="text" ng-model="vm.choicetext" title="asd" required placeholder="Enter the choice">
     <button type="button" ng-click="vm.newChoice()">Add Choice</button>
     <button type="button" ng-click="vm.answerChoice()" ng-disabled="vm.btndisable">Add answer Choice</button>
 </form>
-<div class="table-responsive">
-    <table class="table table-bordered" >
+<br/>
+<div class="container" class="table-responsive">
+    <table class="table table-bordered">
         <thead>
         <tr class="info">
             <th style="text-align: center"> Choices</th>

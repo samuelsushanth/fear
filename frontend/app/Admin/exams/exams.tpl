@@ -4,8 +4,8 @@
     <input type="text" ng-model="vm.examname" title="asd" required placeholder="Enter the Exam title">
     <button type="button" ng-click="vm.newExam()">Create Exam</button>
 
-</form><br />
-<div class="container" class="table-responsive">
+</form><br/>
+<div class="container">
 <table class="table table-bordered" >
     <thead>
     <tr class="info">
