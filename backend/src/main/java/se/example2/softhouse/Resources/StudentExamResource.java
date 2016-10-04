@@ -37,7 +37,7 @@ public class StudentExamResource {
     }
 
     @GET
-    public List<Qfull> list(@PathParam("examId") Long id) {
+    public List<Qfull> list(@Auth UserDetails userDetails,@PathParam("examId") Long id) {
        List<Question> questionList=questionDAO.getQuestions(id);
         List<Qfull> qfullList=new ArrayList<Qfull>();
 
@@ -54,7 +54,7 @@ public class StudentExamResource {
 
     @GET
     @Path("/{questionId}")
-    public Qfull retrieve(@PathParam("questionId") Long questionId)
+    public Qfull retrievequestions(@Auth UserDetails userDetails,@PathParam("questionId") Long questionId)
     {
 
       Question question = questionDAO.retrieve(questionId);

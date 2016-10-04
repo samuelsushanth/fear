@@ -27,6 +27,7 @@ public class ResultResource {
     private QuestionAnswerDAO questionAnswerDAO;
     private UserRegisterDAO userRegisterDAO;
 
+
     public ResultResource(UserRegisterDAO userRegisterDAO, QuestionDAO questionDAO, ExamQuestionDAO examQuestionDAO, ChoiceDAO choiceDAO, StudentExamDAO studentExamDAO, QuestionAnswerDAO questionAnswerDAO) {
         this.questionDAO = questionDAO;
         this.examQuestionDAO = examQuestionDAO;
@@ -37,12 +38,20 @@ public class ResultResource {
     }
 
     @GET
-    public List<StudentExam> retrieve(@Auth UserDetails userDetails,@PathParam("examId") Long examId)
+    public Response retrieve(@Auth UserDetails userDetails,@PathParam("examId") Long examId)
     {
         String userName=userDetails.getUserName();
         long userId=userRegisterDAO.retrieveUserId(userName);
-        return studentExamDAO.retrieveAnswers(userId,examId);
-
+        List<StudentExam> studentExams=studentExamDAO.retrieveAnswers(userId,examId);
+        int numberofQuestions=studentExams.size();
+        List<StudentExam> studentExams1=studentExamDAO.retrieveCorrectAnswers(userId,examId);
+        int correctAnswers =studentExams1.size();
+        Result result=new Result(studentExams,numberofQuestions,correctAnswers);
+        //result.setResult(studentExams);
+       // result.setNumberOfCorrectanswers(correctAnswers);
+        //result.setNumberOfQuestions(numberofQuestions);
+        return Response.ok(result).build();
+           //return studentExams;
     }
     @POST
     public void registerUser(@Auth UserDetails userDetails) {

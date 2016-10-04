@@ -41,5 +41,8 @@ public interface StudentExamDAO {
 
     @SqlQuery("select * from studentexam where userId = :userId and examId=:examId")
     List<StudentExam> retrieveAnswers(@Bind("userId") long userId,@Bind("examId") long examId);
+    @SqlQuery("select * from studentexam where userId = :userId and examId=:examId and marks=1")
+    List<StudentExam> retrieveCorrectAnswers(@Bind("userId") long userId,@Bind("examId") long examId);
+
 
 }

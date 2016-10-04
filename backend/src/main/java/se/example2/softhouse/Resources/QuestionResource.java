@@ -40,12 +40,12 @@ public class QuestionResource {
 
     @GET
     @Path("/{questionId}")
-    public Question retrieve(@PathParam("questionId") Long id) {
+    public Question retrieve(@Auth UserDetails userDetails,@PathParam("questionId") Long id) {
         return questionDAO.retrieve(id);
     }
 
     @POST
-    public Response create(@PathParam("examId") Long examId, Question question) {
+    public Response create(@Auth UserDetails userDetails,@PathParam("examId") Long examId, Question question) {
 
         List<Question>  questionList=questionDAO.getQuestions(examId);
 
@@ -67,7 +67,7 @@ public class QuestionResource {
 
     @PUT
     @Path("/{questionId}")
-    public Response update(@PathParam("questionId") Long questionId, Question question) {
+    public Response update(@Auth UserDetails userDetails,@PathParam("questionId") Long questionId, Question question) {
         Optional<Question> update = Optional.ofNullable(questionDAO.retrieve(questionId));
         if (update.isPresent()) {
             questionDAO.update(questionId, question);
@@ -79,7 +79,7 @@ public class QuestionResource {
 
     @DELETE
     @Path("/{questionId}")
-    public Response delete(@PathParam("examId") long examId,@PathParam("questionId") long questionId) {
+    public Response delete(@Auth UserDetails userDetails,@PathParam("examId") long examId,@PathParam("questionId") long questionId) {
         questionDAO.delete(questionId);
         questionDAO.deleteinExamQuestion(examId, questionId);
         Optional<List<Choice>> update = Optional.ofNullable(choiceDAO.getChoices(questionId));

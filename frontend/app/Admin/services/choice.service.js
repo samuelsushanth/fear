@@ -42,7 +42,7 @@ function choiceService($http, $interpolate) {
      * @returns {Object}
      */
     function create(text, examId, questionId) {
-        return $http.post(toListURL({examId : examId, questionId : questionId}), { text: text });
+        return $http.post(toListURL({examId : examId, questionId : questionId}), { text: text, isCorrect: 0});
     }
 
 }

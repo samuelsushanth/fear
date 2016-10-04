@@ -1,5 +1,6 @@
 package se.example2.softhouse.Resources;
 
+import io.dropwizard.auth.Auth;
 import se.example2.softhouse.DAO.ChoiceDAO;
 import se.example2.softhouse.DAO.ExamDAO;
 import se.example2.softhouse.DAO.ExamQuestionDAO;
@@ -7,6 +8,7 @@ import se.example2.softhouse.DAO.QuestionDAO;
 import se.example2.softhouse.core.Choice;
 import se.example2.softhouse.core.Exam;
 import se.example2.softhouse.core.Question;
+import se.example2.softhouse.core.UserDetails;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
@@ -36,7 +38,7 @@ public class ExamResource {
 
     @GET
     @Path("/{examId}")
-    public Exam retrieve(@PathParam("examId") Long id) {
+    public Exam retrieve(@Auth UserDetails userDetails, @PathParam("examId") Long id) {
         return examdao.retrieve(id);
     }
 
@@ -61,7 +63,7 @@ public class ExamResource {
 
     @PUT
     @Path("/{examId}")
-    public Response update(@PathParam("examId") long id, Exam exam) {
+    public Response update(@Auth UserDetails userDetails,@PathParam("examId") long id, Exam exam) {
         Optional<Exam> update = Optional.ofNullable(examdao.retrieve(id));
 
         if (update.isPresent()) {
@@ -74,7 +76,7 @@ public class ExamResource {
 
     @DELETE
     @Path("/{examId}")
-    public Response delete(@PathParam("examId") long id) {
+    public Response delete(@Auth UserDetails userDetails,@PathParam("examId") long id) {
         examdao.delete(id);
         Optional<List<Long>> update = Optional.ofNullable(examQuestionDAO.checkQuestionInExamQuestion(id));
         if (update.isPresent()) {
