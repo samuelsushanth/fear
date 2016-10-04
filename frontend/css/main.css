@@ -79,3 +79,73 @@ li a:hover:not(.active) {
     background-color:lightgrey;
     border-color:transparent;
 }
+
+.t1{
+    cellpadding:2px;
+    width: 80%;
+    background-color:lightgrey;
+    position: relative;
+    top: 1%;
+    left: 25%;
+    cellspacing: 2px;
+
+}
+
+ .f1{
+     border:3px solid #f1f1f1;
+ }
+
+.i1 {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.b1 {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-default {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+
+.container {
+    padding: 16px;
+    background-color: #f7f7f7;
+}
+
+#d1{
+    background-color: darkgrey;
+}
+
+#d2{
+    background-color: lightgrey;
+
+}
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}

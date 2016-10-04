@@ -1,8 +1,14 @@
+<html>
 
+<head>
+
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
 <form action="#" name="Registration">
 
-    <table cellpadding="2" width="80%" bgcolor="#d3d3d3" align="center"
-           cellspacing="2">
+    <table class="t1">
 
         <tr>
             <td colspan=2 style="text-align: center">
@@ -33,3 +39,5 @@
         </tr>
     </table>
 </form>
+</body>
+</html>
