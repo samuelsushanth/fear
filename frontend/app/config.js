@@ -1,4 +1,7 @@
-function config($routeProvider)
+function authenticationInterceptor() {
+}
+
+function config($routeProvider, $httpProvider)
 {
     $routeProvider
         .when('/',{
@@ -16,5 +19,5 @@ function config($routeProvider)
 
     console.log($routeProvider);
 // http://fear.com/exam/6
-
+    $httpProvider.interceptors.push(authenticationInterceptor)
 }
