@@ -1,5 +1,7 @@
-function authenticationInterceptor() {}
+function authenticationInterceptor() {
+    console.log('HELLOOO');
 
+}
 function config($routeProvider, $httpProvider)
 {
     $routeProvider
@@ -18,7 +20,8 @@ function config($routeProvider, $httpProvider)
 
     console.log($routeProvider);
 // http://fear.com/exam/6
-    //$httpProvider.interceptors.push(authenticationInterceptor)
+  //  $httpProvider.defaults.headers.common['Authorization'] = 'Basic Y2hhcmFuOmNoYXJhbg==';
+    //$httpProvider.interceptors.push(authenticationInterceptor);
 
-    //$httpProvider.defaults.headers.common['Authorization'] = 'Basic Y2hhcmFuOmNoYXJhbg==';
+
 }
